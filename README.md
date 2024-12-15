@@ -10,5 +10,6 @@ TODO:
  - Document all items in Dusk that need to be randomized
  - Create function to randomize items using logic to prevent softlocks
  - Create function to intercept the game's vanilla item-handler and instead distribute items from a randomizer output file
- - Create fucntion to unlock levels in an arbitrary order
+ - Create function to unlock levels in an arbitrary order
+ - BONUS: create function to update models of randomized items on scene load (level load)
  
