@@ -1,4 +1,4 @@
-This is a randomizer of the video game Dusk by David Szymanski.
+This is a randomizer of the video game Dusk (https://store.steampowered.com/app/519860/DUSK/) by David Szymanski.
 
 The goal is to implement a randomizer and pair it with Archipelago (https://archipelago.gg).
 
