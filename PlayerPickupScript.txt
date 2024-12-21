@@ -1,0 +1,460 @@
+using System;
+using System.Diagnostics;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+// Token: 0x02000106 RID: 262
+[Serializable]
+public class PlayerPickupScript : MonoBehaviour
+{
+	// Token: 0x14000002 RID: 2
+	// (add) Token: 0x060005B6 RID: 1462 RVA: 0x00034398 File Offset: 0x00032798
+	// (remove) Token: 0x060005B7 RID: 1463 RVA: 0x000343CC File Offset: 0x000327CC
+	[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+	public static event Action OnItemPickedUp;
+
+	// Token: 0x060005B8 RID: 1464 RVA: 0x00034400 File Offset: 0x00032800
+	public void Start()
+	{
+		this.SubScript = GameObject.Find("PERSIST").GetComponent<SubtitleScript>();
+	}
+
+	// Token: 0x060005B9 RID: 1465 RVA: 0x00034418 File Offset: 0x00032818
+	public bool TryPickupItem(GameObject item)
+	{
+		string tag = item.tag;
+		switch (tag)
+		{
+		case "Weapon Pickup":
+		case "SuperShotgunTag":
+			return this.pickupweapon(item);
+		case "Health Pickup":
+			return this.pickuphealth(item);
+		case "HolyHealthTag":
+			return this.pickupholyhealth(item);
+		case "SwordTag":
+			return this.PickUpSword(item);
+		case "WeaponEnhanceTag":
+			return this.pickupenhance(item);
+		case "RedKeyTag":
+			return this.pickupredkey(item);
+		case "BlueKeyTag":
+			return this.pickupbluekey(item);
+		case "YellowKeyTag":
+			return this.pickupyellowkey(item);
+		case "Weapon Speed Pickup":
+			return this.weaponspeedpickup(item);
+		case "ClimbingPickupTag":
+			return this.climbpickup(item);
+		case "Superhot Powerup":
+			return this.superhotpickup(item);
+		case "FlashlightPickupTag":
+			return this.flashlightpickup(item);
+		case "LavaSuitPickup":
+			return this.lavasuitpickup(item);
+		case "BackpackTag":
+			return this.backpackpickup(item);
+		}
+		return false;
+	}
+
+	// Token: 0x060005BA RID: 1466 RVA: 0x000345CC File Offset: 0x000329CC
+	public void OnTriggerStay(Collider hit)
+	{
+		if (!hit || base.GetComponent<PlayerHealthManagement>().iamdead)
+		{
+			return;
+		}
+		if (!Physics.Raycast(base.transform.position, (hit.transform.position - base.transform.position).normalized, Vector3.Distance(base.transform.position, hit.transform.position), this.pickupblockinglayers))
+		{
+			GameObject gameObject = hit.transform.gameObject;
+			if (this.TryPickupItem(gameObject))
+			{
+				if (PlayerPickupScript.OnItemPickedUp != null)
+				{
+					PlayerPickupScript.OnItemPickedUp();
+				}
+			}
+		}
+	}
+
+	// Token: 0x060005BB RID: 1467 RVA: 0x00034684 File Offset: 0x00032A84
+	public bool backpackpickup(GameObject ob)
+	{
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_BACKPACK");
+		GameObject.Find("MessageText").GetComponent<ClearMessageAfterTime>().timer = GameObject.Find("MessageText").GetComponent<ClearMessageAfterTime>().defaulttime;
+		this.holyhealthpickupsound.GetComponent<AudioSource>().Play();
+		ob.GetComponent<Collider>().enabled = false;
+		BackpackScript component = ob.GetComponent<BackpackScript>();
+		SelectionScript component2 = GameObject.Find("WeaponAnimator").GetComponent<SelectionScript>();
+		for (int i = 0; i < component2.ammoinventory.Length; i++)
+		{
+			component2.ammoinventory[i] = component.contents[i];
+		}
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005BC RID: 1468 RVA: 0x0003474C File Offset: 0x00032B4C
+	public bool flashlightpickup(GameObject ob)
+	{
+		((StatScript)GameObject.Find("StatObject").GetComponent(typeof(StatScript))).brokenflashlight = false;
+		GameObject.Find("TutorialMessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_FLASHLIGHT");
+		((ClearMessageAfterTime)GameObject.Find("TutorialMessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = 3f;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005BD RID: 1469 RVA: 0x00034818 File Offset: 0x00032C18
+	public bool climbpickup(GameObject ob)
+	{
+		ClimbingPowerupScript climbingPowerupScript = (ClimbingPowerupScript)base.GetComponent(typeof(ClimbingPowerupScript));
+		climbingPowerupScript.havepower = true;
+		climbingPowerupScript.powertimer = 30f;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_CLIMBING_THING");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		GameObject.Find("TutorialMessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "TUT_HOLD_WALK");
+		((ClearMessageAfterTime)GameObject.Find("TutorialMessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = 3f;
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((DecreaseBarOverTime)GameObject.Find("ClimbPowerupBar").GetComponent(typeof(DecreaseBarOverTime))).time = climbingPowerupScript.powertimer;
+		((DisableSoundAfterTime)GameObject.Find("ClimbPowerSound").GetComponent(typeof(DisableSoundAfterTime))).timer = climbingPowerupScript.powertimer;
+		((AudioSource)GameObject.Find("ClimbPowerSound").GetComponent(typeof(AudioSource))).volume = 1f;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005BE RID: 1470 RVA: 0x000349D4 File Offset: 0x00032DD4
+	public bool superhotpickup(GameObject ob)
+	{
+		MyControllerScript myControllerScript = (MyControllerScript)base.GetComponent(typeof(MyControllerScript));
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_BLISTERING_HEAT");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		myControllerScript.superhot = true;
+		myControllerScript.superhottimer = 15f;
+		((DecreaseBarOverTime)GameObject.Find("SuperhotPowerupBar").GetComponent(typeof(DecreaseBarOverTime))).time = myControllerScript.superhottimer;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005BF RID: 1471 RVA: 0x00034B10 File Offset: 0x00032F10
+	public bool lavasuitpickup(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_LAVA_SUIT");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		selectionScript.ignorelava = true;
+		selectionScript.lavasuittimer = 25f;
+		((DecreaseBarOverTime)GameObject.Find("LavasuitPowerupBar").GetComponent(typeof(DecreaseBarOverTime))).time = selectionScript.lavasuittimer;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((DisableSoundAfterTime)GameObject.Find("LavasuitPowerupSound").GetComponent(typeof(DisableSoundAfterTime))).timer = selectionScript.lavasuittimer;
+		((AudioSource)GameObject.Find("LavasuitPowerupSound").GetComponent(typeof(AudioSource))).volume = 1f;
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C0 RID: 1472 RVA: 0x00034CA8 File Offset: 0x000330A8
+	public bool weaponspeedpickup(GameObject ob)
+	{
+		AttackScript attackScript = (AttackScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(AttackScript));
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_FAST_FIRE");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		attackScript.firespeed *= 2f;
+		attackScript.firespeedtimer = 15f;
+		((ChangePitchOverTime)GameObject.Find("FastFireSound").GetComponent(typeof(ChangePitchOverTime))).changetime = attackScript.firespeedtimer;
+		((DisableSoundAfterTime)GameObject.Find("FastFireSound").GetComponent(typeof(DisableSoundAfterTime))).timer = attackScript.firespeedtimer;
+		((DecreaseBarOverTime)GameObject.Find("SpeedPowerupBar").GetComponent(typeof(DecreaseBarOverTime))).time = attackScript.firespeedtimer;
+		((AudioSource)GameObject.Find("FastFireSound").GetComponent(typeof(AudioSource))).volume = 1f;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C1 RID: 1473 RVA: 0x00034E74 File Offset: 0x00033274
+	public bool pickupredkey(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		selectionScript.haveredkey = true;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_RED_KEY");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		GameObject.Find("DamageOverlay").GetComponent<Image>().SetColorAlpha(0.8f);
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((AudioSource)this.keysound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C2 RID: 1474 RVA: 0x00034FA0 File Offset: 0x000333A0
+	public bool pickupbluekey(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		selectionScript.havebluekey = true;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_BLUE_KEY");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.8f);
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((AudioSource)this.keysound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C3 RID: 1475 RVA: 0x000350CC File Offset: 0x000334CC
+	public bool pickupyellowkey(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		selectionScript.haveyellowkey = true;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_YELLOW_KEY");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		GameObject.Find("GetPowerOverlay").GetComponent<Image>().SetColorAlpha(0.8f);
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((AudioSource)this.keysound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C4 RID: 1476 RVA: 0x000351F8 File Offset: 0x000335F8
+	public bool pickuphealth(GameObject ob)
+	{
+		PlayerHealthManagement playerHealthManagement = (PlayerHealthManagement)base.GetComponent(typeof(PlayerHealthManagement));
+		HealthPickupScript healthPickupScript = (HealthPickupScript)ob.GetComponent(typeof(HealthPickupScript));
+		float num = playerHealthManagement.myhealth + healthPickupScript.myhealthcontent;
+		float num2 = playerHealthManagement.myarmor + healthPickupScript.myarmorcontent;
+		float myhealthcontent = healthPickupScript.myhealthcontent;
+		float myarmorcontent = healthPickupScript.myarmorcontent;
+		if (num > 100f && healthPickupScript.myhealthcontent > 0f && myhealthcontent <= 100f && !healthPickupScript.doublehealth)
+		{
+			num = 100f;
+		}
+		if (num2 > 100f && healthPickupScript.myarmorcontent > 0f && myhealthcontent <= 100f && !healthPickupScript.doublearmor)
+		{
+			num2 = 100f;
+		}
+		if (num > 200f)
+		{
+			num = 200f;
+		}
+		if (num2 > 200f)
+		{
+			num2 = 200f;
+		}
+		if (num > playerHealthManagement.myhealth || num2 > playerHealthManagement.myarmor)
+		{
+			GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, healthPickupScript.message);
+			((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+			GameObject.Find("GetHealthOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+			((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+			if (healthPickupScript.myarmorcontent > 0f)
+			{
+				((AudioSource)this.armorpickupsound.GetComponent(typeof(AudioSource))).Play();
+			}
+			else
+			{
+				((AudioSource)this.healthpickupsound.GetComponent(typeof(AudioSource))).Play();
+			}
+			playerHealthManagement.myhealth = num;
+			playerHealthManagement.myarmor = num2;
+			((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+			UnityEngine.Object.Destroy(ob);
+			return true;
+		}
+		return false;
+	}
+
+	// Token: 0x060005C5 RID: 1477 RVA: 0x00035444 File Offset: 0x00033844
+	public bool pickupweapon(GameObject ob)
+	{
+		bool result = false;
+		WeaponPickupScript weaponPickupScript = (WeaponPickupScript)ob.GetComponent(typeof(WeaponPickupScript));
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		if (weaponPickupScript.giveweapon)
+		{
+			if (weaponPickupScript.weaponcontent == 1 && !selectionScript.havedualpistols && selectionScript.weaponinventory[1])
+			{
+				GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_ANOTHER_PISTOL");
+				((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+				GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+				((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+				if (selectionScript.ammoinventory[weaponPickupScript.weaponcontent] < selectionScript.maxammo[weaponPickupScript.weaponcontent])
+				{
+					selectionScript.ammoinventory[weaponPickupScript.weaponcontent] = selectionScript.ammoinventory[weaponPickupScript.weaponcontent] + (float)weaponPickupScript.ammocontent;
+				}
+				selectionScript.havedualpistols = true;
+				selectionScript.permduals = true;
+				((Animator)GameObject.Find("WeaponAnimator").GetComponent(typeof(Animator))).SetTrigger("StopAll");
+				if (selectionScript.selectedweapon != 0 && this.doautoswitch)
+				{
+					selectionScript.weapontogetto = weaponPickupScript.weaponcontent + 1;
+					selectionScript.lastselectedweapon = selectionScript.selectedweapon;
+				}
+				((AudioSource)this.weaponpickupsound.GetComponent(typeof(AudioSource))).Play();
+				((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+				UnityEngine.Object.Destroy(ob);
+				result = true;
+			}
+			if (weaponPickupScript.weaponcontent == 2 && !selectionScript.havedualshotguns && selectionScript.weaponinventory[2])
+			{
+				GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_ANOTHER_SHOTGUN");
+				((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+				GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+				((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+				if (selectionScript.ammoinventory[weaponPickupScript.weaponcontent] < selectionScript.maxammo[weaponPickupScript.weaponcontent])
+				{
+					selectionScript.ammoinventory[weaponPickupScript.weaponcontent] = selectionScript.ammoinventory[weaponPickupScript.weaponcontent] + (float)weaponPickupScript.ammocontent;
+				}
+				selectionScript.havedualshotguns = true;
+				selectionScript.permshotguns = true;
+				((Animator)GameObject.Find("WeaponAnimator").GetComponent(typeof(Animator))).SetTrigger("StopAll");
+				if (selectionScript.selectedweapon != 0 && this.doautoswitch)
+				{
+					selectionScript.weapontogetto = weaponPickupScript.weaponcontent + 1;
+					selectionScript.lastselectedweapon = selectionScript.selectedweapon;
+				}
+				((AudioSource)this.weaponpickupsound.GetComponent(typeof(AudioSource))).Play();
+				((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+				UnityEngine.Object.Destroy(ob);
+				result = true;
+			}
+			if (ob.tag == "Weapon Pickup" && weaponPickupScript.weaponcontent == 2 && !selectionScript.havesingleshotgun && !selectionScript.weaponinventory[2])
+			{
+				selectionScript.havedualshotguns = false;
+				selectionScript.permshotguns = false;
+				selectionScript.havesingleshotgun = true;
+				UnityEngine.Object.Destroy(ob);
+				result = true;
+			}
+			if (!selectionScript.weaponinventory[weaponPickupScript.weaponcontent])
+			{
+				if (selectionScript.selectedweapon != 0 && this.doautoswitch)
+				{
+					selectionScript.weapontogetto = weaponPickupScript.weaponcontent + 1;
+					selectionScript.lastselectedweapon = selectionScript.selectedweapon;
+				}
+				((AudioSource)this.weaponpickupsound.GetComponent(typeof(AudioSource))).Play();
+				GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, weaponPickupScript.message);
+				((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+				GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+				((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+			}
+			selectionScript.weaponinventory[weaponPickupScript.weaponcontent] = true;
+		}
+		if (selectionScript.ammoinventory[weaponPickupScript.weaponcontent] < selectionScript.maxammo[weaponPickupScript.weaponcontent])
+		{
+			selectionScript.ammoinventory[weaponPickupScript.weaponcontent] = selectionScript.ammoinventory[weaponPickupScript.weaponcontent] + (float)weaponPickupScript.ammocontent;
+			((AudioSource)this.ammopickupsound.GetComponent(typeof(AudioSource))).Play();
+			GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, weaponPickupScript.message);
+			((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+			GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+			((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+			((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+			UnityEngine.Object.Destroy(ob);
+			if (selectionScript.ammoinventory[weaponPickupScript.weaponcontent] > selectionScript.maxammo[weaponPickupScript.weaponcontent])
+			{
+				selectionScript.ammoinventory[weaponPickupScript.weaponcontent] = selectionScript.maxammo[weaponPickupScript.weaponcontent];
+			}
+			result = true;
+		}
+		return result;
+	}
+
+	// Token: 0x060005C6 RID: 1478 RVA: 0x00035B0C File Offset: 0x00033F0C
+	public bool PickUpSword(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		if (this.doautoswitch && !selectionScript.havedaikatana)
+		{
+			selectionScript.weapontogetto = 1;
+		}
+		selectionScript.permdaikatana = true;
+		selectionScript.havedaikatana = true;
+		selectionScript.lastselectedweapon = selectionScript.selectedweapon;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_FOUND_SWORD");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		GameObject.Find("GetWeaponOverlay").GetComponent<Image>().SetColorAlpha(0.3f);
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((AudioSource)this.weaponpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((Animator)GameObject.Find("WeaponAnimator").GetComponent(typeof(Animator))).SetTrigger("StopAll");
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C7 RID: 1479 RVA: 0x00035C90 File Offset: 0x00034090
+	public bool pickupholyhealth(GameObject ob)
+	{
+		PlayerHealthManagement playerHealthManagement = (PlayerHealthManagement)base.GetComponent(typeof(PlayerHealthManagement));
+		playerHealthManagement.myhealth += 50f;
+		if (playerHealthManagement.myhealth > 200f)
+		{
+			playerHealthManagement.myhealth = 200f;
+		}
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = this.SubScript.ReturnText(this.SubScript.Language, "PICKUP_HALLOWED_HEALTH");
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		Image component = GameObject.Find("GetPowerOverlay").GetComponent<Image>();
+		Color color = component.color;
+		color.a = 0.6f;
+		component.color = color;
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((AudioSource)this.holyhealthpickupsound.GetComponent(typeof(AudioSource))).Play();
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x060005C8 RID: 1480 RVA: 0x00035DE8 File Offset: 0x000341E8
+	public bool pickupenhance(GameObject ob)
+	{
+		SelectionScript selectionScript = (SelectionScript)GameObject.Find("WeaponAnimator").GetComponent(typeof(SelectionScript));
+		selectionScript.weaponenhance = true;
+		selectionScript.enhancetimer = 30f;
+		GameObject.Find("MessageText").GetComponent<TextMeshProUGUI>().text = "You found the Weapon Enhancer";
+		((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).timer = ((ClearMessageAfterTime)GameObject.Find("MessageText").GetComponent(typeof(ClearMessageAfterTime))).defaulttime;
+		Image component = GameObject.Find("GetPowerOverlay").GetComponent<Image>();
+		Color color = component.color;
+		color.a = 0.3f;
+		component.color = color;
+		((CrosshairSizeScript)GameObject.Find("Crosshair").GetComponent(typeof(CrosshairSizeScript))).plus = 1.5f;
+		((Collider)ob.GetComponent(typeof(Collider))).enabled = false;
+		UnityEngine.Object.Destroy(ob);
+		return true;
+	}
+
+	// Token: 0x040007E7 RID: 2023
+	public GameObject weaponpickupsound;
+
+	// Token: 0x040007E8 RID: 2024
+	public GameObject healthpickupsound;
+
+	// Token: 0x040007E9 RID: 2025
+	public GameObject armorpickupsound;
+
+	// Token: 0x040007EA RID: 2026
+	public GameObject ammopickupsound;
+
+	// Token: 0x040007EB RID: 2027
+	public GameObject holyhealthpickupsound;
+
+	// Token: 0x040007EC RID: 2028
+	public GameObject keysound;
+
+	// Token: 0x040007ED RID: 2029
+	public LayerMask pickupblockinglayers;
+
+	// Token: 0x040007EE RID: 2030
+	public bool doautoswitch;
+
+	// Token: 0x040007EF RID: 2031
+	public SubtitleScript SubScript;
+}
