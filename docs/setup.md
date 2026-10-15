@@ -44,7 +44,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
 
 ## 3. Install the DUSK mod
 
-1. Download `DuskRando-v<version>.zip` from the
+1. Download `DuskRando-<version>.zip` from the
    [Releases page](https://github.com/FlapjackRetro/dusk-rando/releases).
 2. Extract it **into your DUSK folder**. The zip already contains the `BepInEx\plugins\DuskRando` folders, so you
    should end up with:
@@ -60,7 +60,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
            Newtonsoft.Json.dll
    ```
 
-   If your unzip tool made an extra `DuskRando-v<version>` folder, move its `BepInEx` folder up into the DUSK folder
+   If your unzip tool made an extra `DuskRando-<version>` folder, move its `BepInEx` folder up into the DUSK folder
    and let it merge with the existing one.
 3. Start DUSK. A small **Archipelago** window should appear in the top-left corner; **F1** shows or hides it.
    If it doesn't appear, check `BepInEx\LogOutput.log` in your DUSK folder for errors.
