@@ -13,7 +13,7 @@ This guide covers installing the DUSK randomizer mod and the DUSK APWorld for
   connect to them
 - **BepInEx 5**, the mod loader (64-bit Windows build)
 - From this project's [Releases page](https://github.com/FlapjackRetro/dusk-rando/releases):
-  - `DuskRando-v<version>.zip`, the game mod
+  - `DuskRando-<version>.zip`, the game mod
   - `dusk.apworld`, the Archipelago world
 
 ## 1. Find your DUSK folder
