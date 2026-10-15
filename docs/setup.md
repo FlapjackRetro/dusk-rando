@@ -97,11 +97,26 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 
 ## 6. Connect and play
 
-1. Start DUSK and, in the Archipelago window, enter the **server** (e.g. `archipelago.gg:38281`), your **slot**
-   name and the **password** (if any), then click **Connect**.
-2. Start a **new game** for the episode you want to play. Levels you haven't unlocked yet are dimmed on the map
-   screen. Collect `<level> Access` items to open them.
-3. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`.
+1. Start DUSK. At the main menu, enter the **server** (e.g. `archipelago.gg:38281`), your **slot** name and the
+   **password** (if any) in the Archipelago window, then click **Connect**. Always connect *before* starting a game.
+2. Choose **CAMPAIGN** (not ENDLESS; Endless mode isn't part of the randomizer), then:
+   - **NEW EPISODE** → pick an episode → pick a difficulty to start that episode's first level. Each episode in your
+     seed starts with its first level (E1M1, E2M1, E3M1) and that level's keys unlocked. **Use this to begin a seed.**
+   - **LEVEL SELECT** → pick an episode → pick a difficulty to open that episode's map. The map shows every level
+     you have a `<level> Access` item for (even ones you've never beaten) and hides the rest. Use this to move
+     between levels as new ones unlock.
+3. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
+   are sent to that episode's map instead, where you can pick any level you *do* have access to.
+4. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`.
+
+### What you'll see
+
+- Randomized pickups look like the item they hold. Your own DUSK items use the DUSK model (a shotgun pickup that
+  holds a Riveter looks like a Riveter). Items for other players show an Archipelago logo: grey for filler, colour
+  for useful items, colour with a yellow arrow for progression.
+- The mod learns DUSK models from the levels you visit, so early on a DUSK weapon you haven't come across yet may
+  show as the Archipelago logo instead.
+- Secret areas and treasure chests look normal; finding or opening them sends the check.
 
 ## Uninstalling
 

@@ -50,4 +50,5 @@ second command writes `dist/dusk.apworld`; those two files are what goes on the 
    but not yet tested in game.
  - [ ] Check in game: what DUSK's save/quickload does with collected pickups, and which scenes count as "level
    complete" (currently: moving from a level to `WinLevelScene` / `TextScene*` / `EndStoryScene` / `CreditsScene`).
- - [ ] BONUS: update models of randomized items on scene load (level load).
+ - [~] BONUS: update models of randomized items on scene load (#4): DUSK items take their DUSK model (learned from
+   levels as you visit them), other games' items show a grey / colour / arrow Archipelago logo. Needs in-game testing.
