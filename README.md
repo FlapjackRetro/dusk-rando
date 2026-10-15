@@ -4,6 +4,9 @@ built for Archipelago (https://archipelago.gg).
 Initially this is item randomization, with access to levels and keys reworked to match other boomer shooters on
 Archipelago (DOOM and Duke Nukem): levels are unlocked by items, and each level's keys are items too.
 
+**Installing / playing:** see the [Setup Guide](docs/setup.md). The mod and APWorld are on the
+[Releases page](https://github.com/FlapjackRetro/dusk-rando/releases).
+
 ## Layout
 
 | Path | What it is |
@@ -11,6 +14,7 @@ Archipelago (DOOM and Duke Nukem): levels are unlocked by items, and each level'
 | `apworld/dusk/` | The Archipelago world (Python). Package it with `python tools/build_apworld.py`. |
 | `apworld/dusk/data/locations.json` | Every location with a stable ID, generated from the game's level files. Shared by the APWorld and the mod. |
 | `DuskRando/` | The BepInEx 5 game mod (C#): sends checks, receives items, gates levels. |
+| `docs/setup.md` | Player setup guide: BepInEx, the mod zip, the APWorld. |
 | `docs/ITEMS.md` | Item/location reference: categories, counts per level, oddities. |
 | `docs/LOCATIONS.csv` | All 3,233 locations with names, IDs, objects and positions. |
 | `data/raw_pickups.json` | Raw dump of every pickup in every scene. |
@@ -24,11 +28,12 @@ from the Steam install (override with `-p:DuskDir=...`).
 
 ```
 dotnet build DuskRando/DuskRando.csproj -c Release
+python tools/build_apworld.py
 ```
 
-Install BepInEx 5 (x64) into the DUSK folder, then copy `DuskRando.dll`, `Archipelago.MultiClient.Net.dll` and
-`Newtonsoft.Json.dll` from `DuskRando/bin/Release/net46/` into `Dusk/BepInEx/plugins/DuskRando/`. In game, press F1
-for the connection window.
+The Release build writes `dist/DuskRando-v<version>.zip` (the three DLLs in `BepInEx/plugins/DuskRando/`) and the
+second command writes `dist/dusk.apworld`; those two files are what goes on the Releases page. See
+[docs/setup.md](docs/setup.md#for-maintainers-building-a-release) for the release checklist.
 
 ## TODO
 
