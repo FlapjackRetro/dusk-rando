@@ -1,15 +1,48 @@
-This is a randomizer of the video game Dusk (https://store.steampowered.com/app/519860/DUSK/) by David Szymanski.
+This is a randomizer for the video game Dusk (https://store.steampowered.com/app/519860/DUSK/) by David Szymanski,
+built for Archipelago (https://archipelago.gg).
 
-The goal is to implement a randomizer and pair it with Archipelago (https://archipelago.gg).
+Initially this is item randomization, with access to levels and keys reworked to match other boomer shooters on
+Archipelago (DOOM and Duke Nukem): levels are unlocked by items, and each level's keys are items too.
 
-This is currently a very slow work-in-progress as I have never built a randomizer before, and it's been more than a decade since I've used C#, and never since using Python.
+## Layout
 
-Initially this will just be item randomization, although I intend to also change the way access to weapons and keys are implemented, to bring the behavior inline with other boomer shooters on Archieplago (DOOM and Duke Nukem).
+| Path | What it is |
+|---|---|
+| `apworld/dusk/` | The Archipelago world (Python). Package it with `python tools/build_apworld.py`. |
+| `apworld/dusk/data/locations.json` | Every location with a stable ID, generated from the game's level files. Shared by the APWorld and the mod. |
+| `DuskRando/` | The BepInEx 5 game mod (C#): sends checks, receives items, gates levels. |
+| `docs/ITEMS.md` | Item/location reference: categories, counts per level, oddities. |
+| `docs/LOCATIONS.csv` | All 3,233 locations with names, IDs, objects and positions. |
+| `data/raw_pickups.json` | Raw dump of every pickup in every scene. |
+| `tools/asset_extract/` | Reads the Unity level files to produce `raw_pickups.json`. |
+| `tools/gen_data.py` | Turns the raw dump into `locations.json`, `LOCATIONS.csv` and `ITEMS.md`. |
 
-TODO:
- - Document all items in Dusk that need to be randomized
- - Create function to randomize items using logic to prevent softlocks
- - Create function to intercept the game's vanilla item-handler and instead distribute items from a randomizer output file
- - Create function to unlock levels in an arbitrary order
- - BONUS: create function to update models of randomized items on scene load (level load)
- 
+## Building the mod
+
+Requires the .NET SDK. NuGet pulls in BepInEx and Archipelago.MultiClient.Net; the game's own DLLs are referenced
+from the Steam install (override with `-p:DuskDir=...`).
+
+```
+dotnet build DuskRando/DuskRando.csproj -c Release
+```
+
+Install BepInEx 5 (x64) into the DUSK folder, then copy `DuskRando.dll`, `Archipelago.MultiClient.Net.dll` and
+`Newtonsoft.Json.dll` from `DuskRando/bin/Release/net46/` into `Dusk/BepInEx/plugins/DuskRando/`. In game, press F1
+for the connection window.
+
+## TODO
+
+ - [x] Document all items in Dusk that need to be randomized: `docs/ITEMS.md`. Pickups are grouped into toggleable
+   categories (weapons, keys, powerups, secrets, treasure chests, health, morale, ammo), plus a "Level Complete"
+   check per level.
+ - [x] Randomize items with logic that prevents softlocks: the APWorld (`apworld/dusk`). Generates and passes
+   Archipelago's world tests.
+   - [ ] Replace *strict* key logic (every check in a keyed level needs all of its keys) with per-door regions.
+   - [ ] Tune combat logic (minimum firearms per level) from playtesting.
+ - [~] Intercept the game's vanilla item handler and hand out Archipelago items instead: written (Harmony patch on
+   `PlayerPickupScript.TryPickupItem`, secrets, chests, item granting) but **not yet built or tested in game**.
+ - [~] Unlock levels in an arbitrary order: written (`<level> Access` items; `SceneManager` and map-screen patches)
+   but not yet tested in game.
+ - [ ] Check in game: what DUSK's save/quickload does with collected pickups, and which scenes count as "level
+   complete" (currently: moving from a level to `WinLevelScene` / `TextScene*` / `EndStoryScene` / `CreditsScene`).
+ - [ ] BONUS: update models of randomized items on scene load (level load).
