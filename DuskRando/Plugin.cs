@@ -21,7 +21,7 @@ namespace DuskRando
         ConfigEntry<string> host, slot, password;
         ConfigEntry<KeyCode> toggleKey;
         bool showWindow = true;
-        Rect windowRect = new Rect(20, 20, 340, 190);
+        Rect windowRect = new Rect(20, 20, 380, 190);
         string passwordText = "";
 
         // Scenes the game passes through after a level is finished (stats screen / story text / ending).
@@ -36,6 +36,7 @@ namespace DuskRando
             toggleKey = Config.Bind("UI", "ToggleWindow", KeyCode.F1);
             passwordText = password.Value;
             LocationTable.Load();
+            ItemModels.Init();
             new Harmony(Guid).PatchAll();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
@@ -46,6 +47,11 @@ namespace DuskRando
             if (Input.GetKeyDown(toggleKey.Value)) showWindow = !showWindow;
             if (Client.Connected)
                 Client.Pump(ItemGiver.Apply, OnDeathLink);
+            if (Client.ScoutsArrived)
+            {
+                Client.ScoutsArrived = false;
+                DressAll();
+            }
             if (PendingMessage != null && ItemGiver.InLevel)
             {
                 ItemGiver.Message(PendingMessage);
@@ -67,6 +73,7 @@ namespace DuskRando
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (!Client.Connected || !LocationTable.LevelByScene.ContainsKey(scene.name)) return;
+            ItemModels.Harvest(); // before anything is destroyed or re-dressed
             int marked = 0, removed = 0;
             foreach (var save in FindObjectsOfType<SavePickupScript>())
                 Mark(scene.name, save.gameObject, ref marked, ref removed);
@@ -79,8 +86,14 @@ namespace DuskRando
                 chest.myitem = placeholder;
             }
             Log.LogInfo($"{scene.name}: {marked} randomized pickups, {removed} already collected");
+            DressAll();
             // Weapons/keys: give them a frame so SelectionScript.Start has run.
             StartCoroutine(ApplyStateNextFrame());
+        }
+
+        static void DressAll()
+        {
+            foreach (var loc in FindObjectsOfType<ApLocation>()) ItemModels.Apply(loc);
         }
 
         System.Collections.IEnumerator ApplyStateNextFrame()
@@ -121,6 +134,22 @@ namespace DuskRando
         }
 
         // ---- connection window ----------------------------------------------------------------
+        static string Hint()
+        {
+            var scene = SceneManager.GetActiveScene().name;
+            if (!Client.Connected)
+                return scene == "Menu" ? "Connect here before starting a game." : null;
+            if (scene == "Menu")
+                return "To start: CAMPAIGN > NEW EPISODE, pick an episode.\n" +
+                       "To replay or jump to unlocked levels: CAMPAIGN > LEVEL SELECT.\n" +
+                       "Endless mode is not part of the randomizer.";
+            if (scene.StartsWith("Endless") || scene == "QuakeconEndlessMode")
+                return "Endless mode is not part of the randomizer: nothing here counts.";
+            if (scene == "mapscene" || scene == "mapscene2" || scene == "mapscene3")
+                return "Levels you have Access for are shown; the rest stay hidden.";
+            return null;
+        }
+
         void OnGUI()
         {
             if (!showWindow) return;
@@ -145,6 +174,8 @@ namespace DuskRando
             if (Client.Connected && GUILayout.Button("Disconnect")) Client.Disconnect();
             GUILayout.EndHorizontal();
             GUILayout.Label(Client.Status);
+            var hint = Hint();
+            if (hint != null) GUILayout.Label(hint);
             GUI.DragWindow();
         }
     }

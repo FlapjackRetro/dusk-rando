@@ -8,6 +8,7 @@ namespace DuskRando.Patches
     {
         public long Id;
         public bool Sent;
+        public bool Dressed; // ItemModels has given it the look of its real item
     }
 
     /// <summary>

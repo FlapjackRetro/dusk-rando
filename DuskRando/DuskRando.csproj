@@ -37,12 +37,15 @@
     <Reference Include="UnityEngine.AudioModule"><HintPath>$(DuskManaged)\UnityEngine.AudioModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UI"><HintPath>$(DuskManaged)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UIModule"><HintPath>$(DuskManaged)\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.ImageConversionModule"><HintPath>$(DuskManaged)\UnityEngine.ImageConversionModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.InputModule"><HintPath>$(DuskManaged)\UnityEngine.InputModule.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 
   <ItemGroup>
     <!-- Single source of truth for location IDs, shared with the APWorld. -->
     <EmbeddedResource Include="..\apworld\dusk\data\locations.json" LogicalName="DuskRando.locations.json" />
+    <!-- AP item sprites (derived from Archipelago's MIT-licensed data/icon.png) -->
+    <EmbeddedResource Include="Assets\*.png" LogicalName="DuskRando.Assets.%(Filename)%(Extension)" />
   </ItemGroup>
 
   <!--

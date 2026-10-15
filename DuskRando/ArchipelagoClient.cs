@@ -19,6 +19,14 @@ namespace DuskRando
         public Received(int index, string name, string sender) { Index = index; Name = name; Sender = sender; }
     }
 
+    public class ScoutEntry
+    {
+        public string ItemName;   // e.g. "Progressive Shotgun"
+        public bool ForDusk;      // a DUSK item for this player, so it can wear its DUSK model
+        public ItemFlags Flags;
+        public string Display;    // text shown when it's picked up
+    }
+
     /// <summary>Owns the Archipelago session. Network callbacks only enqueue; the game thread drains in Update.</summary>
     public class ArchipelagoClient
     {
@@ -39,7 +47,10 @@ namespace DuskRando
 
         /// <summary>Every item received so far, by item name, for state-like items (access, keys, weapons).</summary>
         public readonly Dictionary<string, int> ReceivedCounts = new Dictionary<string, int>();
-        public readonly Dictionary<long, string> ScoutedNames = new Dictionary<long, string>();
+        /// <summary>What sits at each of our locations (filled asynchronously after connecting).</summary>
+        public readonly Dictionary<long, ScoutEntry> Scouted = new Dictionary<long, ScoutEntry>();
+        /// <summary>Set by the network thread when scouting finished; the game thread clears it after use.</summary>
+        public volatile bool ScoutsArrived;
         int processedIndex = -1;
         int receivedCounter;
         int highestSeen = -1;
@@ -51,6 +62,8 @@ namespace DuskRando
             try
             {
                 Session = ArchipelagoSessionFactory.CreateSession(host);
+                lock (Scouted) Scouted.Clear();
+                ScoutsArrived = false;
                 ReceivedCounts.Clear();
                 lock (queueLock) { incoming.Clear(); receivedCounter = 0; }
                 deferred.Clear();
@@ -130,15 +143,30 @@ namespace DuskRando
         void Scout()
         {
             var ids = Session.Locations.AllLocations.ToArray();
+            int mySlot = Session.ConnectionInfo.Slot;
             Session.Locations.ScoutLocationsAsync(HintCreationPolicy.None, ids).ContinueWith(t =>
             {
-                if (t.IsFaulted) return;
-                lock (ScoutedNames)
+                if (t.IsFaulted) { Plugin.Log.LogWarning("Scouting failed: " + t.Exception?.GetBaseException().Message); return; }
+                lock (Scouted)
                     foreach (var kv in t.Result)
-                        ScoutedNames[kv.Key] = kv.Value.Player.Slot == Session.ConnectionInfo.Slot
-                            ? kv.Value.ItemName
-                            : $"{kv.Value.Player.Name}'s {kv.Value.ItemName}";
+                    {
+                        var info = kv.Value;
+                        bool mine = info.Player.Slot == mySlot;
+                        Scouted[kv.Key] = new ScoutEntry
+                        {
+                            ItemName = info.ItemDisplayName,
+                            ForDusk = mine && info.ItemGame == Game,
+                            Flags = info.Flags,
+                            Display = mine ? info.ItemDisplayName : $"{info.Player.Name}'s {info.ItemDisplayName}",
+                        };
+                    }
+                ScoutsArrived = true;
             });
+        }
+
+        public ScoutEntry GetScout(long id)
+        {
+            lock (Scouted) return Scouted.TryGetValue(id, out var s) ? s : null;
         }
 
         // New items whose effect needs the player in a level (ammo, health, powerups, weapons while in menus).
@@ -211,11 +239,7 @@ namespace DuskRando
             CheckGoal();
         }
 
-        public string DescribeLocation(long id)
-        {
-            lock (ScoutedNames)
-                return ScoutedNames.TryGetValue(id, out var n) ? n : "an Archipelago item";
-        }
+        public string DescribeLocation(long id) => GetScout(id)?.Display ?? "an Archipelago item";
 
         public void SendDeath()
         {

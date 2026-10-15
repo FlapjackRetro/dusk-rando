@@ -63,7 +63,12 @@ namespace DuskRando.Patches
     [HarmonyPatch(typeof(SceneManager), nameof(SceneManager.LoadSceneAsync), typeof(string), typeof(LoadSceneMode))]
     static class LoadSceneAsyncStringPatch { static void Prefix(ref string __0) => LevelGate.Redirect(ref __0); }
 
-    /// <summary>Map screen: show every level we have access to as selectable, and refuse locked ones.</summary>
+    /// <summary>
+    /// Map screen (CAMPAIGN > LEVEL SELECT). Vanilla MapNodeScript.Start hides every level that the save file
+    /// hasn't beaten (ES2 "scores?tag=<n>levelbeaten"): canvas group alpha 0, no raycasts, map icon hidden.
+    /// With Archipelago, what counts is "<code> Access", so show accessible levels and hide the others,
+    /// whatever the save file says.
+    /// </summary>
     [HarmonyPatch(typeof(MapNodeScript), "Start")]
     static class MapNodeStartPatch
     {
@@ -73,10 +78,18 @@ namespace DuskRando.Patches
             var lvl = LevelGate.LevelForBuildIndex(__instance.mylevel);
             if (lvl == null) return;
             bool open = LevelGate.HasAccess(lvl);
-            var button = Traverse.Create(__instance).Field("_button").GetValue<Button>();
+            var t = Traverse.Create(__instance);
+            var group = t.Field("_canvasGroup").GetValue<CanvasGroup>() ?? __instance.GetComponent<CanvasGroup>();
+            if (group != null)
+            {
+                group.alpha = open ? 1f : 0f;
+                group.interactable = open;
+                group.blocksRaycasts = open;
+            }
+            var button = t.Field("_button").GetValue<Button>();
             if (button != null) button.interactable = open;
-            var group = Traverse.Create(__instance).Field("_canvasGroup").GetValue<CanvasGroup>();
-            if (group != null) group.alpha = open ? 1f : 0.35f;
+            var icon = t.Field("_mapIcon").GetValue<Component>();
+            if (icon != null) icon.gameObject.SetActive(open);
         }
     }
 
