@@ -3,19 +3,17 @@
 ## Required software
 
 - DUSK (Steam version)
-- [BepInEx 5 (x64)](https://github.com/BepInEx/BepInEx/releases)
-- The DUSK Archipelago mod (`DuskRando.dll` plus `Archipelago.MultiClient.Net.dll` and `Newtonsoft.Json.dll`)
-- The `dusk.apworld` file, installed into your Archipelago installation's `custom_worlds` folder
+- [BepInEx 5 (64-bit Windows build)](https://github.com/BepInEx/BepInEx/releases)
+- `DuskRando-v<version>.zip` and `dusk.apworld` from the
+  [dusk-rando Releases page](https://github.com/FlapjackRetro/dusk-rando/releases)
 
 ## Installation
 
-1. Extract BepInEx into the DUSK folder (the one containing `Dusk.exe`) and start the game once so BepInEx creates
-   its folders, then quit.
-2. Copy the mod's DLLs into `Dusk/BepInEx/plugins/DuskRando/`.
-3. Start DUSK. Press **F1** to open the Archipelago connection window, enter the server, slot name and password, then
-   connect before starting a new game.
+1. Extract BepInEx into the DUSK folder (the one containing `Dusk.exe`), start the game once, then quit.
+2. Extract `DuskRando-v<version>.zip` into the same DUSK folder. It already contains `BepInEx/plugins/DuskRando/`.
+3. Install `dusk.apworld` by double-clicking it, or copy it into Archipelago's `custom_worlds` folder.
+4. Start DUSK, press **F1** for the Archipelago window, enter server, slot and password, and connect before starting
+   a new game.
 
-## Generating a game
-
-Create a player YAML (generate a template from the Archipelago Launcher, "Generate Template Options") with
-`game: DUSK` and generate as usual.
+The full guide, with troubleshooting and Proton notes, is at
+https://github.com/FlapjackRetro/dusk-rando/blob/master/docs/setup.md

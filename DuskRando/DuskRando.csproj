@@ -2,8 +2,7 @@
   <!--
     BepInEx 5 plugin for DUSK (Unity 2018.2.8f1, Mono, .NET 4.x profile).
     Build:  dotnet build -c Release            (or set DuskDir if the game lives elsewhere)
-    Output: bin/Release/net46/ -> copy DuskRando.dll, Archipelago.MultiClient.Net.dll and
-            Newtonsoft.Json.dll into Dusk/BepInEx/plugins/DuskRando/
+    Output: bin/Release/net46/ plus dist/DuskRando-v<Version>.zip (see PackageReleaseZip below)
   -->
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
@@ -45,4 +44,25 @@
     <!-- Single source of truth for location IDs, shared with the APWorld. -->
     <EmbeddedResource Include="..\apworld\dusk\data\locations.json" LogicalName="DuskRando.locations.json" />
   </ItemGroup>
+
+  <!--
+    Release builds also produce dist/DuskRando-v<Version>.zip for the GitHub Releases page.
+    The zip mirrors the game folder (BepInEx/plugins/DuskRando/...), so players extract it straight
+    into the folder that contains Dusk.exe.
+  -->
+  <Target Name="PackageReleaseZip" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <ReleaseStaging>$(BaseIntermediateOutputPath)release-zip\</ReleaseStaging>
+      <ReleaseZip>$(MSBuildProjectDirectory)\..\dist\DuskRando-v$(Version).zip</ReleaseZip>
+    </PropertyGroup>
+    <ItemGroup>
+      <ReleaseDll Include="$(OutDir)DuskRando.dll;$(OutDir)Archipelago.MultiClient.Net.dll;$(OutDir)Newtonsoft.Json.dll" />
+    </ItemGroup>
+    <Error Condition="!Exists('%(ReleaseDll.Identity)')" Text="Release zip: missing %(ReleaseDll.Identity)" />
+    <RemoveDir Directories="$(ReleaseStaging)" />
+    <Copy SourceFiles="@(ReleaseDll)" DestinationFolder="$(ReleaseStaging)BepInEx\plugins\DuskRando" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\..\dist" />
+    <ZipDirectory SourceDirectory="$(ReleaseStaging)" DestinationFile="$(ReleaseZip)" Overwrite="true" />
+    <Message Importance="high" Text="Release zip: $(ReleaseZip)" />
+  </Target>
 </Project>
