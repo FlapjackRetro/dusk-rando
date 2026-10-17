@@ -82,16 +82,21 @@ class RandomizeAmmo(Toggle):
 
 class CombatLogic(Choice):
     """
-    Only matters when weapons are randomized. Requires a minimum number of distinct firearms before
-    a level is considered in logic.
-    normal: E1M3+ needs 1, Episode 2 needs 3, Episode 3 needs 5.
-    lenient: E1M5+ needs 1, Episode 2 needs 2, Episode 3 needs 3.
-    none: sickles are enough for everything.
+    Only matters when weapons are randomized. How many distinct firearms (weapons other than the starting sickles
+    and the sword) the logic expects before a level is considered in logic. More required firearms means you arrive
+    better armed. Each episode's first level never needs any; secret levels need as many as the end of their episode.
+    easy: Episode 1 needs 1 from E1M3 and 2 from E1M6; Episode 2 needs 2 from E2M2 and 3 from E2M6; Episode 3
+          needs 3 from E3M2 and 4 from E3M6.
+    normal: Episode 1 needs 1 from E1M6; Episode 2 needs 1 from E2M2 and 2 from E2M6; Episode 3 needs 2 from E3M2
+            and 3 from E3M6.
+    unhinged: no combat logic. Sickles are enough for everything; you may play a long time with only them.
     """
     display_name = "Combat Logic"
-    option_normal = 0
-    option_lenient = 1
-    option_none = 2
+    option_easy = 0
+    option_normal = 1
+    option_unhinged = 2
+    alias_lenient = 1
+    alias_none = 2
     default = 0
 
 
