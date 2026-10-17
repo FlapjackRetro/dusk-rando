@@ -111,15 +111,24 @@ class DuskWorld(World):
     }
 
     def firearms_needed(self, lvl: LevelData) -> int:
-        if "weapons" not in self.categories or self.options.combat_logic == self.options.combat_logic.option_none:
+        combat = self.options.combat_logic
+        if "weapons" not in self.categories or combat == combat.option_unhinged:
             return 0
+        if combat == combat.option_permissive:
+            # Only the seed's very first level (E1M1, or the first level of the lowest included episode when
+            # Episode 1 is off) is free; everything else needs one firearm.
+            return 0 if lvl.code == self.free_level else 1
         need = 0
         for start, count in self.COMBAT_TABLE[lvl.episode]:
             if lvl.number >= start:
                 need = count
-        if self.options.combat_logic == self.options.combat_logic.option_lenient:
+        if combat == combat.option_lenient:
             need = max(0, need - 1)
         return need
+
+    @property
+    def free_level(self) -> str:
+        return f"E{min(l.episode for l in self.included_levels)}M1"
 
     def can_enter(self, state: CollectionState, lvl: LevelData) -> bool:
         if not state.has(f"{lvl.code} Access", self.player):

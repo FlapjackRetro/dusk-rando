@@ -24,6 +24,50 @@ class TestDefaults(DuskTestBase):
         self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
 
 
+class TestUnhinged(DuskTestBase):
+    """No combat logic: an unlocked level is in logic with sickles only."""
+    options = {"combat_logic": "unhinged"}
+
+    def test_no_firearms_needed(self) -> None:
+        self.assertTrue(self.can_reach_region("E2M1 The Grainery"))
+        self.collect_by_name(["E3M8 Access"])
+        self.assertTrue(self.can_reach_region("E3M8 As Above, So Below"))
+
+
+class TestUnhingedAlias(DuskTestBase):
+    """Old YAMLs with combat_logic: none still work."""
+    options = {"combat_logic": "none"}
+
+    def test_alias(self) -> None:
+        self.assertEqual(self.world.options.combat_logic.value, self.world.options.combat_logic.option_unhinged)
+
+
+class TestPermissive(DuskTestBase):
+    """E1M1 needs nothing; every other level (including other episodes' first levels) needs 1 firearm."""
+    options = {"combat_logic": "permissive"}
+
+    def test_e1m1_free(self) -> None:
+        self.assertTrue(self.can_reach_region("E1M1 Head Cheese"))
+
+    def test_others_need_one_firearm(self) -> None:
+        self.collect_by_name(["E1M2 Access", "E3M9 Access"])
+        for region in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral", "E3M9 The Dweller in Darkness"):
+            self.assertFalse(self.can_reach_region(region), region)
+        self.collect_by_name(["Crossbow"])
+        for region in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral", "E3M9 The Dweller in Darkness"):
+            self.assertTrue(self.can_reach_region(region), region)
+
+
+class TestPermissiveEpisode3Only(DuskTestBase):
+    """Without Episode 1, the first included level (E3M1) is the free one, so the seed can still start."""
+    options = {"combat_logic": "permissive", "episode1": False, "episode2": False, "secret_levels": False}
+
+    def test_first_level_free(self) -> None:
+        self.assertTrue(self.can_reach_region("E3M1 The Iron Cathedral"))
+        self.collect_by_name(["E3M2 Access"])
+        self.assertFalse(self.can_reach_region("E3M2 Fire and Ice"))
+
+
 class TestEverything(DuskTestBase):
     options = {"randomize_health": True, "randomize_armor": True, "randomize_ammo": True, "goal": "all_levels"}
 
