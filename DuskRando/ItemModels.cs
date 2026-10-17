@@ -171,7 +171,7 @@ namespace DuskRando
         }
 
         // Thickness of the Archipelago logo, in texture pixels (the logo is 128 px across at 160 px per unit).
-        const int LogoDepthPixels = 6;
+        const int LogoDepthPixels = 12;
         const float PixelsPerUnit = 160f;
         const float SideShade = 0.55f; // inner layers are darker so the edge reads as a side, not more logo
 
