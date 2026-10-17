@@ -157,7 +157,10 @@ namespace DuskRando
                             ItemName = info.ItemDisplayName,
                             ForDusk = mine && info.ItemGame == Game,
                             Flags = info.Flags,
-                            Display = mine ? info.ItemDisplayName : $"{info.Player.Name}'s {info.ItemDisplayName}",
+                            // Name the other world's player and game, so e.g. DOOM's "Tower of Babel (E2M8)"
+                            // isn't mistaken for DUSK's E2M8 (issue #19).
+                            Display = mine ? info.ItemDisplayName
+                                           : $"{info.ItemDisplayName} for {info.Player.Name} ({info.ItemGame})",
                         };
                     }
                 ScoutsArrived = true;
