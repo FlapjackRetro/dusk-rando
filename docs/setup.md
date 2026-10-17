@@ -64,6 +64,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
    and let it merge with the existing one.
 3. Start DUSK. A small **Archipelago** window should appear in the top-left corner; **F1** shows or hides it.
    If it doesn't appear, check `BepInEx\LogOutput.log` in your DUSK folder for errors.
+   The mod's version is shown in small print at the bottom of that window; please include it in bug reports.
 
 ## 4. Install the APWorld
 
@@ -152,7 +153,8 @@ folder.
    ```
 
    A Release build writes `dist/DuskRando-v<Version>.zip` with the three DLLs already in `BepInEx/plugins/DuskRando/`.
-   The version comes from `<Version>` in `DuskRando/DuskRando.csproj`.
+   The version comes from `<Version>` in `DuskRando/DuskRando.csproj`; the build also uses it for the BepInEx
+   plugin version and the version shown in the connection window.
 2. Package the APWorld:
 
    ```
