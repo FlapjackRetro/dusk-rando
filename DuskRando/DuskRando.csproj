@@ -8,7 +8,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>DuskRando</AssemblyName>
     <RootNamespace>DuskRando</RootNamespace>
-    <Version>0.4.1</Version>
+    <Version>0.4.2</Version>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
