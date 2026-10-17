@@ -99,15 +99,17 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 
 1. Start DUSK. At the main menu, enter the **server** (e.g. `archipelago.gg:38281`), your **slot** name and the
    **password** (if any) in the Archipelago window, then click **Connect**. Always connect *before* starting a game.
-2. Choose **CAMPAIGN** (not ENDLESS; Endless mode isn't part of the randomizer), then:
-   - **NEW EPISODE** → pick an episode → pick a difficulty to start that episode's first level. Each episode in your
-     seed starts with its first level (E1M1, E2M1, E3M1) and that level's keys unlocked. **Use this to begin a seed.**
-   - **LEVEL SELECT** → pick an episode → pick a difficulty to open that episode's map. The map shows every level
-     you have a `<level> Access` item for (even ones you've never beaten) and hides the rest. Use this to move
-     between levels as new ones unlock.
-3. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
-   are sent to that episode's map instead, where you can pick any level you *do* have access to.
-4. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`.
+2. Press **ARCHIPELAGO** (the new top button on the main menu) and pick a difficulty. You land on the level map of
+   your first episode. At the start of a seed only each episode's first level (E1M1, E2M1, E3M1) is shown; more
+   appear as you receive `<level> Access` items.
+3. On the map, the **E1 / E2 / E3** buttons above *Back to Main Menu* switch between episodes. Your current episode
+   is highlighted; episodes you have no access to yet are greyed out.
+4. In a level, the pause menu has a **LEVEL SELECT** button that takes you back to the episode map.
+5. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
+   are sent to that episode's map instead.
+6. CAMPAIGN and ENDLESS are still there, but Endless mode isn't part of the randomizer and CAMPAIGN follows the
+   vanilla episode flow, so use ARCHIPELAGO.
+7. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`.
 
 ### What you'll see
 
