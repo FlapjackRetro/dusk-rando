@@ -105,3 +105,37 @@ namespace DuskRando.Patches
         }
     }
 }
+
+namespace DuskRando.Patches
+{
+    /// <summary>
+    /// End of an episode (E1M10, E2M10): the story text scene (TextScene / TextScene2) offers Proceed or Return to
+    /// Menu. Vanilla Proceed (NarrativeTextScript.Continue) stores the next episode's first level in
+    /// PersistScript.leveltoload and loads LogoScene, which plays the next episode's intro movie and then drops
+    /// the player into that level. With Archipelago, Proceed goes back to the level select map of the episode
+    /// that was just finished instead, skipping the movie.
+    /// </summary>
+    [HarmonyPatch(typeof(NarrativeTextScript), nameof(NarrativeTextScript.Continue))]
+    static class EpisodeEndProceedPatch
+    {
+        static bool Prefix(NarrativeTextScript __instance)
+        {
+            if (!Plugin.Client.Connected) return true;
+            var next = NextLevel(Traverse.Create(__instance).Field("levelload").GetValue());
+            int episode = next == null ? 1 : next.Episode > 1 ? next.Episode - 1 : next.Episode;
+            if (!MenuUi.EpisodeAvailable(episode) && next != null && MenuUi.EpisodeAvailable(next.Episode))
+                episode = next.Episode;
+            Plugin.Log.LogInfo($"Episode end: Proceed goes to the episode {episode} map (vanilla would load " +
+                               $"{next?.Code ?? "?"} after its intro movie)");
+            SceneManager.LoadScene(LevelGate.MapScenes[episode]);
+            return false;
+        }
+
+        static LevelEntry NextLevel(object levelload)
+        {
+            if (levelload is int index) return LevelGate.LevelForBuildIndex(index);
+            if (levelload is string name && LocationTable.LevelByScene.TryGetValue(name, out var l)) return l;
+            return null;
+        }
+    }
+}
