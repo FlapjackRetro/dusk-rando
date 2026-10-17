@@ -17,7 +17,7 @@ set of instructions in the Setup Guide.
 | `DuskRando/` | The BepInEx 5 game mod (C#): sends checks, receives items, gates levels. |
 | `docs/setup.md` | Player setup guide: BepInEx, the mod zip, the APWorld. |
 | `docs/ITEMS.md` | Item/location reference: categories, counts per level, oddities. |
-| `docs/LOCATIONS.csv` | All 3,233 locations with names, IDs, objects and positions. |
+| `docs/LOCATIONS.csv` | All 3,216 locations with names, IDs, objects and positions. |
 | `data/raw_pickups.json` | Raw dump of every pickup in every scene. |
 | `tools/asset_extract/` | Reads the Unity level files to produce `raw_pickups.json`. |
 | `tools/gen_data.py` | Turns the raw dump into `locations.json`, `LOCATIONS.csv` and `ITEMS.md`. |

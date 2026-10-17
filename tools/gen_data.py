@@ -73,6 +73,11 @@ CHEST_PATHIDS = {("sharedassets2.assets", 911): "tenarmor", ("sharedassets2.asse
                  ("sharedassets2.assets", 1029): "RifleBoxPickup", ("sharedassets2.assets", 962): "CrossbowAmmoPickup",
                  ("sharedassets2.assets", 961): "m16clip", ("sharedassets36.assets", 16): "grenadebox"}
 
+# Developer-only pickups: placed in the level files but not part of normal play, so they are not locations.
+# (scene, object name). E2M1 has a stash of 16 blue keys in a grid plus a sword in one corner of the map; the
+# level's real blue key is the BlueCard object.
+DEV_ONLY = {("E2M1", f"BlueKey ({i})") for i in range(1, 17)} | {("E2M1", "SwordPickup")}
+
 
 def classify(rec):
     """-> (category, vanilla item label) or None to skip."""
@@ -114,6 +119,8 @@ def main():
             continue  # endless arenas, menus
         if rec["tag"] == "EndButtonTag":
             exits[rec["scene"]].append(rec["path"])
+            continue
+        if (rec["scene"], rec["name"]) in DEV_ONLY:
             continue
         c = classify(rec)
         if c:

@@ -15,7 +15,7 @@ class TestDefaults(DuskTestBase):
         self.assertTrue(self.can_reach_location("E1M2 - Sword"))
 
     def test_episode_starts_have_keys(self) -> None:
-        self.assertTrue(self.can_reach_location("E2M1 - Sword"))
+        self.assertTrue(self.can_reach_location("E2M1 - Crossbow"))
 
     def test_combat_logic(self) -> None:
         """Default (easy): E1M3 needs one firearm."""
