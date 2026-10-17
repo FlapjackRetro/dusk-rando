@@ -24,9 +24,10 @@ UNITY_STRUCTS = {
     "UnityEngine.Bounds": [("c", ("struct", "UnityEngine.Vector3")), ("e", ("struct", "UnityEngine.Vector3"))],
     "UnityEngine.Vector2Int": [("x", "i32"), ("y", "i32")],
     "UnityEngine.Vector3Int": [("x", "i32"), ("y", "i32"), ("z", "i32")],
+    "UnityEngine.RectOffset": [("m_Left", "i32"), ("m_Right", "i32"), ("m_Top", "i32"), ("m_Bottom", "i32")],
 }
 UNSUPPORTED = {"UnityEngine.AnimationCurve", "UnityEngine.Gradient", "UnityEngine.GUIStyle",
-               "UnityEngine.RectOffset", "UnityEngine.Matrix4x4"}
+               "UnityEngine.Matrix4x4"}
 
 
 def read_compressed(b, i):

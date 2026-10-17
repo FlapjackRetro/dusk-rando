@@ -43,7 +43,11 @@ namespace DuskRando
             if (ep > 0 && Plugin.Client.Connected)
             {
                 var panel = canvas.transform.Find("Panel") as RectTransform;
-                if (panel != null) AddEpisodeRow(panel, ep);
+                if (panel != null)
+                {
+                    AddEpisodeRow(panel, ep);
+                    MapKeysRow.Build(panel);
+                }
             }
         }
 

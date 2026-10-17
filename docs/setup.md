@@ -102,14 +102,16 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 2. Press **ARCHIPELAGO** (the new top button on the main menu) and pick a difficulty. You land on the level map of
    your first episode. At the start of a seed only each episode's first level (E1M1, E2M1, E3M1) is shown; more
    appear as you receive `<level> Access` items.
-3. On the map, the **E1 / E2 / E3** buttons above *Back to Main Menu* switch between episodes. Your current episode
+3. Hovering a level on the map shows its stats, plus a **KEYS** row: the level's keys in colour once you've
+   received them, dark until then ("NONE" if the level has no keys).
+4. On the map, the **E1 / E2 / E3** buttons above *Back to Main Menu* switch between episodes. Your current episode
    is highlighted; episodes you have no access to yet are greyed out.
-4. In a level, the pause menu has a **LEVEL SELECT** button that takes you back to the episode map.
-5. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
+5. In a level, the pause menu has a **LEVEL SELECT** button that takes you back to the episode map.
+6. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
    are sent to that episode's map instead.
-6. CAMPAIGN and ENDLESS are still there, but Endless mode isn't part of the randomizer and CAMPAIGN follows the
+7. CAMPAIGN and ENDLESS are still there, but Endless mode isn't part of the randomizer and CAMPAIGN follows the
    vanilla episode flow, so use ARCHIPELAGO.
-7. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`. The same file has
+8. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`. The same file has
    `KeepWindowMode` (on by default): DUSK no longer jumps back to fullscreen on the menu or when a level loads,
    so a windowed game (Alt+Enter) stays windowed. The game's own Fullscreen setting still works.
 
