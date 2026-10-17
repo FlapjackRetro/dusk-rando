@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace DuskRando
 {
-    [BepInPlugin(Guid, "DUSK Archipelago", "0.3.0")]
+    [BepInPlugin(Guid, "DUSK Archipelago", "0.4.0")]
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "flapjackretro.dusk.archipelago";
