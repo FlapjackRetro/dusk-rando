@@ -73,18 +73,35 @@ namespace DuskRando
             Disconnect();
             try
             {
-                Session = ArchipelagoSessionFactory.CreateSession(host);
-                lock (Scouted) Scouted.Clear();
-                ScoutsArrived = false;
-                ReceivedCounts.Clear();
-                lock (queueLock) { incoming.Clear(); receivedCounter = 0; }
-                deferred.Clear();
-                highestSeen = -1;
-                // Attach before logging in so the initial ReceivedItems packet goes through the handler.
-                Session.Items.ItemReceived += OnItemReceived;
-                var result = Session.TryConnectAndLogin(Game, slot, ItemsHandlingFlags.AllItems,
-                    new Version(0, 6, 0), tags: new string[0], password: string.IsNullOrEmpty(password) ? null : password,
-                    requestSlotData: true);
+                LoginResult result = null;
+                // Issue #24: try our compressed websocket first; on any connection-level problem, fall back
+                // to MultiClient.Net's own (uncompressed) socket. A real refusal (bad slot/password...) is final.
+                if (UseCompression)
+                {
+                    try
+                    {
+                        Session = CompressedSession.Create(host, out _);
+                        result = LoginWith(slot, password);
+                        if (result is LoginFailure f0 && f0.ErrorCodes.Length == 0)
+                        {
+                            Plugin.Log.LogWarning("Compressed connection failed (" + string.Join(", ", f0.Errors) +
+                                                  "); retrying uncompressed");
+                            try { Session.Socket.DisconnectAsync(); } catch { /* ignored */ }
+                            result = null;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Plugin.Log.LogWarning("Compressed connection unavailable (" + e.Message + "); using uncompressed");
+                        try { Session?.Socket.DisconnectAsync(); } catch { /* ignored */ }
+                        result = null;
+                    }
+                }
+                if (result == null)
+                {
+                    Session = ArchipelagoSessionFactory.CreateSession(host);
+                    result = LoginWith(slot, password);
+                }
                 if (!(result is LoginSuccessful ok))
                 {
                     var f = (LoginFailure)result;
@@ -121,6 +138,24 @@ namespace DuskRando
                 Plugin.Log.LogError(e);
                 Session = null;
             }
+        }
+
+        /// <summary>Use the compressed websocket (config: Archipelago.UseCompression).</summary>
+        public static bool UseCompression = true;
+
+        LoginResult LoginWith(string slot, string password)
+        {
+            lock (Scouted) Scouted.Clear();
+            ScoutsArrived = false;
+            ReceivedCounts.Clear();
+            lock (queueLock) { incoming.Clear(); receivedCounter = 0; }
+            deferred.Clear();
+            highestSeen = -1;
+            // Attach before logging in so the initial ReceivedItems packet goes through the handler.
+            Session.Items.ItemReceived += OnItemReceived;
+            return Session.TryConnectAndLogin(Game, slot, ItemsHandlingFlags.AllItems,
+                new Version(0, 6, 0), tags: new string[0], password: string.IsNullOrEmpty(password) ? null : password,
+                requestSlotData: true);
         }
 
         public void Disconnect()

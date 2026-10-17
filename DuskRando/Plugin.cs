@@ -44,6 +44,9 @@ namespace DuskRando
             host = Config.Bind("Archipelago", "Server", "archipelago.gg:38281");
             slot = Config.Bind("Archipelago", "Slot", "Player");
             password = Config.Bind("Archipelago", "Password", "");
+            ArchipelagoClient.UseCompression = Config.Bind("Archipelago", "UseCompression", true,
+                "Use a compressed (permessage-deflate) websocket connection, as Archipelago recommends. " +
+                "If it fails, the mod falls back to an uncompressed connection automatically.").Value;
             toggleKey = Config.Bind("UI", "ToggleWindow", KeyCode.F1);
             WindowMode.Enabled = Config.Bind("Display", "KeepWindowMode", true,
                 "Stop DUSK from switching back to fullscreen on the menu and on every level load. " +
