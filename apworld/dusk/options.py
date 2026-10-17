@@ -85,7 +85,8 @@ class CombatLogic(Choice):
     Only matters when weapons are randomized. How many distinct firearms (weapons other than the starting sickles)
     the logic expects before a level is considered in logic.
     unhinged: no combat logic. Sickles are enough for everything; you may play a long time with only them.
-    permissive: E1M1 needs nothing; every other level needs at least 1 firearm.
+    permissive: E1M1 needs nothing. E2M1 and E3M1 can be explored with sickles, but finishing them needs 1 firearm.
+                Every other level needs at least 1 firearm.
     lenient: E1M5+ needs 1, Episode 2 needs 2, Episode 3 needs 3.
     normal: E1M3+ needs 1, Episode 2 needs 3, Episode 3 needs 5.
     """

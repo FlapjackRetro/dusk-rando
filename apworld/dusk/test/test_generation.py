@@ -43,27 +43,37 @@ class TestUnhingedAlias(DuskTestBase):
 
 
 class TestPermissive(DuskTestBase):
-    """E1M1 needs nothing; every other level (including other episodes' first levels) needs 1 firearm."""
+    """E1M1 is free; E2M1/E3M1 can be explored with sickles but finishing them needs a firearm; everything else
+    needs a firearm to enter."""
     options = {"combat_logic": "permissive"}
 
     def test_e1m1_free(self) -> None:
-        self.assertTrue(self.can_reach_region("E1M1 Head Cheese"))
+        self.assertTrue(self.can_reach_location("E1M1 - Level Complete"))
+
+    def test_episode_starts(self) -> None:
+        for code in ("E2M1", "E3M1"):
+            self.assertTrue(self.can_reach_location(f"{code} - Sword"), code)
+            self.assertFalse(self.can_reach_location(f"{code} - Level Complete"), code)
+        self.collect_by_name(["Crossbow"])
+        for code in ("E2M1", "E3M1"):
+            self.assertTrue(self.can_reach_location(f"{code} - Level Complete"), code)
 
     def test_others_need_one_firearm(self) -> None:
         self.collect_by_name(["E1M2 Access", "E3M9 Access"])
-        for region in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral", "E3M9 The Dweller in Darkness"):
+        for region in ("E1M2 Down on the Farm", "E3M9 The Dweller in Darkness"):
             self.assertFalse(self.can_reach_region(region), region)
         self.collect_by_name(["Crossbow"])
-        for region in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral", "E3M9 The Dweller in Darkness"):
+        for region in ("E1M2 Down on the Farm", "E3M9 The Dweller in Darkness"):
             self.assertTrue(self.can_reach_region(region), region)
 
 
 class TestPermissiveEpisode3Only(DuskTestBase):
-    """Without Episode 1, the first included level (E3M1) is the free one, so the seed can still start."""
+    """Without Episode 1 the seed still starts: E3M1's pickups are in logic with sickles."""
     options = {"combat_logic": "permissive", "episode1": False, "episode2": False, "secret_levels": False}
 
-    def test_first_level_free(self) -> None:
+    def test_episode_start(self) -> None:
         self.assertTrue(self.can_reach_region("E3M1 The Iron Cathedral"))
+        self.assertFalse(self.can_reach_location("E3M1 - Level Complete"))
         self.collect_by_name(["E3M2 Access"])
         self.assertFalse(self.can_reach_region("E3M2 Fire and Ice"))
 
