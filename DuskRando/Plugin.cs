@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace DuskRando
 {
-    [BepInPlugin(Guid, "DUSK Archipelago", "0.4.0")]
+    [BepInPlugin(Guid, "DUSK Archipelago", PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "flapjackretro.dusk.archipelago";
@@ -31,7 +31,8 @@ namespace DuskRando
         ConfigEntry<string> host, slot, password;
         ConfigEntry<KeyCode> toggleKey;
         bool showWindow = true;
-        Rect windowRect = new Rect(20, 20, 380, 190);
+        Rect windowRect = new Rect(20, 20, 380, 0);
+        GUIStyle versionStyle;
         string passwordText = "";
 
         // Scenes the game passes through after a level is finished (stats screen / story text / ending).
@@ -184,7 +185,9 @@ namespace DuskRando
         void OnGUI()
         {
             if (!showWindow) return;
-            windowRect = GUI.Window(0xD05C, windowRect, DrawWindow, "Archipelago (F1 to hide)");
+            // Auto-sized to its contents (height 0 each frame, so it also shrinks when a note goes away).
+            windowRect = GUILayout.Window(0xD05C, new Rect(windowRect.x, windowRect.y, 380, 0), DrawWindow,
+                "Archipelago (F1 to hide)", GUILayout.Width(380));
         }
 
         void DrawWindow(int id)
@@ -208,6 +211,15 @@ namespace DuskRando
             if (windowNote != null && !Client.Connected) GUILayout.Label(windowNote);
             var hint = Hint();
             if (hint != null) GUILayout.Label(hint);
+            // Issue #29: mod version, small, at the very bottom (for bug reports).
+            if (versionStyle == null)
+                versionStyle = new GUIStyle(GUI.skin.label)
+                {
+                    fontSize = 10,
+                    alignment = TextAnchor.LowerRight,
+                    normal = { textColor = new Color(0.7f, 0.7f, 0.7f) },
+                };
+            GUILayout.Label("DuskRando v" + PluginInfo.Version, versionStyle);
             GUI.DragWindow();
         }
     }

@@ -8,7 +8,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>DuskRando</AssemblyName>
     <RootNamespace>DuskRando</RootNamespace>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -49,6 +49,22 @@
     <!-- AP item sprites (derived from Archipelago's MIT-licensed data/icon.png) -->
     <EmbeddedResource Include="Assets\*.png" LogicalName="DuskRando.Assets.%(Filename)%(Extension)" />
   </ItemGroup>
+
+  <!--
+    PluginInfo.Version: <Version> above is the only place the version is written. This generates a constant from
+    it for the BepInPlugin attribute and the version shown in the connection window (issue #29).
+  -->
+  <Target Name="GeneratePluginInfo" BeforeTargets="BeforeCompile;CoreCompile">
+    <PropertyGroup>
+      <PluginInfoFile>$(IntermediateOutputPath)PluginInfo.g.cs</PluginInfoFile>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(PluginInfoFile)" Overwrite="true" WriteOnlyWhenDifferent="true"
+                      Lines="namespace DuskRando { internal static class PluginInfo { public const string Version = &quot;$(Version)&quot;%3B } }" />
+    <ItemGroup>
+      <Compile Include="$(PluginInfoFile)" />
+      <FileWrites Include="$(PluginInfoFile)" />
+    </ItemGroup>
+  </Target>
 
   <!--
     Release builds also produce dist/DuskRando-v<Version>.zip for the GitHub Releases page.
