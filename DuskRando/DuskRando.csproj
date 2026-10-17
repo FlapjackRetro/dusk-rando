@@ -40,6 +40,8 @@
     <Reference Include="UnityEngine.UI"><HintPath>$(DuskManaged)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UIModule"><HintPath>$(DuskManaged)\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.ImageConversionModule"><HintPath>$(DuskManaged)\UnityEngine.ImageConversionModule.dll</HintPath><Private>false</Private></Reference>
+    <!-- TextAnchor, FontStyle (GUIStyle alignment) -->
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(DuskManaged)\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.InputModule"><HintPath>$(DuskManaged)\UnityEngine.InputModule.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 
