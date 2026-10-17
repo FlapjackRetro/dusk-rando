@@ -111,13 +111,9 @@ class DuskWorld(World):
     }
 
     def firearms_needed(self, lvl: LevelData) -> int:
-        """Distinct firearms needed to enter a level (and reach its pickups)."""
         combat = self.options.combat_logic
         if "weapons" not in self.categories or combat == combat.option_unhinged:
             return 0
-        if combat == combat.option_permissive:
-            # Each episode's first level can be explored with sickles; every other level needs a firearm.
-            return 0 if lvl.number == 1 else 1
         need = 0
         for start, count in self.COMBAT_TABLE[lvl.episode]:
             if lvl.number >= start:
@@ -125,15 +121,6 @@ class DuskWorld(World):
         if combat == combat.option_lenient:
             need = max(0, need - 1)
         return need
-
-    def firearms_to_finish(self, lvl: LevelData) -> int:
-        """Distinct firearms needed to finish a level (its Level Complete check and Cleared event)."""
-        combat = self.options.combat_logic
-        if ("weapons" in self.categories and combat == combat.option_permissive
-                and lvl.number == 1 and lvl.episode != 1):
-            # Permissive: E2M1 and E3M1 can be explored with sickles, but only E1M1 can be finished with them.
-            return 1
-        return self.firearms_needed(lvl)
 
     def can_enter(self, state: CollectionState, lvl: LevelData) -> bool:
         if not state.has(f"{lvl.code} Access", self.player):
@@ -144,20 +131,14 @@ class DuskWorld(World):
     def set_rules(self) -> None:
         for lvl in self.included_levels:
             keys = self.level_keys(lvl)
-            finish = self.firearms_to_finish(lvl)
-            extra = finish > self.firearms_needed(lvl)  # entering the level already checks firearms_needed
-            if not keys and not extra:
+            if not keys:
                 continue
+            # Strict key logic: we don't yet know which pickups sit behind which door, so every check in a
+            # level that has keys is considered to need all of that level's keys.
+            # TODO: replace with per-door regions once door/key placement is mapped out.
             region = self.multiworld.get_region(f"{lvl.code} {lvl.name}", self.player)
             for location in region.locations:
-                ends_level = location.name in (f"{lvl.code} - Level Complete", f"{lvl.code} - Cleared")
-                need = finish if extra and ends_level else 0
-                # Strict key logic: we don't yet know which pickups sit behind which door, so every check in a
-                # level that has keys is considered to need all of that level's keys.
-                # TODO: replace with per-door regions once door/key placement is mapped out.
-                location.access_rule = (
-                    lambda state, k=keys, n=need: state.has_all(k, self.player)
-                    and (n == 0 or state.has_from_list_unique(FIREARMS, self.player, n)))
+                location.access_rule = lambda state, k=keys: state.has_all(k, self.player)
 
         if self.options.goal == self.options.goal.option_bosses:
             targets = [f"{BOSS_LEVELS[ep]} Cleared" for ep in sorted({l.episode for l in self.included_levels})]

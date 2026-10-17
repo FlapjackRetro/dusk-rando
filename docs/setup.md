@@ -157,7 +157,7 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
    | `goal` | `bosses` | `bosses` = beat E1M10/E2M10/E3M10; `all_levels` = finish every level |
    | `randomize_weapons` / `keys` / `powerups` / `secrets` / `treasure_chests` | on | Which pickups are checks |
    | `randomize_health` / `armor` / `ammo` | off | Add many more checks (ammo alone adds ~1,400) |
-   | `combat_logic` | `normal` | How many guns the logic expects before later levels: `unhinged` (none, sickles only), `permissive` (E1M1 needs nothing; E2M1 and E3M1 can be explored with sickles but need 1 gun to finish; everything else needs 1 gun), `lenient`, `normal` |
+   | `combat_logic` | `lenient` | How many guns the logic expects before later levels: `lenient`, `normal` (more guns, sooner) or `unhinged` (no combat logic, sickles only) |
    | `death_link` | off | Die when others die, and vice versa |
 
    See [ITEMS.md](ITEMS.md) for exactly what each category contains.

@@ -18,10 +18,12 @@ class TestDefaults(DuskTestBase):
         self.assertTrue(self.can_reach_location("E2M1 - Sword"))
 
     def test_combat_logic(self) -> None:
-        self.collect_by_name(["E1M3 Access"])
-        self.assertFalse(self.can_reach_region("E1M3 Old Time Religion"))
+        """Default (lenient): E1M5 is free, E1M6 needs one firearm."""
+        self.collect_by_name(["E1M5 Access", "E1M6 Access"])
+        self.assertTrue(self.can_reach_region("E1M5 Sawdust"))
+        self.assertFalse(self.can_reach_region("E1M6 The Cutty Mine"))
         self.collect_by_name(["Crossbow"])
-        self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
+        self.assertTrue(self.can_reach_region("E1M6 The Cutty Mine"))
 
 
 class TestUnhinged(DuskTestBase):
@@ -42,40 +44,14 @@ class TestUnhingedAlias(DuskTestBase):
         self.assertEqual(self.world.options.combat_logic.value, self.world.options.combat_logic.option_unhinged)
 
 
-class TestPermissive(DuskTestBase):
-    """E1M1 is free; E2M1/E3M1 can be explored with sickles but finishing them needs a firearm; everything else
-    needs a firearm to enter."""
-    options = {"combat_logic": "permissive"}
+class TestNormal(DuskTestBase):
+    options = {"combat_logic": "normal"}
 
-    def test_e1m1_free(self) -> None:
-        self.assertTrue(self.can_reach_location("E1M1 - Level Complete"))
-
-    def test_episode_starts(self) -> None:
-        for code in ("E2M1", "E3M1"):
-            self.assertTrue(self.can_reach_location(f"{code} - Sword"), code)
-            self.assertFalse(self.can_reach_location(f"{code} - Level Complete"), code)
+    def test_normal_thresholds(self) -> None:
+        self.collect_by_name(["E1M3 Access"])
+        self.assertFalse(self.can_reach_region("E1M3 Old Time Religion"))
         self.collect_by_name(["Crossbow"])
-        for code in ("E2M1", "E3M1"):
-            self.assertTrue(self.can_reach_location(f"{code} - Level Complete"), code)
-
-    def test_others_need_one_firearm(self) -> None:
-        self.collect_by_name(["E1M2 Access", "E3M9 Access"])
-        for region in ("E1M2 Down on the Farm", "E3M9 The Dweller in Darkness"):
-            self.assertFalse(self.can_reach_region(region), region)
-        self.collect_by_name(["Crossbow"])
-        for region in ("E1M2 Down on the Farm", "E3M9 The Dweller in Darkness"):
-            self.assertTrue(self.can_reach_region(region), region)
-
-
-class TestPermissiveEpisode3Only(DuskTestBase):
-    """Without Episode 1 the seed still starts: E3M1's pickups are in logic with sickles."""
-    options = {"combat_logic": "permissive", "episode1": False, "episode2": False, "secret_levels": False}
-
-    def test_episode_start(self) -> None:
-        self.assertTrue(self.can_reach_region("E3M1 The Iron Cathedral"))
-        self.assertFalse(self.can_reach_location("E3M1 - Level Complete"))
-        self.collect_by_name(["E3M2 Access"])
-        self.assertFalse(self.can_reach_region("E3M2 Fire and Ice"))
+        self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
 
 
 class TestEverything(DuskTestBase):
