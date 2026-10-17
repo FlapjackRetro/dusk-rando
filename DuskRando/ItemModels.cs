@@ -101,9 +101,11 @@ namespace DuskRando
             var copy = Object.Instantiate(source, library.transform, false);
             copy.name = name;
             StripToVisuals(copy);
+            // The library root sits at the origin with no rotation or scale, so local values here are the
+            // source's world values: remembered so copies come out the same size and the same way up.
             copy.transform.localPosition = Vector3.zero;
-            copy.transform.localRotation = Quaternion.identity;
-            copy.transform.localScale = source.transform.lossyScale; // remembered so copies come out the same size
+            copy.transform.localRotation = source.transform.rotation;
+            copy.transform.localScale = source.transform.lossyScale;
             templates[name] = copy;
         }
 
@@ -145,27 +147,32 @@ namespace DuskRando
             }
 
             foreach (var r in loc.GetComponentsInChildren<Renderer>(true)) r.enabled = false;
+            // Placement is done in world space. Pickups don't share an orientation: models imported from
+            // Blender (health packs, totems, ammo...) are rotated -90 degrees on X and spin around their local Z,
+            // while weapon pickups are unrotated and spin around Y. Either way the spin is around world up, so a
+            // child given an upright *world* rotation stays upright and turns with its pickup. Copying the
+            // parent's local frame instead is what laid the logo flat (and made its spin invisible) on the
+            // E1M1 Fast Fire Totem.
+            var parent = loc.transform;
+            float parentScale = UniformScale(parent.lossyScale);
             GameObject visual;
             if (template != null)
             {
-                visual = Object.Instantiate(template, loc.transform, false);
-                var parentScale = loc.transform.lossyScale;
-                var wanted = template.transform.localScale;
-                visual.transform.localScale = new Vector3(
-                    SafeDiv(wanted.x, parentScale.x), SafeDiv(wanted.y, parentScale.y), SafeDiv(wanted.z, parentScale.z));
+                visual = Object.Instantiate(template, parent, false);
+                visual.transform.rotation = template.transform.localRotation;   // the source's world rotation
+                visual.transform.localScale = template.transform.localScale / parentScale;
+                visual.transform.position = parent.position;
             }
             else
             {
                 visual = new GameObject("AP Item");
-                visual.transform.SetParent(loc.transform, false);
+                visual.transform.SetParent(parent, false);
                 BuildLogoSlab(visual.transform, SpriteFor(scout.Flags));
-                var parentScale = loc.transform.lossyScale;
-                visual.transform.localScale = new Vector3(SafeDiv(1, parentScale.x), SafeDiv(1, parentScale.y), SafeDiv(1, parentScale.z));
-                visual.transform.localPosition = new Vector3(0, SafeDiv(0.3f, parentScale.y), 0);
+                visual.transform.rotation = Quaternion.identity;                // upright, facing the player
+                visual.transform.localScale = Vector3.one / parentScale;
+                visual.transform.position = parent.position + Vector3.up * 0.3f;
             }
             visual.name = "AP Visual";
-            visual.transform.localRotation = Quaternion.identity;
-            if (template != null) visual.transform.localPosition = Vector3.zero;
             visual.SetActive(true);
             loc.Dressed = true;
         }
@@ -197,7 +204,11 @@ namespace DuskRando
             }
         }
 
-        static float SafeDiv(float a, float b) => Mathf.Abs(b) < 1e-5f ? a : a / b;
+        static float UniformScale(Vector3 s)
+        {
+            float u = (Mathf.Abs(s.x) + Mathf.Abs(s.y) + Mathf.Abs(s.z)) / 3f;
+            return u < 1e-5f ? 1f : u;
+        }
 
         static Sprite SpriteFor(ItemFlags flags)
         {
