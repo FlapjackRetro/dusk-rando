@@ -137,16 +137,28 @@ namespace DuskRando
             return true;
         }
 
+        static string lastLevelScene; // Unity's activeSceneChanged gives an empty "from" scene (#8)
+
         void OnActiveSceneChanged(Scene from, Scene to)
         {
-            if (!Client.Connected || string.IsNullOrEmpty(from.name)) return;
-            if (!CompletionScenes.Contains(to.name)) return;
-            var loc = LocationTable.LevelComplete(from.name);
-            if (loc != null && Client.IsLocationActive(loc.Id))
-            {
-                Log.LogInfo($"Level complete: {from.name}");
-                Client.Check(loc.Id);
-            }
+            if (LocationTable.LevelByScene.ContainsKey(to.name)) { lastLevelScene = to.name; return; }
+            var finished = !string.IsNullOrEmpty(from.name) ? from.name : lastLevelScene;
+            // Only a direct jump from a level to a win/story/credits scene counts. Anything else (menu, map,
+            // loading screen) means the level was left, so forget it; an episode's intro TextScene from the
+            // menu must not complete whatever level was played last.
+            lastLevelScene = null;
+            if (CompletionScenes.Contains(to.name) && finished != null && LocationTable.LevelByScene.ContainsKey(finished))
+                LevelCompleted(finished, "scene change to " + to.name);
+        }
+
+        /// <summary>Send a level's "Level Complete" check (idempotent).</summary>
+        public static void LevelCompleted(string scene, string how)
+        {
+            if (!Client.Connected || scene == null) return;
+            var loc = LocationTable.LevelComplete(scene);
+            if (loc == null || !Client.IsLocationActive(loc.Id) || Client.IsChecked(loc.Id)) return;
+            Log.LogInfo($"Level complete: {scene} ({how})");
+            Client.Check(loc.Id);
         }
 
         // ---- connection window ----------------------------------------------------------------

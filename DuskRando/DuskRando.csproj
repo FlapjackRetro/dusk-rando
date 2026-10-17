@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Reference Include="Assembly-CSharp"><HintPath>$(DuskManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="ES2"><HintPath>$(DuskManaged)\ES2.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.TextMeshPro"><HintPath>$(DuskManaged)\Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine"><HintPath>$(DuskManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.CoreModule"><HintPath>$(DuskManaged)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>

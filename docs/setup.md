@@ -124,6 +124,9 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
   Flashlights show the Archipelago logo.
 - Before a level starts, the map's loadout picker ticks exactly the weapons you've received (you can't tick others),
   and MAX / Reset only change ammo for those weapons.
+- Level stats on the map (best time, kills, secrets, awards) are kept per seed while you're connected, in
+  `Dusk\config\archipelago\scores_<seed>_<slot>`. A new seed starts clean, the same seed picks up where you left
+  off, and your normal DUSK stats in `Dusk\config\scores` are left untouched.
 - Secret areas and treasure chests look normal; finding or opening them sends the check.
 
 ## Uninstalling
