@@ -82,6 +82,11 @@ namespace DuskRando
         {
             foreach (var p in Object.FindObjectsOfType<SavePickupScript>())
                 if (!p.CompareTag("SecretTag")) AddTemplate(p.gameObject);
+            // Also any pickup prefab that is loaded but not placed (chest contents, breakable drops, ...).
+            // FindObjectsOfTypeAll includes assets; skip our own library copies and other scenes' leftovers.
+            foreach (var p in Resources.FindObjectsOfTypeAll<SavePickupScript>())
+                if (p != null && !p.gameObject.scene.IsValid() && !p.CompareTag("SecretTag"))
+                    AddTemplate(p.gameObject);
             var save = Object.FindObjectOfType<SaveManagerScript>();
             if (save != null && save.spawnableitems != null)
                 foreach (var prefab in save.spawnableitems)
@@ -132,7 +137,7 @@ namespace DuskRando
 
             GameObject template = null;
             if (scout.ForDusk && TemplateNameFor(scout.ItemName, out var objName))
-                templates.TryGetValue(objName, out template);
+                template = FindTemplate(objName);
             if (template != null && template.name == BaseName(loc.gameObject.name))
             {
                 loc.Dressed = true; // already looks right
@@ -173,6 +178,33 @@ namespace DuskRando
             if ((flags & ItemFlags.Advancement) != 0) return progression;
             if ((flags & ItemFlags.NeverExclude) != 0) return useful;
             return filler; // filler and traps
+        }
+
+        // Stand-ins for models that aren't loaded yet, closest first. Every level carries the prefabs in
+        // SaveManagerScript.spawnableitems, so these targets are always available. Missing from that list
+        // (and so only known once seen in a level): grenadebox, the Episode 1 keys, weaponspeedpickup,
+        // superhotpickup, flashlightpickup and every weapon pickup.
+        static readonly Dictionary<string, string[]> Fallbacks = new Dictionary<string, string[]>
+        {
+            { "grenadebox", new[] { "mortarammo" } },              // Box of Mortar Grenades -> single grenade
+            { "RedKey", new[] { "RedKeyMagic", "RedCard" } },
+            { "BlueKey", new[] { "BlueKeyMagic", "BlueCard" } },
+            { "YellowKey", new[] { "YellowKeyMagic", "YellowCard" } },
+            { "RedCard", new[] { "RedKey", "RedKeyMagic" } },
+            { "BlueCard", new[] { "BlueKey", "BlueKeyMagic" } },
+            { "YellowCard", new[] { "YellowKey", "YellowKeyMagic" } },
+            { "RedKeyMagic", new[] { "RedKey", "RedCard" } },
+            { "BlueKeyMagic", new[] { "BlueKey", "BlueCard" } },
+            { "YellowKeyMagic", new[] { "YellowKey", "YellowCard" } },
+        };
+
+        static GameObject FindTemplate(string objName)
+        {
+            if (templates.TryGetValue(objName, out var t)) return t;
+            if (Fallbacks.TryGetValue(objName, out var alts))
+                foreach (var alt in alts)
+                    if (templates.TryGetValue(alt, out t)) return t;
+            return null; // caller falls back to an Archipelago logo
         }
 
         static bool TemplateNameFor(string item, out string objName)

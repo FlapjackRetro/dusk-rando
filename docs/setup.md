@@ -114,8 +114,10 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 - Randomized pickups look like the item they hold. Your own DUSK items use the DUSK model (a shotgun pickup that
   holds a Riveter looks like a Riveter). Items for other players show an Archipelago logo: grey for filler, colour
   for useful items, colour with a yellow arrow for progression.
-- The mod learns DUSK models from the levels you visit, so early on a DUSK weapon you haven't come across yet may
-  show as the Archipelago logo instead.
+- Ammo, health, morale, keys and the backpack always show their DUSK model; every level carries those. Other DUSK
+  models are learned from the levels you visit. Until then, a Box of Mortar Grenades shows as a single grenade, a key
+  borrows another episode's key of the same colour, and weapons, Fast Fire Totems, Serums of Blistering Heat and
+  Flashlights show the Archipelago logo.
 - Secret areas and treasure chests look normal; finding or opening them sends the check.
 
 ## Uninstalling
