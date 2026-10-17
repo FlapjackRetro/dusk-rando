@@ -116,9 +116,34 @@ class Assemblies:
     def is_enum(self, fullname):
         return self.base_name(fullname) == "System.Enum"
 
+    def _extends_generic_unityevent(self, fullname):
+        pe, row = self.typedefs[fullname]
+        try:
+            spec = row.Extends.row
+            sig = spec.Signature.value
+            # GENERICINST CLASS <typedeforref> ...
+            t, _ = self.parse_type(pe, sig, 0)
+            return t[0] == "generic" and t[1][1] and t[1][1].startswith("UnityEngine.Events.UnityEvent")
+        except Exception:
+            return False
+
     def is_serializable(self, fullname):
         pe, row = self.typedefs.get(fullname, (None, None))
-        return row is not None and bool(row.Flags.tdSerializable)
+        if row is None:
+            return False
+        if row.Flags.tdSerializable:
+            return True
+        # UnityEvent subclasses (e.g. Button.ButtonClickedEvent) are serialized even without [Serializable]
+        n = fullname
+        for _ in range(10):
+            n = self.base_name(n)
+            if n is None:
+                return False
+            if n == "UnityEngine.Events.UnityEventBase":
+                return True
+            if n == "?generic":
+                return self._extends_generic_unityevent(fullname)
+        return False
 
     def parse_type(self, pe, b, i):
         """Parse a type in a signature blob; returns (typedesc, i)."""
@@ -153,6 +178,8 @@ class Assemblies:
         pe, row = self.typedefs[fullname]
         out = []
         base = self.base_name(fullname)
+        if base == "?generic" and self._extends_generic_unityevent(fullname):
+            base = "UnityEngine.Events.UnityEventBase"  # UnityEvent<T> subclasses (EventTrigger.TriggerEvent...)
         if base and base in self.typedefs and base not in ("UnityEngine.MonoBehaviour", "System.Object"):
             out += self.serialized_fields(base)
         serfield_rows = self._serializefield_rows(pe)
@@ -175,15 +202,26 @@ class Assemblies:
         if key in self.cache:
             return self.cache[key]
         s = set()
-        ca = pe.net.mdtables.CustomAttribute
+        md = pe.net.mdtables
+        # ctor MethodDef -> owning type name (for attributes defined in the same module, e.g. CoreModule)
+        owner = {}
+        if md.TypeDef:
+            for t in md.TypeDef.rows:
+                for m in t.MethodList:
+                    owner[id(m.row)] = str(t.TypeName)
+        ca = md.CustomAttribute
         if ca:
             for r in ca.rows:
                 try:
                     if r.Parent.table.name != "Field":
                         continue
                     ctor = r.Type.row
-                    cls = ctor.Class.row if hasattr(ctor, "Class") else None
-                    if cls is not None and str(cls.TypeName) == "SerializeField":
+                    if r.Type.table.name == "MethodDef":
+                        cname = owner.get(id(ctor))
+                    else:
+                        cls = ctor.Class.row if hasattr(ctor, "Class") else None
+                        cname = str(cls.TypeName) if cls is not None else None
+                    if cname == "SerializeField":
                         s.add(id(r.Parent.row))
                 except Exception:
                     pass

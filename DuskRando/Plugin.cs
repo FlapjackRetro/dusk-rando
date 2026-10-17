@@ -17,6 +17,16 @@ namespace DuskRando
         public static ArchipelagoClient Client = new ArchipelagoClient();
         public static string PendingMessage;
         public static bool ReceivingDeath;
+        static Plugin instance;
+        static string windowNote;
+
+        /// <summary>Open the connection window, optionally with a one-line note under the status.</summary>
+        public static void ShowWindow(string note = null)
+        {
+            if (instance == null) return;
+            instance.showWindow = true;
+            windowNote = note;
+        }
 
         ConfigEntry<string> host, slot, password;
         ConfigEntry<KeyCode> toggleKey;
@@ -30,6 +40,7 @@ namespace DuskRando
         void Awake()
         {
             Log = Logger;
+            instance = this;
             host = Config.Bind("Archipelago", "Server", "archipelago.gg:38281");
             slot = Config.Bind("Archipelago", "Slot", "Player");
             password = Config.Bind("Archipelago", "Password", "");
@@ -72,6 +83,8 @@ namespace DuskRando
         // ---- level lifecycle ------------------------------------------------------------------
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            try { MenuUi.OnSceneLoaded(scene); }
+            catch (System.Exception e) { Log.LogError("Menu changes failed: " + e); }
             if (!Client.Connected || !LocationTable.LevelByScene.ContainsKey(scene.name)) return;
             ItemModels.Harvest(); // before anything is destroyed or re-dressed
             int marked = 0, removed = 0;
@@ -140,13 +153,12 @@ namespace DuskRando
             if (!Client.Connected)
                 return scene == "Menu" ? "Connect here before starting a game." : null;
             if (scene == "Menu")
-                return "To start: CAMPAIGN > NEW EPISODE, pick an episode.\n" +
-                       "To replay or jump to unlocked levels: CAMPAIGN > LEVEL SELECT.\n" +
-                       "Endless mode is not part of the randomizer.";
+                return "To play: press ARCHIPELAGO, pick a difficulty, then pick a level on the map.\n" +
+                       "In a level, the pause menu's LEVEL SELECT takes you back to the map.";
             if (scene.StartsWith("Endless") || scene == "QuakeconEndlessMode")
                 return "Endless mode is not part of the randomizer: nothing here counts.";
             if (scene == "mapscene" || scene == "mapscene2" || scene == "mapscene3")
-                return "Levels you have Access for are shown; the rest stay hidden.";
+                return "Levels you have Access for are shown; E1 / E2 / E3 switch episodes.";
             return null;
         }
 
@@ -174,6 +186,7 @@ namespace DuskRando
             if (Client.Connected && GUILayout.Button("Disconnect")) Client.Disconnect();
             GUILayout.EndHorizontal();
             GUILayout.Label(Client.Status);
+            if (windowNote != null && !Client.Connected) GUILayout.Label(windowNote);
             var hint = Hint();
             if (hint != null) GUILayout.Label(hint);
             GUI.DragWindow();
