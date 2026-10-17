@@ -144,6 +144,7 @@ namespace DuskRando
 
         void OnActiveSceneChanged(Scene from, Scene to)
         {
+            Client.ReportScene(to.name);
             if (LocationTable.LevelByScene.ContainsKey(to.name)) { lastLevelScene = to.name; return; }
             var finished = !string.IsNullOrEmpty(from.name) ? from.name : lastLevelScene;
             // Only a direct jump from a level to a win/story/credits scene counts. Anything else (menu, map,

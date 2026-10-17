@@ -129,6 +129,8 @@ namespace DuskRando
                 }
                 Session.Locations.CheckedLocationsUpdated += ids => { lock (checkedLocations) checkedLocations.UnionWith(ids); };
                 Scout();
+                reportedArea = null;
+                ReportScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
                 Status = $"Connected as {slot}";
                 Plugin.Log.LogInfo(Status);
             }
@@ -167,6 +169,7 @@ namespace DuskRando
             Session = null;
             deathLink = null;
             SeedKey = null;
+            reportedArea = null;
             Status = "Not connected";
         }
 
@@ -294,6 +297,31 @@ namespace DuskRando
         }
 
         public string DescribeLocation(long id) => GetScout(id)?.Display ?? "an Archipelago item";
+
+        // ---- tracker hint: where the player is ------------------------------------------------
+        // PopTracker (dusk-rando-poptracker) watches this data storage key and switches its map tab.
+        // Value: a level code ("E2M4") while in a level, "E1"/"E2"/"E3" on an episode map, "" elsewhere.
+        static readonly Dictionary<string, string> MapSceneEpisode = new Dictionary<string, string>
+            { { "mapscene", "E1" }, { "mapscene2", "E2" }, { "mapscene3", "E3" } };
+
+        string reportedArea;
+
+        public string TrackerKey => Connected ? $"dusk_level_{Session.ConnectionInfo.Team}_{Session.ConnectionInfo.Slot}" : null;
+
+        public void ReportScene(string sceneName)
+        {
+            if (!Connected) return;
+            string area;
+            if (sceneName != null && LocationTable.LevelByScene.TryGetValue(sceneName, out var lvl)) area = lvl.Code;
+            else if (sceneName == null || !MapSceneEpisode.TryGetValue(sceneName, out area)) area = "";
+            if (area == reportedArea) return;
+            try
+            {
+                Session.DataStorage[TrackerKey] = area;
+                reportedArea = area;
+            }
+            catch (Exception e) { Plugin.Log.LogWarning("Could not report level to the tracker: " + e.Message); }
+        }
 
         public void SendDeath()
         {
