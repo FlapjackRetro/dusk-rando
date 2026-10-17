@@ -158,8 +158,7 @@ namespace DuskRando
             {
                 visual = new GameObject("AP Item");
                 visual.transform.SetParent(loc.transform, false);
-                var sr = visual.AddComponent<SpriteRenderer>();
-                sr.sprite = SpriteFor(scout.Flags);
+                BuildLogoSlab(visual.transform, SpriteFor(scout.Flags));
                 var parentScale = loc.transform.lossyScale;
                 visual.transform.localScale = new Vector3(SafeDiv(1, parentScale.x), SafeDiv(1, parentScale.y), SafeDiv(1, parentScale.z));
                 visual.transform.localPosition = new Vector3(0, SafeDiv(0.3f, parentScale.y), 0);
@@ -169,6 +168,33 @@ namespace DuskRando
             if (template != null) visual.transform.localPosition = Vector3.zero;
             visual.SetActive(true);
             loc.Dressed = true;
+        }
+
+        // Thickness of the Archipelago logo, in texture pixels (the logo is 128 px across at 160 px per unit).
+        const int LogoDepthPixels = 12;
+        const float PixelsPerUnit = 160f;
+        const float SideShade = 0.55f; // inner layers are darker so the edge reads as a side, not more logo
+
+        /// <summary>
+        /// Give the flat logo some depth (issue #6): a stack of sprite layers one texture pixel apart. Front and
+        /// back layers are full brightness, the ones between are shaded, so the rim looks like a solid edge
+        /// when the pickup spins. Separate renderers keep Unity's back-to-front sorting of transparent sprites
+        /// correct from every angle, which a single extruded mesh with the sprite shader would not.
+        /// </summary>
+        static void BuildLogoSlab(Transform parent, Sprite sprite)
+        {
+            float step = 1f / PixelsPerUnit;
+            float half = LogoDepthPixels * step / 2f;
+            for (int i = 0; i <= LogoDepthPixels; i++)
+            {
+                var layer = new GameObject(i == 0 ? "Front" : i == LogoDepthPixels ? "Back" : "Side");
+                layer.transform.SetParent(parent, false);
+                layer.transform.localPosition = new Vector3(0f, 0f, -half + i * step);
+                var sr = layer.AddComponent<SpriteRenderer>();
+                sr.sprite = sprite;
+                bool face = i == 0 || i == LogoDepthPixels;
+                sr.color = face ? Color.white : new Color(SideShade, SideShade, SideShade, 1f);
+            }
         }
 
         static float SafeDiv(float a, float b) => Mathf.Abs(b) < 1e-5f ? a : a / b;
