@@ -109,7 +109,9 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
    are sent to that episode's map instead.
 6. CAMPAIGN and ENDLESS are still there, but Endless mode isn't part of the randomizer and CAMPAIGN follows the
    vanilla episode flow, so use ARCHIPELAGO.
-7. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`.
+7. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`. The same file has
+   `KeepWindowMode` (on by default): DUSK no longer jumps back to fullscreen on the menu or when a level loads,
+   so a windowed game (Alt+Enter) stays windowed. The game's own Fullscreen setting still works.
 
 ### What you'll see
 

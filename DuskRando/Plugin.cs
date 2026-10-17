@@ -45,6 +45,9 @@ namespace DuskRando
             slot = Config.Bind("Archipelago", "Slot", "Player");
             password = Config.Bind("Archipelago", "Password", "");
             toggleKey = Config.Bind("UI", "ToggleWindow", KeyCode.F1);
+            WindowMode.Enabled = Config.Bind("Display", "KeepWindowMode", true,
+                "Stop DUSK from switching back to fullscreen on the menu and on every level load. " +
+                "The game's own Fullscreen setting still works.").Value;
             passwordText = password.Value;
             LocationTable.Load();
             ItemModels.Init();
