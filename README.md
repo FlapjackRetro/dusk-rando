@@ -43,7 +43,7 @@ second command writes `dist/dusk.apworld`; those two files are what goes on the 
    check per level.
  - [x] Randomize items with logic that prevents softlocks: the APWorld (`apworld/dusk`). Generates and passes
    Archipelago's world tests.
-   - [ ] Replace *strict* key logic (every check in a keyed level needs all of its keys) with per-door regions.
+   - [ ] Replace *strict* key logic (every check in a keyed level needs all of its keys) with per-location key rules in `apworld/dusk/key_logic.py`, level by level. Done: E1M8 (partly).
    - [ ] Tune combat logic (minimum firearms per level) from playtesting.
  - [x] Intercept the game's vanilla item handler and hand out Archipelago items instead: written (Harmony patch on
    `PlayerPickupScript.TryPickupItem`, secrets, chests, item granting) and tested in game.

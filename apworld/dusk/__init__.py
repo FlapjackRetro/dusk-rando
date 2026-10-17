@@ -8,6 +8,7 @@ from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
 
 from .data import ALWAYS_CATEGORIES, BOSS_LEVELS, LEVELS, LEVELS_BY_CODE, LOCATIONS, VANILLA_ONLY_ITEMS, LevelData
+from .key_logic import KEY_RULES
 from .items import (FILLER_WEIGHTS, FIREARMS, GAME, ITEM_GROUPS, ITEM_INFO, ITEM_NAME_TO_ID,
                     VANILLA_WEAPON_TO_ITEM, WEAPON_ITEMS, DuskItem)
 from .options import CATEGORY_OPTIONS, DuskOptions, option_groups
@@ -134,12 +135,18 @@ class DuskWorld(World):
             keys = self.level_keys(lvl)
             if not keys:
                 continue
-            # Strict key logic: we don't yet know which pickups sit behind which door, so every check in a
-            # level that has keys is considered to need all of that level's keys.
-            # TODO: replace with per-door regions once door/key placement is mapped out.
+            # Locations listed in key_logic.KEY_RULES need only the keys given there. Everything else uses strict
+            # key logic: every check in a level that has keys needs all of that level's keys, until the level's
+            # door/key layout has been mapped (see key_logic.py).
+            rules = KEY_RULES.get(lvl.code, {})
             region = self.multiworld.get_region(f"{lvl.code} {lvl.name}", self.player)
             for location in region.locations:
-                location.access_rule = lambda state, k=keys: state.has_all(k, self.player)
+                rule = rules.get(location.name)
+                if rule is None and location.name == f"{lvl.code} - Cleared":
+                    rule = rules.get(f"{lvl.code} - Level Complete")
+                needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
+                if needed:
+                    location.access_rule = lambda state, k=needed: state.has_all(k, self.player)
 
         if self.options.goal == self.options.goal.option_bosses:
             targets = [f"{BOSS_LEVELS[ep]} Cleared" for ep in sorted({l.episode for l in self.included_levels})]
