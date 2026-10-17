@@ -177,6 +177,8 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 5. In a level, the pause menu has a **LEVEL SELECT** button that takes you back to the episode map.
 6. When you finish a level, the game tries to load the next one as usual. If you don't have access to it yet, you
    are sent to that episode's map instead.
+   After an episode's final level (E1M10, E2M10) and its story text, **Proceed** takes you back to that episode's
+   map instead of playing the next episode's intro movie and starting its first level.
 7. CAMPAIGN and ENDLESS are still there, but Endless mode isn't part of the randomizer and CAMPAIGN follows the
    vanilla episode flow, so use ARCHIPELAGO.
 8. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`. The same file has
