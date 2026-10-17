@@ -5,7 +5,8 @@ Initially this is item randomization, with access to levels and keys reworked to
 Archipelago (DOOM and Duke Nukem): levels are unlocked by items, and each level's keys are items too.
 
 **Installing / playing:** see the [Setup Guide](docs/setup.md). The mod and APWorld are on the
-[Releases page](https://github.com/FlapjackRetro/dusk-rando/releases).
+[Releases page](https://github.com/FlapjackRetro/dusk-rando/releases). macOS and Linux (including Steam Deck) have their own
+set of instructions in the Setup Guide.
 
 ## Layout
 
