@@ -8,39 +8,105 @@ This guide covers installing the DUSK randomizer mod and the DUSK APWorld for
 
 ## What you need
 
-- **DUSK** (Steam version)
+- **DUSK** (Steam version) on Windows, Linux/Steam Deck or macOS
 - **[Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases)** 0.6.7 or newer, to generate games and
   connect to them
-- **BepInEx 5**, the mod loader (64-bit Windows build)
+- **BepInEx 5**, the mod loader, in the build for your system (see step 2)
 - From this project's [Releases page](https://github.com/FlapjackRetro/dusk-rando/releases):
-  - `DuskRando-<version>.zip`, the game mod
+  - `DuskRando-<version>.zip`, the game mod (the same zip works on every system)
   - `dusk.apworld`, the Archipelago world
+
+> **Linux and macOS:** the native Linux and macOS builds of DUSK run the same game code as Windows, so the mod
+> should work there, but they haven't been tested in game yet (see
+> [#32](https://github.com/FlapjackRetro/dusk-rando/issues/32)). Reports are very welcome.
 
 ## 1. Find your DUSK folder
 
-In Steam, right-click **DUSK** → **Manage** → **Browse local files**. That folder, the one containing `Dusk.exe`,
-is your *DUSK folder*. On a default install it is:
+In Steam, right-click **DUSK** → **Manage** → **Browse local files**. That folder is your *DUSK folder*. On a
+default install it is:
 
-```
-C:\Program Files (x86)\Steam\steamapps\common\Dusk
-```
+| System | DUSK folder | The game in it |
+|---|---|---|
+| Windows | `C:\Program Files (x86)\Steam\steamapps\common\Dusk` | `Dusk.exe` |
+| Linux / Steam Deck | `~/.local/share/Steam/steamapps/common/Dusk` | `DUSK.x86_64` |
+| macOS | `~/Library/Application Support/Steam/steamapps/common/Dusk` | `DUSK.app` |
+
+The examples below use Windows-style paths (`BepInEx\plugins`); on Linux and macOS the same folders are
+`BepInEx/plugins` and so on.
 
 ## 2. Install BepInEx 5
 
-1. Open the [BepInEx releases page](https://github.com/BepInEx/BepInEx/releases) and download the latest
-   **5.x** release for 64-bit Windows: `BepInEx_win_x64_5.4.<x>.zip`.
-   Do **not** use BepInEx 6 or the "IL2CPP" builds; DUSK needs BepInEx 5 (Mono).
+Download BepInEx from the [BepInEx releases page](https://github.com/BepInEx/BepInEx/releases): use the latest
+**5.x** release (5.4.23 or newer). Do **not** use BepInEx 6 or the "IL2CPP" builds; DUSK needs BepInEx 5 (Mono).
+Then follow the part for your system.
+
+### Windows
+
+1. Download `BepInEx_win_x64_5.4.<x>.zip`.
 2. Extract the zip **into your DUSK folder**. Afterwards the folder should contain `winhttp.dll`,
    `doorstop_config.ini` and a `BepInEx` folder, right next to `Dusk.exe`.
 3. Start DUSK once and quit at the main menu. This lets BepInEx create its folders; you should now have
    `BepInEx\plugins` and `BepInEx\config`.
 
-**Linux / Steam Deck (Proton):** BepInEx only loads under Proton if you add this to DUSK's Steam launch options
-(right-click DUSK → **Properties** → **General** → **Launch Options**):
+### Linux (native)
 
-```
-WINEDLLOVERRIDES="winhttp=n,b" %command%
-```
+1. Download `BepInEx_linux_x64_5.4.<x>.zip`.
+2. Extract it **into your DUSK folder**, so `run_bepinex.sh` and the `BepInEx` folder sit next to `DUSK.x86_64`.
+3. Make the script executable. In a terminal in the DUSK folder:
+
+   ```
+   chmod u+x run_bepinex.sh
+   ```
+4. In Steam, right-click DUSK → **Properties** → **General** → **Launch Options** and enter:
+
+   ```
+   ./run_bepinex.sh %command%
+   ```
+5. Start DUSK from Steam once and quit at the main menu, so BepInEx creates `BepInEx/plugins` and `BepInEx/config`.
+
+### Steam Deck
+
+DUSK has a native Linux build, so the Deck runs that one by default. You can either:
+
+- **Use the native build:** follow the *Linux (native)* steps above (switch to Desktop Mode for the terminal and
+  file manager), or
+- **Use the Windows build through Proton:** right-click DUSK → **Properties** → **Compatibility**, tick
+  **Force the use of a specific Steam Play compatibility tool** and pick a Proton version. Steam then downloads the
+  Windows build. Follow the *Windows* steps above (extract `BepInEx_win_x64` into the DUSK folder), and set the
+  launch options to:
+
+  ```
+  WINEDLLOVERRIDES="winhttp=n,b" %command%
+  ```
+
+  Without this line Proton ignores BepInEx's `winhttp.dll` and the mod doesn't load. The same applies to any
+  Linux PC where you run DUSK through Proton.
+
+### macOS
+
+1. Download `BepInEx_macos_x64_5.4.<x>.zip`.
+2. Extract it **into your DUSK folder**, so `run_bepinex.sh` and the `BepInEx` folder sit next to `DUSK.app`.
+3. Open **Terminal** in the DUSK folder (in Finder, right-click the folder → **New Terminal at Folder**) and run:
+
+   ```
+   chmod u+x run_bepinex.sh
+   xattr -dr com.apple.quarantine .
+   ```
+
+   The second line stops macOS (Gatekeeper) from blocking the downloaded BepInEx files.
+4. In Steam, right-click DUSK → **Properties** → **General** → **Launch Options** and enter the script's full path
+   followed by `%command%`, e.g.:
+
+   ```
+   "/Users/<you>/Library/Application Support/Steam/steamapps/common/Dusk/run_bepinex.sh" %command%
+   ```
+
+   If launching through Steam doesn't load BepInEx, open `run_bepinex.sh` in a text editor, set
+   `executable_name="DUSK.app"`, and start the game from Terminal with `./run_bepinex.sh` instead.
+5. Start DUSK once and quit at the main menu, so BepInEx creates `BepInEx/plugins` and `BepInEx/config`.
+
+DUSK for Mac is an Intel build; on Apple Silicon Macs it runs through Rosetta, and BepInEx's script handles that
+for you.
 
 ## 3. Install the DUSK mod
 
@@ -51,7 +117,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
 
    ```
    Dusk\
-     Dusk.exe
+     Dusk.exe            (DUSK.x86_64 on Linux, DUSK.app on macOS)
      BepInEx\
        plugins\
          DuskRando\
@@ -63,7 +129,8 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
    If your unzip tool made an extra `DuskRando-<version>` folder, move its `BepInEx` folder up into the DUSK folder
    and let it merge with the existing one.
 3. Start DUSK. A small **Archipelago** window should appear in the top-left corner; **F1** shows or hides it.
-   If it doesn't appear, check `BepInEx\LogOutput.log` in your DUSK folder for errors.
+   If it doesn't appear, check `BepInEx\LogOutput.log` in your DUSK folder for errors. On Linux and macOS, also
+   check that you started the game through `run_bepinex.sh` (step 2).
    The mod's version is shown in small print at the bottom of that window; please include it in bug reports.
 
 ## 4. Install the APWorld
@@ -132,14 +199,18 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
   and MAX / Reset only change ammo for those weapons.
 - Level stats on the map (best time, kills, secrets, awards) are kept per seed while you're connected, in
   `Dusk\config\archipelago\scores_<seed>_<slot>`. A new seed starts clean, the same seed picks up where you left
-  off, and your normal DUSK stats in `Dusk\config\scores` are left untouched.
+  off, and your normal DUSK stats in `Dusk\config\scores` are left untouched. (The folder is always next to DUSK's
+  own `config` folder; on macOS that is expected to be inside `DUSK.app`.)
 - Secret areas and treasure chests look normal; finding or opening them sends the check.
 
 ## Uninstalling
 
 Delete the `BepInEx\plugins\DuskRando` folder to remove the randomizer. To remove BepInEx completely, also delete
-`winhttp.dll`, `doorstop_config.ini`, `.doorstop_version` (if present) and the `BepInEx` folder from your DUSK
-folder.
+the `BepInEx` folder and the BepInEx loader files from your DUSK folder:
+
+- **Windows / Proton:** `winhttp.dll`, `doorstop_config.ini` and `.doorstop_version` (if present)
+- **Linux / macOS:** `run_bepinex.sh`, `libdoorstop.so` / `libdoorstop.dylib`, `.doorstop_version` (if present),
+  and clear DUSK's Steam launch options
 
 ---
 
