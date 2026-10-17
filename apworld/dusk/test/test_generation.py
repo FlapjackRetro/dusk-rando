@@ -18,12 +18,11 @@ class TestDefaults(DuskTestBase):
         self.assertTrue(self.can_reach_location("E2M1 - Sword"))
 
     def test_combat_logic(self) -> None:
-        """Default (lenient): E1M5 is free, E1M6 needs one firearm."""
-        self.collect_by_name(["E1M5 Access", "E1M6 Access"])
-        self.assertTrue(self.can_reach_region("E1M5 Sawdust"))
-        self.assertFalse(self.can_reach_region("E1M6 The Cutty Mine"))
+        """Default (easy): E1M3 needs one firearm."""
+        self.collect_by_name(["E1M3 Access"])
+        self.assertFalse(self.can_reach_region("E1M3 Old Time Religion"))
         self.collect_by_name(["Crossbow"])
-        self.assertTrue(self.can_reach_region("E1M6 The Cutty Mine"))
+        self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
 
 
 class TestUnhinged(DuskTestBase):
@@ -45,13 +44,23 @@ class TestUnhingedAlias(DuskTestBase):
 
 
 class TestNormal(DuskTestBase):
+    """normal: E1M5 is free, E1M6 needs one firearm."""
     options = {"combat_logic": "normal"}
 
     def test_normal_thresholds(self) -> None:
-        self.collect_by_name(["E1M3 Access"])
-        self.assertFalse(self.can_reach_region("E1M3 Old Time Religion"))
+        self.collect_by_name(["E1M5 Access", "E1M6 Access"])
+        self.assertTrue(self.can_reach_region("E1M5 Sawdust"))
+        self.assertFalse(self.can_reach_region("E1M6 The Cutty Mine"))
         self.collect_by_name(["Crossbow"])
-        self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
+        self.assertTrue(self.can_reach_region("E1M6 The Cutty Mine"))
+
+
+class TestLenientAlias(DuskTestBase):
+    """Old YAMLs with combat_logic: lenient get the same rules under their new name, normal."""
+    options = {"combat_logic": "lenient"}
+
+    def test_alias(self) -> None:
+        self.assertEqual(self.world.options.combat_logic.value, self.world.options.combat_logic.option_normal)
 
 
 class TestEverything(DuskTestBase):

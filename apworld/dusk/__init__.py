@@ -102,7 +102,8 @@ class DuskWorld(World):
             return []
         return [f"{lvl.code} {k}" for k in lvl.keys]
 
-    # Distinct firearms required to enter a level, by episode: [(from level number, count), ...].
+    # Distinct firearms required to enter a level on 'easy', by episode: [(from level number, count), ...].
+    # 'normal' needs one fewer at every step.
     # Every episode starts with sickles only, so each episode's first level never needs any.
     COMBAT_TABLE = {
         1: [(3, 1), (6, 2)],
@@ -118,7 +119,7 @@ class DuskWorld(World):
         for start, count in self.COMBAT_TABLE[lvl.episode]:
             if lvl.number >= start:
                 need = count
-        if combat == combat.option_lenient:
+        if combat == combat.option_normal:
             need = max(0, need - 1)
         return need
 
