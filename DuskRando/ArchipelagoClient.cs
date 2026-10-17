@@ -36,6 +36,18 @@ namespace DuskRando
         public bool Connected => Session != null && Session.Socket.Connected;
         public string Status = "Not connected";
 
+        /// <summary>Seed + slot, safe for file names. Kept while the connection drops; cleared on Disconnect.</summary>
+        public string SeedKey { get; private set; }
+
+        static string SafeFileName(string s)
+        {
+            var bad = System.IO.Path.GetInvalidFileNameChars();
+            var chars = s.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+                if (Array.IndexOf(bad, chars[i]) >= 0 || chars[i] == '?' || chars[i] == ' ') chars[i] = '_';
+            return new string(chars);
+        }
+
         public HashSet<string> Levels = new HashSet<string>();
         public HashSet<string> Categories = new HashSet<string>();
         public string Goal = "bosses";
@@ -82,6 +94,9 @@ namespace DuskRando
                 }
                 ReadSlotData(ok.SlotData);
                 saveKey = $"{Session.RoomState.Seed}_{slot}";
+                SeedKey = SafeFileName(saveKey);
+                try { System.IO.Directory.CreateDirectory(Patches.SeedStats.Directory); }
+                catch (Exception e) { Plugin.Log.LogWarning("Could not create seed stats folder: " + e.Message); }
                 processedIndex = LoadProcessedIndex();
                 if (ok.SlotData.TryGetValue("death_link", out var dl) && Convert.ToBoolean(dl))
                 {
@@ -116,6 +131,7 @@ namespace DuskRando
             }
             Session = null;
             deathLink = null;
+            SeedKey = null;
             Status = "Not connected";
         }
 
