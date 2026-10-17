@@ -44,11 +44,11 @@ second command writes `dist/dusk.apworld`; those two files are what goes on the 
    Archipelago's world tests.
    - [ ] Replace *strict* key logic (every check in a keyed level needs all of its keys) with per-door regions.
    - [ ] Tune combat logic (minimum firearms per level) from playtesting.
- - [~] Intercept the game's vanilla item handler and hand out Archipelago items instead: written (Harmony patch on
+ - [x] Intercept the game's vanilla item handler and hand out Archipelago items instead: written (Harmony patch on
    `PlayerPickupScript.TryPickupItem`, secrets, chests, item granting) but **not yet built or tested in game**.
- - [~] Unlock levels in an arbitrary order: written (`<level> Access` items; `SceneManager` and map-screen patches)
+ - [x] Unlock levels in an arbitrary order: written (`<level> Access` items; `SceneManager` and map-screen patches)
    but not yet tested in game.
  - [ ] Check in game: what DUSK's save/quickload does with collected pickups, and which scenes count as "level
    complete" (currently: moving from a level to `WinLevelScene` / `TextScene*` / `EndStoryScene` / `CreditsScene`).
- - [~] BONUS: update models of randomized items on scene load (#4): DUSK items take their DUSK model (learned from
+ - [x] BONUS: update models of randomized items on scene load (#4): DUSK items take their DUSK model (learned from
    levels as you visit them), other games' items show a grey / colour / arrow Archipelago logo. Needs in-game testing.
