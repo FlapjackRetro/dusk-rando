@@ -25,6 +25,31 @@ class TestDefaults(DuskTestBase):
         self.assertTrue(self.can_reach_region("E1M3 Old Time Religion"))
 
 
+class TestKeyRules(DuskTestBase):
+    """Per-location key rules (key_logic.KEY_RULES). Combat logic off so only keys matter."""
+    options = {"combat_logic": "unhinged"}
+
+    def test_rules_name_real_locations(self) -> None:
+        from ..data import LEVELS_BY_CODE, LOCATIONS
+        from ..key_logic import KEY_RULES
+        names = {l.name for l in LOCATIONS} | {f"{c} - Level Complete" for c in LEVELS_BY_CODE}
+        for code, rules in KEY_RULES.items():
+            self.assertIn(code, LEVELS_BY_CODE)
+            for name, keys in rules.items():
+                self.assertIn(name, names)
+                self.assertTrue(name.startswith(code + " - "), name)
+                self.assertTrue(set(keys) <= set(LEVELS_BY_CODE[code].keys), (name, keys))
+
+    def test_e1m8(self) -> None:
+        self.collect_by_name(["E1M8 Access"])
+        for name in ("E1M8 - Super Shotgun", "E1M8 - Red Key", "E1M8 - Blue Key", "E1M8 - Secret Area 4"):
+            self.assertTrue(self.can_reach_location(name), name)
+        for name in ("E1M8 - Yellow Key", "E1M8 - Riveter", "E1M8 - Level Complete"):
+            self.assertFalse(self.can_reach_location(name), name)
+        self.collect_by_name(["E1M8 Blue Key", "E1M8 Red Key", "E1M8 Yellow Key"])
+        self.assertTrue(self.can_reach_location("E1M8 - Level Complete"))
+
+
 class TestUnhinged(DuskTestBase):
     """No combat logic: an unlocked level is in logic with sickles only."""
     options = {"combat_logic": "unhinged"}
