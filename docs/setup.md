@@ -114,6 +114,9 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
 8. Your connection details are saved in `BepInEx\config\flapjackretro.dusk.archipelago.cfg`. The same file has
    `KeepWindowMode` (on by default): DUSK no longer jumps back to fullscreen on the menu or when a level loads,
    so a windowed game (Alt+Enter) stays windowed. The game's own Fullscreen setting still works.
+   `UseCompression` (on by default) makes the mod use a compressed connection to the server, as Archipelago
+   recommends; if that doesn't work it quietly falls back to a normal connection. `BepInEx\LogOutput.log` shows
+   "Connected to … (compressed)" when compression is in use.
 
 ### What you'll see
 
