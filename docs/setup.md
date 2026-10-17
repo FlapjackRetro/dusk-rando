@@ -122,6 +122,8 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
   models are learned from the levels you visit. Until then, a Box of Mortar Grenades shows as a single grenade, a key
   borrows another episode's key of the same colour, and weapons, Fast Fire Totems, Serums of Blistering Heat and
   Flashlights show the Archipelago logo.
+- Before a level starts, the map's loadout picker ticks exactly the weapons you've received (you can't tick others),
+  and MAX / Reset only change ammo for those weapons.
 - Secret areas and treasure chests look normal; finding or opening them sends the check.
 
 ## Uninstalling
