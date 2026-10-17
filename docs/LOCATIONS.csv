@@ -1226,23 +1226,7 @@ id,name,level,level_name,scene,category,vanilla_item,object,x,y,z
 3495791464,E2M1 - Small Medical Kit 6,E2M1,The Grainery,E2M1,health,Small Medical Kit,minihealthpack (5),204.75,-112.75,230.0
 3495791465,E2M1 - Small Medical Kit 7,E2M1,The Grainery,E2M1,health,Small Medical Kit,minihealthpack (6),204.75,-112.75,227.0
 3495791466,E2M1 - Small Medical Kit 8,E2M1,The Grainery,E2M1,health,Small Medical Kit,minihealthpack (7),169.55,-52.13,218.22
-3495791467,E2M1 - Blue Key 1,E2M1,The Grainery,E2M1,keys,Blue Key,BlueCard,196.61,-82.59,16.57
-3495791468,E2M1 - Blue Key 2,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (1),222.16,-82.75,-91.5
-3495791469,E2M1 - Blue Key 3,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (10),228.25,-82.75,-93.25
-3495791470,E2M1 - Blue Key 4,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (11),228.25,-82.75,-91.75
-3495791471,E2M1 - Blue Key 5,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (12),228.25,-82.75,-90.25
-3495791472,E2M1 - Blue Key 6,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (13),227.0,-82.75,-90.25
-3495791473,E2M1 - Blue Key 7,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (14),225.75,-82.75,-90.25
-3495791474,E2M1 - Blue Key 8,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (15),224.25,-82.75,-90.25
-3495791475,E2M1 - Blue Key 9,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (16),222.75,-82.75,-90.25
-3495791476,E2M1 - Blue Key 10,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (2),222.16,-82.75,-93.25
-3495791477,E2M1 - Blue Key 11,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (3),222.16,-82.75,-94.75
-3495791478,E2M1 - Blue Key 12,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (4),222.16,-82.75,-96.5
-3495791479,E2M1 - Blue Key 13,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (5),223.75,-82.75,-96.5
-3495791480,E2M1 - Blue Key 14,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (6),225.25,-82.75,-96.5
-3495791481,E2M1 - Blue Key 15,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (7),226.75,-82.75,-96.5
-3495791482,E2M1 - Blue Key 16,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (8),228.25,-82.75,-96.5
-3495791483,E2M1 - Blue Key 17,E2M1,The Grainery,E2M1,keys,Blue Key,BlueKey (9),228.25,-82.75,-94.75
+3495791467,E2M1 - Blue Key,E2M1,The Grainery,E2M1,keys,Blue Key,BlueCard,196.61,-82.59,16.57
 3495791484,E2M1 - Red Key,E2M1,The Grainery,E2M1,keys,Red Key,RedCard,203.16,-79.45,205.28
 3495791485,E2M1 - Yellow Key,E2M1,The Grainery,E2M1,keys,Yellow Key,YellowCard,187.97,-115.98,165.5
 3495791486,E2M1 - Fast Fire Totem,E2M1,The Grainery,E2M1,powerups,Fast Fire Totem,weaponspeedpickup,210.67,-94.56,221.34
@@ -1263,7 +1247,6 @@ id,name,level,level_name,scene,category,vanilla_item,object,x,y,z
 3495791501,E2M1 - Riveter 2,E2M1,The Grainery,E2M1,weapons,Riveter,RiveterPickup (1),161.47,-82.25,2.0
 3495791502,E2M1 - Shotgun 1,E2M1,The Grainery,E2M1,weapons,Shotgun,ShotgunPickup,204.25,-82.5,12.0
 3495791503,E2M1 - Shotgun 2,E2M1,The Grainery,E2M1,weapons,Shotgun,ShotgunPickup (2),174.34,-61.0,161.0
-3495791504,E2M1 - Sword,E2M1,The Grainery,E2M1,weapons,Sword,SwordPickup,234.37,-82.5,-136.91
 3495791505,E2M1 - Level Complete,E2M1,The Grainery,E2M1,level_complete,,,,,
 3495791506,E2M2 - Assault Rifle Magazine 1,E2M2,Unseen,E2M2,ammo,Assault Rifle Magazine,m16clip (10),-21.25,-17.25,4.65
 3495791507,E2M2 - Assault Rifle Magazine 2,E2M2,Unseen,E2M2,ammo,Assault Rifle Magazine,m16clip (2),-31.52,-42.46,-39.32

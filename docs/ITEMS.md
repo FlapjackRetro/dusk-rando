@@ -8,8 +8,8 @@ Each category is a separate YAML toggle so the number of checks can grow or shri
 
 | Category | Option | Default | Checks | What's in it |
 |---|---|---|---:|---|
-| weapons | `randomize_weapons` | on | 272 | Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups |
-| keys | `randomize_keys` | on | 88 | Red / Blue / Yellow keys (per level) |
+| weapons | `randomize_weapons` | on | 271 | Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups |
+| keys | `randomize_keys` | on | 72 | Red / Blue / Yellow keys (per level) |
 | powerups | `randomize_powerups` | on | 105 | Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Flashlight, Backpack |
 | secrets | `randomize_secrets` | on | 166 | Secret area triggers |
 | treasure_chests | `randomize_treasure_chests` | on | 16 | Treasure chests (fixed contents) |
@@ -18,7 +18,7 @@ Each category is a separate YAML toggle so the number of checks can grow or shri
 | ammo | `randomize_ammo` | off | 1443 | All ammo pickups |
 | level_complete | `(always)` | on | 33 | Finishing the level |
 
-Total: **3228** possible checks.
+Total: **3211** possible checks.
 
 ### Never randomized
 
@@ -54,7 +54,7 @@ Total: **3228** possible checks.
 | health | Magic Potion | 7 |
 | health | Medical Kit | 370 |
 | health | Small Medical Kit | 148 |
-| keys | Blue Key | 40 |
+| keys | Blue Key | 24 |
 | keys | Red Key | 26 |
 | keys | Yellow Key | 22 |
 | powerups | Backpack | 6 |
@@ -81,7 +81,7 @@ Total: **3228** possible checks.
 | weapons | Riveter | 22 |
 | weapons | Shotgun | 55 |
 | weapons | Super Shotgun | 28 |
-| weapons | Sword | 14 |
+| weapons | Sword | 13 |
 
 ## Checks per level
 
@@ -98,7 +98,7 @@ Total: **3228** possible checks.
 | E1M9 | Ghost Town | `E1M8` | Blue, Red, Yellow | 10 | 3 | 1 | 10 | 1 | 27 | 24 | 91 | 1 | 168 |
 | E1M10 | Creations | `E1M9` | - | 4 | 0 | 2 | 1 | 0 | 6 | 2 | 17 | 1 | 33 |
 | E1MS | The Dim Slough | `E1MS` | Blue, Red, Yellow | 5 | 3 | 1 | 5 | 0 | 10 | 19 | 44 | 1 | 88 |
-| E2M1 | The Grainery | `E2M1` | Blue, Red, Yellow | 9 | 19 | 3 | 7 | 0 | 15 | 31 | 63 | 1 | 148 |
+| E2M1 | The Grainery | `E2M1` | Blue, Red, Yellow | 8 | 3 | 3 | 7 | 0 | 15 | 31 | 63 | 1 | 131 |
 | E2M2 | Unseen | `E2M2` | Blue, Red, Yellow | 6 | 3 | 2 | 4 | 1 | 11 | 17 | 35 | 1 | 80 |
 | E2M3 | Into the Thresher | `E2M3` | Blue, Red, Yellow | 9 | 3 | 2 | 7 | 0 | 17 | 19 | 44 | 1 | 102 |
 | E2M4 | The Infernal Machine | `E2M4` | Blue, Red, Yellow | 7 | 3 | 5 | 6 | 0 | 18 | 17 | 70 | 1 | 127 |
