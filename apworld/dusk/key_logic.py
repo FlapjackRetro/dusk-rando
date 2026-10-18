@@ -27,6 +27,15 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E2M4 - Shotgun 1": NONE,
         "E2M4 - Red Key": NONE,
     },
+    "E2M7": {
+        "E2M7 - Pistol 1": NONE,
+        "E2M7 - Pistol 2": NONE,
+        "E2M7 - Shotgun 1": NONE,
+        "E2M7 - Shotgun 2": NONE,
+        "E2M7 - Hunting Rifle": NONE,
+        "E2M7 - Mortar": NONE,
+        "E2M7 - Blue Key": NONE,
+    },
     "E3M1": {
         "E3M1 - Sword": NONE,
         "E3M1 - Crossbow 2": NONE,

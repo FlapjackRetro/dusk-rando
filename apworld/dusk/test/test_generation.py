@@ -76,6 +76,13 @@ class TestKeyRules(DuskTestBase):
         for name in ("E2M4 - Shotgun 2", "E2M4 - Blue Key", "E2M4 - Level Complete"):
             self.assertFalse(self.can_reach_location(name), name)
 
+    def test_e2m7(self) -> None:
+        self.collect_by_name(["E2M7 Access"])
+        for name in ("E2M7 - Hunting Rifle", "E2M7 - Mortar", "E2M7 - Blue Key", "E2M7 - Shotgun 2"):
+            self.assertTrue(self.can_reach_location(name), name)
+        for name in ("E2M7 - Yellow Key", "E2M7 - Riveter", "E2M7 - Secret Area 1", "E2M7 - Level Complete"):
+            self.assertFalse(self.can_reach_location(name), name)
+
     def test_e3m1(self) -> None:
         """E3M1 is a starting level, so its keys are precollected; remove them to test the rule itself."""
         state = self.multiworld.state
