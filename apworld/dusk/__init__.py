@@ -9,7 +9,7 @@ from worlds.AutoWorld import WebWorld, World
 
 from .data import ALWAYS_CATEGORIES, BOSS_LEVELS, LEVELS, LEVELS_BY_CODE, LOCATIONS, VANILLA_ONLY_ITEMS, LevelData
 from .key_logic import KEY_RULES
-from .items import (FILLER_WEIGHTS, FIREARMS, GAME, ITEM_GROUPS, ITEM_INFO, ITEM_NAME_TO_ID,
+from .items import (EXORCIST_WEAPONS, FILLER_WEIGHTS, FIREARMS, GAME, ITEM_GROUPS, ITEM_INFO, ITEM_NAME_TO_ID,
                     VANILLA_WEAPON_TO_ITEM, WEAPON_ITEMS, DuskItem)
 from .options import CATEGORY_OPTIONS, DuskOptions, option_groups
 
@@ -69,6 +69,28 @@ class DuskWorld(World):
             self.multiworld.push_precollected(self.create_item(f"{first.code} Access"))
             for key in self.level_keys(first):
                 self.multiworld.push_precollected(self.create_item(key))
+        if self.exorcist:
+            self._setup_exorcist(episodes)
+
+    # ---- exorcist combat logic (testing) ----------------------------------------------------------
+    @property
+    def exorcist(self) -> bool:
+        return "weapons" in self.categories and \
+            self.options.combat_logic == self.options.combat_logic.option_exorcist
+
+    def _setup_exorcist(self, episodes: List[int]) -> None:
+        """Everything outside the seed's first level needs all 10 weapons, so they all go in that level."""
+        self.exorcist_level = f"E{episodes[0]}M1"
+        # Keep the weapons in this world; otherwise they could also land in other players' early checks.
+        self.options.local_items.value |= set(EXORCIST_WEAPONS)
+        slots = sum(1 for l in LOCATIONS if l.level == self.exorcist_level and self._is_location(l))
+        # Room for the 10 weapons, plus one more level Access item when no other episode starts unlocked.
+        need = sum(EXORCIST_WEAPONS.values()) + (1 if len(episodes) == 1 else 0)
+        if slots < need:
+            raise OptionError(
+                f"{self.player_name}: combat_logic exorcist puts all 10 weapons in {self.exorcist_level}, which only "
+                f"has {slots} checks with these options (needs {need}). Enable more check categories, "
+                "e.g. randomize_secrets, randomize_powerups or randomize_ammo.")
 
     def _is_location(self, loc) -> bool:
         return loc.category in self.categories and loc.vanilla_item not in VANILLA_ONLY_ITEMS
@@ -114,8 +136,8 @@ class DuskWorld(World):
 
     def firearms_needed(self, lvl: LevelData) -> int:
         combat = self.options.combat_logic
-        if "weapons" not in self.categories or combat == combat.option_unhinged:
-            return 0
+        if "weapons" not in self.categories or combat in (combat.option_unhinged, combat.option_exorcist):
+            return 0  # exorcist is handled in can_enter
         need = 0
         for start, count in self.COMBAT_TABLE[lvl.episode]:
             if lvl.number >= start:
@@ -127,6 +149,8 @@ class DuskWorld(World):
     def can_enter(self, state: CollectionState, lvl: LevelData) -> bool:
         if not state.has(f"{lvl.code} Access", self.player):
             return False
+        if self.exorcist:
+            return lvl.code == self.exorcist_level or state.has_all_counts(EXORCIST_WEAPONS, self.player)
         need = self.firearms_needed(lvl)
         return need == 0 or state.has_from_list_unique(FIREARMS, self.player, need)
 
