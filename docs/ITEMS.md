@@ -8,17 +8,17 @@ Each category is a separate YAML toggle so the number of checks can grow or shri
 
 | Category | Option | Default | Checks | What's in it |
 |---|---|---|---:|---|
-| weapons | `randomize_weapons` | on | 271 | Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups |
+| weapons | `randomize_weapons` | on | 269 | Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups |
 | keys | `randomize_keys` | on | 72 | Red / Blue / Yellow keys (per level) |
-| powerups | `randomize_powerups` | on | 105 | Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Flashlight, Backpack |
+| powerups | `randomize_powerups` | on | 103 | Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Flashlight, Backpack |
 | secrets | `randomize_secrets` | on | 166 | Secret area triggers |
 | treasure_chests | `randomize_treasure_chests` | on | 16 | Treasure chests (fixed contents) |
 | health | `randomize_health` | off | 525 | Medical Kit (+15), Small Medical Kit (+7), Magic Potion (+1, overcharge) |
-| armor | `randomize_armor` | off | 580 | Gold Coin (+1), Bag of Gems (+10), Diamond (+50) morale |
-| ammo | `randomize_ammo` | off | 1443 | All ammo pickups |
+| armor | `randomize_armor` | off | 579 | Gold Coin (+1), Bag of Gems (+10), Diamond (+50) morale |
+| ammo | `randomize_ammo` | off | 1420 | All ammo pickups |
 | level_complete | `(always)` | on | 33 | Finishing the level |
 
-Total: **3211** possible checks.
+Total: **3183** possible checks.
 
 ### Never randomized
 
@@ -40,16 +40,16 @@ Total: **3211** possible checks.
 | ammo | Box of Hunting Rifle Bullets | 95 |
 | ammo | Box of Mortar Grenades | 50 |
 | ammo | Box of Pistol Bullets | 68 |
-| ammo | Box of Shotgun Shells | 252 |
+| ammo | Box of Shotgun Shells | 249 |
 | ammo | Crossbow Bolts | 99 |
 | ammo | Hunting Rifle Bullet | 23 |
 | ammo | Mortar Grenade | 65 |
 | ammo | Pistol Bullet | 2 |
 | ammo | Pistol Clip | 121 |
-| ammo | Rivets | 359 |
+| ammo | Rivets | 339 |
 | ammo | Shotgun Shell | 48 |
 | armor | Bag of Gems | 234 |
-| armor | Diamond | 69 |
+| armor | Diamond | 68 |
 | armor | Gold Coin | 277 |
 | health | Magic Potion | 7 |
 | health | Medical Kit | 370 |
@@ -60,8 +60,8 @@ Total: **3211** possible checks.
 | powerups | Backpack | 6 |
 | powerups | Fast Fire Totem | 41 |
 | powerups | Flashlight | 3 |
-| powerups | Hallowed Health | 46 |
-| powerups | Serum of Blistering Heat | 9 |
+| powerups | Hallowed Health | 45 |
+| powerups | Serum of Blistering Heat | 8 |
 | powerups | Thermal Suit | 5 |
 | treasure_chests | Assault Rifle Magazine | 1 |
 | treasure_chests | Bag of Gems | 1 |
@@ -78,9 +78,9 @@ Total: **3211** possible checks.
 | weapons | Hunting Rifle | 22 |
 | weapons | Mortar | 21 |
 | weapons | Pistol | 59 |
-| weapons | Riveter | 22 |
+| weapons | Riveter | 21 |
 | weapons | Shotgun | 55 |
-| weapons | Super Shotgun | 28 |
+| weapons | Super Shotgun | 27 |
 | weapons | Sword | 13 |
 
 ## Checks per level
@@ -107,7 +107,7 @@ Total: **3211** possible checks.
 | E2M7 | Neobabel | `E2M7` | Blue, Yellow | 10 | 2 | 5 | 5 | 0 | 29 | 15 | 46 | 1 | 113 |
 | E2M8 | Blood and Bone | `E2M8` | Blue, Red, Yellow | 9 | 3 | 2 | 6 | 0 | 17 | 20 | 68 | 1 | 126 |
 | E2M9 | The Dig | `E2M9` | Blue, Red, Yellow | 8 | 3 | 3 | 6 | 1 | 17 | 16 | 58 | 1 | 113 |
-| E2M10 | The Gauntlet | `E2M10` | - | 7 | 0 | 6 | 1 | 0 | 1 | 4 | 85 | 1 | 105 |
+| E2M10 | The Gauntlet | `E2M10` | - | 5 | 0 | 4 | 1 | 0 | 1 | 3 | 62 | 1 | 77 |
 | E2MS | The Foundry | `E2MS` | Blue, Red, Yellow | 8 | 3 | 5 | 4 | 0 | 12 | 27 | 41 | 1 | 101 |
 | E3M1 | The Iron Cathedral | `E3M1` | Blue, Red | 6 | 2 | 1 | 7 | 0 | 13 | 20 | 17 | 1 | 67 |
 | E3M2 | Fire and Ice | `e3m2` | Blue, Red | 8 | 2 | 3 | 8 | 5 | 12 | 15 | 28 | 1 | 82 |

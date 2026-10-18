@@ -2171,98 +2171,70 @@ id,name,level,level_name,scene,category,vanilla_item,object,x,y,z
 3495792426,E2M10 - Box of Mortar Grenades 1,E2M10,The Gauntlet,E2M10,ammo,Box of Mortar Grenades,grenadebox,-4.08,-60.55,32.77
 3495792427,E2M10 - Box of Mortar Grenades 2,E2M10,The Gauntlet,E2M10,ammo,Box of Mortar Grenades,grenadebox (1),-6.85,-60.55,34.1
 3495792428,E2M10 - Box of Mortar Grenades 3,E2M10,The Gauntlet,E2M10,ammo,Box of Mortar Grenades,grenadebox (2),-10.6,-60.55,35.59
-3495792429,E2M10 - Box of Shotgun Shells 1,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells,48.25,-60.5,55.7
-3495792430,E2M10 - Box of Shotgun Shells 2,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (1),38.17,-60.5,51.71
-3495792431,E2M10 - Box of Shotgun Shells 3,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (2),38.17,-60.5,53.98
-3495792432,E2M10 - Box of Shotgun Shells 4,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (3),-12.0,-57.75,131.0
-3495792433,E2M10 - Box of Shotgun Shells 5,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (4),-12.0,-57.75,134.75
-3495792434,E2M10 - Box of Shotgun Shells 6,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (5),-12.0,-57.75,132.75
-3495792435,E2M10 - Box of Shotgun Shells 7,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (6),7.25,-60.0,39.0
-3495792436,E2M10 - Box of Shotgun Shells 8,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (7),9.0,-60.0,39.0
-3495792437,E2M10 - Box of Shotgun Shells 9,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (8),10.5,-60.0,39.0
+3495792432,E2M10 - Box of Shotgun Shells 1,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (3),-12.0,-57.75,131.0
+3495792433,E2M10 - Box of Shotgun Shells 2,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (4),-12.0,-57.75,134.75
+3495792434,E2M10 - Box of Shotgun Shells 3,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (5),-12.0,-57.75,132.75
+3495792435,E2M10 - Box of Shotgun Shells 4,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (6),7.25,-60.0,39.0
+3495792436,E2M10 - Box of Shotgun Shells 5,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (7),9.0,-60.0,39.0
+3495792437,E2M10 - Box of Shotgun Shells 6,E2M10,The Gauntlet,E2M10,ammo,Box of Shotgun Shells,shotgunshells (8),10.5,-60.0,39.0
 3495792438,E2M10 - Crossbow Bolts 1,E2M10,The Gauntlet,E2M10,ammo,Crossbow Bolts,CrossbowAmmoPickup,-8.87,-57.92,121.85
 3495792439,E2M10 - Crossbow Bolts 2,E2M10,The Gauntlet,E2M10,ammo,Crossbow Bolts,CrossbowAmmoPickup (1),-10.58,-57.92,121.85
 3495792440,E2M10 - Crossbow Bolts 3,E2M10,The Gauntlet,E2M10,ammo,Crossbow Bolts,CrossbowAmmoPickup (2),-11.98,-57.92,121.85
-3495792441,E2M10 - Rivets 1,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo,47.5,-60.5,92.78
-3495792442,E2M10 - Rivets 2,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (1),47.5,-60.5,90.53
-3495792443,E2M10 - Rivets 3,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (10),-2.5,-57.75,136.25
-3495792444,E2M10 - Rivets 4,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (11),49.5,-60.5,79.03
-3495792445,E2M10 - Rivets 5,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (12),49.5,-60.5,81.28
-3495792446,E2M10 - Rivets 6,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (13),49.5,-60.5,83.53
-3495792447,E2M10 - Rivets 7,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (14),49.5,-60.5,85.78
-3495792448,E2M10 - Rivets 8,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (15),49.5,-60.5,88.03
-3495792449,E2M10 - Rivets 9,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (16),49.5,-60.5,90.53
-3495792450,E2M10 - Rivets 10,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (17),49.5,-60.5,92.78
-3495792451,E2M10 - Rivets 11,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (18),-2.5,-57.75,139.75
-3495792452,E2M10 - Rivets 12,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (19),47.23,-60.5,36.12
-3495792453,E2M10 - Rivets 13,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (2),47.5,-60.5,88.03
-3495792454,E2M10 - Rivets 14,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (20),47.23,-60.5,33.87
-3495792455,E2M10 - Rivets 15,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (21),-2.5,-57.75,143.0
-3495792456,E2M10 - Rivets 16,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (22),49.23,-60.5,36.12
-3495792457,E2M10 - Rivets 17,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (23),49.23,-60.5,33.87
-3495792458,E2M10 - Rivets 18,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (24),-2.5,-57.75,146.25
-3495792459,E2M10 - Rivets 19,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (25),49.23,-60.5,31.62
-3495792460,E2M10 - Rivets 20,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (26),-2.5,-57.75,149.5
-3495792461,E2M10 - Rivets 21,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (27),47.23,-60.5,31.62
-3495792462,E2M10 - Rivets 22,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (28),-2.5,-57.75,152.75
-3495792463,E2M10 - Rivets 23,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (29),2.25,-60.0,47.5
-3495792464,E2M10 - Rivets 24,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (3),47.5,-60.5,85.78
-3495792465,E2M10 - Rivets 25,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (30),2.25,-60.0,28.25
-3495792466,E2M10 - Rivets 26,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (31),2.25,-60.0,41.0
-3495792467,E2M10 - Rivets 27,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (32),2.25,-60.0,31.5
-3495792468,E2M10 - Rivets 28,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (33),2.25,-60.0,54.0
-3495792469,E2M10 - Rivets 29,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (34),2.25,-60.0,34.25
-3495792470,E2M10 - Rivets 30,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (35),2.25,-60.0,37.5
-3495792471,E2M10 - Rivets 31,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (36),2.25,-60.0,44.25
-3495792472,E2M10 - Rivets 32,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (37),2.25,-60.0,50.75
-3495792473,E2M10 - Rivets 33,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (38),2.25,-60.0,24.75
-3495792474,E2M10 - Rivets 34,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (39),-25.0,-50.25,90.25
-3495792475,E2M10 - Rivets 35,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (4),47.5,-60.5,83.53
-3495792476,E2M10 - Rivets 36,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (40),-27.5,-50.25,90.25
-3495792477,E2M10 - Rivets 37,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (41),-30.25,-50.25,90.25
-3495792478,E2M10 - Rivets 38,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (42),-33.0,-50.25,90.25
-3495792479,E2M10 - Rivets 39,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (43),-35.5,-50.25,90.25
-3495792480,E2M10 - Rivets 40,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (44),-38.0,-50.25,90.25
-3495792481,E2M10 - Rivets 41,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (45),-40.5,-50.25,90.25
-3495792482,E2M10 - Rivets 42,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (46),32.5,-57.25,90.25
-3495792483,E2M10 - Rivets 43,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (47),30.0,-57.25,90.25
-3495792484,E2M10 - Rivets 44,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (48),27.5,-57.25,90.25
-3495792485,E2M10 - Rivets 45,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (49),25.0,-57.25,90.25
-3495792486,E2M10 - Rivets 46,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (5),47.5,-60.5,81.28
-3495792487,E2M10 - Rivets 47,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (50),22.5,-57.25,90.25
-3495792488,E2M10 - Rivets 48,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (51),20.0,-57.25,90.25
-3495792489,E2M10 - Rivets 49,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (52),2.25,-60.0,21.0
-3495792490,E2M10 - Rivets 50,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (53),-13.75,-60.0,40.0
-3495792491,E2M10 - Rivets 51,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (54),-16.0,-60.0,38.25
-3495792492,E2M10 - Rivets 52,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (55),-19.75,-60.0,38.75
-3495792493,E2M10 - Rivets 53,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (56),-22.0,-60.0,42.0
-3495792494,E2M10 - Rivets 54,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (57),-21.0,-60.0,45.25
-3495792495,E2M10 - Rivets 55,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (58),-16.75,-60.0,45.5
-3495792496,E2M10 - Rivets 56,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (59),-15.0,-60.0,43.0
-3495792497,E2M10 - Rivets 57,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (6),47.5,-60.5,79.03
-3495792498,E2M10 - Rivets 58,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (60),-19.0,-60.0,46.5
-3495792499,E2M10 - Rivets 59,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (7),-2.5,-57.75,127.0
-3495792500,E2M10 - Rivets 60,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (8),-2.5,-57.75,130.25
-3495792501,E2M10 - Rivets 61,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (9),-2.5,-57.75,133.0
+3495792443,E2M10 - Rivets 1,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (10),-2.5,-57.75,136.25
+3495792451,E2M10 - Rivets 2,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (18),-2.5,-57.75,139.75
+3495792455,E2M10 - Rivets 3,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (21),-2.5,-57.75,143.0
+3495792458,E2M10 - Rivets 4,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (24),-2.5,-57.75,146.25
+3495792460,E2M10 - Rivets 5,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (26),-2.5,-57.75,149.5
+3495792462,E2M10 - Rivets 6,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (28),-2.5,-57.75,152.75
+3495792463,E2M10 - Rivets 7,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (29),2.25,-60.0,47.5
+3495792465,E2M10 - Rivets 8,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (30),2.25,-60.0,28.25
+3495792466,E2M10 - Rivets 9,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (31),2.25,-60.0,41.0
+3495792467,E2M10 - Rivets 10,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (32),2.25,-60.0,31.5
+3495792468,E2M10 - Rivets 11,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (33),2.25,-60.0,54.0
+3495792469,E2M10 - Rivets 12,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (34),2.25,-60.0,34.25
+3495792470,E2M10 - Rivets 13,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (35),2.25,-60.0,37.5
+3495792471,E2M10 - Rivets 14,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (36),2.25,-60.0,44.25
+3495792472,E2M10 - Rivets 15,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (37),2.25,-60.0,50.75
+3495792473,E2M10 - Rivets 16,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (38),2.25,-60.0,24.75
+3495792474,E2M10 - Rivets 17,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (39),-25.0,-50.25,90.25
+3495792476,E2M10 - Rivets 18,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (40),-27.5,-50.25,90.25
+3495792477,E2M10 - Rivets 19,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (41),-30.25,-50.25,90.25
+3495792478,E2M10 - Rivets 20,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (42),-33.0,-50.25,90.25
+3495792479,E2M10 - Rivets 21,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (43),-35.5,-50.25,90.25
+3495792480,E2M10 - Rivets 22,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (44),-38.0,-50.25,90.25
+3495792481,E2M10 - Rivets 23,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (45),-40.5,-50.25,90.25
+3495792482,E2M10 - Rivets 24,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (46),32.5,-57.25,90.25
+3495792483,E2M10 - Rivets 25,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (47),30.0,-57.25,90.25
+3495792484,E2M10 - Rivets 26,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (48),27.5,-57.25,90.25
+3495792485,E2M10 - Rivets 27,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (49),25.0,-57.25,90.25
+3495792487,E2M10 - Rivets 28,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (50),22.5,-57.25,90.25
+3495792488,E2M10 - Rivets 29,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (51),20.0,-57.25,90.25
+3495792489,E2M10 - Rivets 30,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (52),2.25,-60.0,21.0
+3495792490,E2M10 - Rivets 31,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (53),-13.75,-60.0,40.0
+3495792491,E2M10 - Rivets 32,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (54),-16.0,-60.0,38.25
+3495792492,E2M10 - Rivets 33,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (55),-19.75,-60.0,38.75
+3495792493,E2M10 - Rivets 34,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (56),-22.0,-60.0,42.0
+3495792494,E2M10 - Rivets 35,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (57),-21.0,-60.0,45.25
+3495792495,E2M10 - Rivets 36,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (58),-16.75,-60.0,45.5
+3495792496,E2M10 - Rivets 37,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (59),-15.0,-60.0,43.0
+3495792498,E2M10 - Rivets 38,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (60),-19.0,-60.0,46.5
+3495792499,E2M10 - Rivets 39,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (7),-2.5,-57.75,127.0
+3495792500,E2M10 - Rivets 40,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (8),-2.5,-57.75,130.25
+3495792501,E2M10 - Rivets 41,E2M10,The Gauntlet,E2M10,ammo,Rivets,riveterammo (9),-2.5,-57.75,133.0
 3495792502,E2M10 - Bag of Gems 1,E2M10,The Gauntlet,E2M10,armor,Bag of Gems,tenarmor,-16.01,-46.52,81.02
 3495792503,E2M10 - Bag of Gems 2,E2M10,The Gauntlet,E2M10,armor,Bag of Gems,tenarmor (1),-14.35,-46.28,81.02
-3495792504,E2M10 - Diamond 1,E2M10,The Gauntlet,E2M10,armor,Diamond,ArmorDiamond,48.25,-60.25,44.24
-3495792505,E2M10 - Diamond 2,E2M10,The Gauntlet,E2M10,armor,Diamond,ArmorDiamond (1),3.2,-57.53,77.21
+3495792505,E2M10 - Diamond,E2M10,The Gauntlet,E2M10,armor,Diamond,ArmorDiamond (1),3.2,-57.53,77.21
 3495792506,E2M10 - Medical Kit,E2M10,The Gauntlet,E2M10,health,Medical Kit,healthpack,19.0,-57.25,87.5
 3495792507,E2M10 - Fast Fire Totem 1,E2M10,The Gauntlet,E2M10,powerups,Fast Fire Totem,weaponspeedpickup,-2.5,-57.5,155.5
 3495792508,E2M10 - Fast Fire Totem 2,E2M10,The Gauntlet,E2M10,powerups,Fast Fire Totem,weaponspeedpickup (1),17.0,-57.5,90.0
 3495792509,E2M10 - Fast Fire Totem 3,E2M10,The Gauntlet,E2M10,powerups,Fast Fire Totem,weaponspeedpickup (2),24.25,-60.0,28.75
-3495792510,E2M10 - Hallowed Health 1,E2M10,The Gauntlet,E2M10,powerups,Hallowed Health,holyhealth,48.25,-60.25,46.04
-3495792511,E2M10 - Hallowed Health 2,E2M10,The Gauntlet,E2M10,powerups,Hallowed Health,holyhealth (1),3.28,-57.5,102.71
-3495792512,E2M10 - Serum of Blistering Heat,E2M10,The Gauntlet,E2M10,powerups,Serum of Blistering Heat,superhotpickup,48.26,-60.32,29.74
+3495792511,E2M10 - Hallowed Health,E2M10,The Gauntlet,E2M10,powerups,Hallowed Health,holyhealth (1),3.28,-57.5,102.71
 3495792513,E2M10 - Secret Area,E2M10,The Gauntlet,E2M10,secrets,,SecretTrigger,-15.92,-46.41,81.15
 3495792514,E2M10 - Assault Rifle,E2M10,The Gauntlet,E2M10,weapons,Assault Rifle,MachineGunPickup,12.14,-57.27,88.67
 3495792515,E2M10 - Crossbow,E2M10,The Gauntlet,E2M10,weapons,Crossbow,ChainsawPickup,-7.12,-57.85,121.75
 3495792516,E2M10 - Mortar,E2M10,The Gauntlet,E2M10,weapons,Mortar,BuzzSawPickup,-2.2,-60.3,32.21
-3495792517,E2M10 - Riveter 1,E2M10,The Gauntlet,E2M10,weapons,Riveter,RiveterPickup,49.6,-60.5,76.55
-3495792518,E2M10 - Riveter 2,E2M10,The Gauntlet,E2M10,weapons,Riveter,RiveterPickup (1),-22.75,-50.5,90.25
-3495792519,E2M10 - Super Shotgun 1,E2M10,The Gauntlet,E2M10,weapons,Super Shotgun,SuperShotgunPickup,47.4,-60.5,76.52
-3495792520,E2M10 - Super Shotgun 2,E2M10,The Gauntlet,E2M10,weapons,Super Shotgun,SuperShotgunPickup (1),12.14,-57.27,91.42
+3495792518,E2M10 - Riveter,E2M10,The Gauntlet,E2M10,weapons,Riveter,RiveterPickup (1),-22.75,-50.5,90.25
+3495792520,E2M10 - Super Shotgun,E2M10,The Gauntlet,E2M10,weapons,Super Shotgun,SuperShotgunPickup (1),12.14,-57.27,91.42
 3495792521,E2M10 - Level Complete,E2M10,The Gauntlet,E2M10,level_complete,,,,,
 3495792522,E2MS - Assault Rifle Magazine 1,E2MS,The Foundry,E2MS,ammo,Assault Rifle Magazine,m16clip,53.58,-44.81,267.45
 3495792523,E2MS - Assault Rifle Magazine 2,E2MS,The Foundry,E2MS,ammo,Assault Rifle Magazine,m16clip (1),31.77,-17.19,157.31

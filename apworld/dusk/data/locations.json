@@ -39465,62 +39465,8 @@
    "key": "E2M10|grenadebox (2)|-10.6,-60.5,35.6"
   },
   {
-   "id": 3495792429,
-   "name": "E2M10 - Box of Shotgun Shells 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Box of Shotgun Shells",
-   "tag": "Weapon Pickup",
-   "object": "shotgunshells",
-   "path": "shotgunshells",
-   "pos": [
-    48.25,
-    -60.5,
-    55.7
-   ],
-   "key": "E2M10|shotgunshells|48.2,-60.5,55.7"
-  },
-  {
-   "id": 3495792430,
-   "name": "E2M10 - Box of Shotgun Shells 2",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Box of Shotgun Shells",
-   "tag": "Weapon Pickup",
-   "object": "shotgunshells (1)",
-   "path": "shotgunshells (1)",
-   "pos": [
-    38.17,
-    -60.5,
-    51.71
-   ],
-   "key": "E2M10|shotgunshells (1)|38.2,-60.5,51.7"
-  },
-  {
-   "id": 3495792431,
-   "name": "E2M10 - Box of Shotgun Shells 3",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Box of Shotgun Shells",
-   "tag": "Weapon Pickup",
-   "object": "shotgunshells (2)",
-   "path": "shotgunshells (2)",
-   "pos": [
-    38.17,
-    -60.5,
-    53.98
-   ],
-   "key": "E2M10|shotgunshells (2)|38.2,-60.5,54.0"
-  },
-  {
    "id": 3495792432,
-   "name": "E2M10 - Box of Shotgun Shells 4",
+   "name": "E2M10 - Box of Shotgun Shells 1",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39538,7 +39484,7 @@
   },
   {
    "id": 3495792433,
-   "name": "E2M10 - Box of Shotgun Shells 5",
+   "name": "E2M10 - Box of Shotgun Shells 2",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39556,7 +39502,7 @@
   },
   {
    "id": 3495792434,
-   "name": "E2M10 - Box of Shotgun Shells 6",
+   "name": "E2M10 - Box of Shotgun Shells 3",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39574,7 +39520,7 @@
   },
   {
    "id": 3495792435,
-   "name": "E2M10 - Box of Shotgun Shells 7",
+   "name": "E2M10 - Box of Shotgun Shells 4",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39592,7 +39538,7 @@
   },
   {
    "id": 3495792436,
-   "name": "E2M10 - Box of Shotgun Shells 8",
+   "name": "E2M10 - Box of Shotgun Shells 5",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39610,7 +39556,7 @@
   },
   {
    "id": 3495792437,
-   "name": "E2M10 - Box of Shotgun Shells 9",
+   "name": "E2M10 - Box of Shotgun Shells 6",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39681,44 +39627,8 @@
    "key": "E2M10|CrossbowAmmoPickup (2)|-12.0,-57.9,121.8"
   },
   {
-   "id": 3495792441,
-   "name": "E2M10 - Rivets 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo",
-   "path": "riveterammo",
-   "pos": [
-    47.5,
-    -60.5,
-    92.78
-   ],
-   "key": "E2M10|riveterammo|47.5,-60.5,92.8"
-  },
-  {
-   "id": 3495792442,
-   "name": "E2M10 - Rivets 2",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (1)",
-   "path": "riveterammo (1)",
-   "pos": [
-    47.5,
-    -60.5,
-    90.53
-   ],
-   "key": "E2M10|riveterammo (1)|47.5,-60.5,90.5"
-  },
-  {
    "id": 3495792443,
-   "name": "E2M10 - Rivets 3",
+   "name": "E2M10 - Rivets 1",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39735,134 +39645,8 @@
    "key": "E2M10|riveterammo (10)|-2.5,-57.8,136.2"
   },
   {
-   "id": 3495792444,
-   "name": "E2M10 - Rivets 4",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (11)",
-   "path": "riveterammo (11)",
-   "pos": [
-    49.5,
-    -60.5,
-    79.03
-   ],
-   "key": "E2M10|riveterammo (11)|49.5,-60.5,79.0"
-  },
-  {
-   "id": 3495792445,
-   "name": "E2M10 - Rivets 5",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (12)",
-   "path": "riveterammo (12)",
-   "pos": [
-    49.5,
-    -60.5,
-    81.28
-   ],
-   "key": "E2M10|riveterammo (12)|49.5,-60.5,81.3"
-  },
-  {
-   "id": 3495792446,
-   "name": "E2M10 - Rivets 6",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (13)",
-   "path": "riveterammo (13)",
-   "pos": [
-    49.5,
-    -60.5,
-    83.53
-   ],
-   "key": "E2M10|riveterammo (13)|49.5,-60.5,83.5"
-  },
-  {
-   "id": 3495792447,
-   "name": "E2M10 - Rivets 7",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (14)",
-   "path": "riveterammo (14)",
-   "pos": [
-    49.5,
-    -60.5,
-    85.78
-   ],
-   "key": "E2M10|riveterammo (14)|49.5,-60.5,85.8"
-  },
-  {
-   "id": 3495792448,
-   "name": "E2M10 - Rivets 8",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (15)",
-   "path": "riveterammo (15)",
-   "pos": [
-    49.5,
-    -60.5,
-    88.03
-   ],
-   "key": "E2M10|riveterammo (15)|49.5,-60.5,88.0"
-  },
-  {
-   "id": 3495792449,
-   "name": "E2M10 - Rivets 9",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (16)",
-   "path": "riveterammo (16)",
-   "pos": [
-    49.5,
-    -60.5,
-    90.53
-   ],
-   "key": "E2M10|riveterammo (16)|49.5,-60.5,90.5"
-  },
-  {
-   "id": 3495792450,
-   "name": "E2M10 - Rivets 10",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (17)",
-   "path": "riveterammo (17)",
-   "pos": [
-    49.5,
-    -60.5,
-    92.78
-   ],
-   "key": "E2M10|riveterammo (17)|49.5,-60.5,92.8"
-  },
-  {
    "id": 3495792451,
-   "name": "E2M10 - Rivets 11",
+   "name": "E2M10 - Rivets 2",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39879,62 +39663,8 @@
    "key": "E2M10|riveterammo (18)|-2.5,-57.8,139.8"
   },
   {
-   "id": 3495792452,
-   "name": "E2M10 - Rivets 12",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (19)",
-   "path": "riveterammo (19)",
-   "pos": [
-    47.23,
-    -60.5,
-    36.12
-   ],
-   "key": "E2M10|riveterammo (19)|47.2,-60.5,36.1"
-  },
-  {
-   "id": 3495792453,
-   "name": "E2M10 - Rivets 13",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (2)",
-   "path": "riveterammo (2)",
-   "pos": [
-    47.5,
-    -60.5,
-    88.03
-   ],
-   "key": "E2M10|riveterammo (2)|47.5,-60.5,88.0"
-  },
-  {
-   "id": 3495792454,
-   "name": "E2M10 - Rivets 14",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (20)",
-   "path": "riveterammo (20)",
-   "pos": [
-    47.23,
-    -60.5,
-    33.87
-   ],
-   "key": "E2M10|riveterammo (20)|47.2,-60.5,33.9"
-  },
-  {
    "id": 3495792455,
-   "name": "E2M10 - Rivets 15",
+   "name": "E2M10 - Rivets 3",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -39951,44 +39681,8 @@
    "key": "E2M10|riveterammo (21)|-2.5,-57.8,143.0"
   },
   {
-   "id": 3495792456,
-   "name": "E2M10 - Rivets 16",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (22)",
-   "path": "riveterammo (22)",
-   "pos": [
-    49.23,
-    -60.5,
-    36.12
-   ],
-   "key": "E2M10|riveterammo (22)|49.2,-60.5,36.1"
-  },
-  {
-   "id": 3495792457,
-   "name": "E2M10 - Rivets 17",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (23)",
-   "path": "riveterammo (23)",
-   "pos": [
-    49.23,
-    -60.5,
-    33.87
-   ],
-   "key": "E2M10|riveterammo (23)|49.2,-60.5,33.9"
-  },
-  {
    "id": 3495792458,
-   "name": "E2M10 - Rivets 18",
+   "name": "E2M10 - Rivets 4",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40005,26 +39699,8 @@
    "key": "E2M10|riveterammo (24)|-2.5,-57.8,146.2"
   },
   {
-   "id": 3495792459,
-   "name": "E2M10 - Rivets 19",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (25)",
-   "path": "riveterammo (25)",
-   "pos": [
-    49.23,
-    -60.5,
-    31.62
-   ],
-   "key": "E2M10|riveterammo (25)|49.2,-60.5,31.6"
-  },
-  {
    "id": 3495792460,
-   "name": "E2M10 - Rivets 20",
+   "name": "E2M10 - Rivets 5",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40041,26 +39717,8 @@
    "key": "E2M10|riveterammo (26)|-2.5,-57.8,149.5"
   },
   {
-   "id": 3495792461,
-   "name": "E2M10 - Rivets 21",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (27)",
-   "path": "riveterammo (27)",
-   "pos": [
-    47.23,
-    -60.5,
-    31.62
-   ],
-   "key": "E2M10|riveterammo (27)|47.2,-60.5,31.6"
-  },
-  {
    "id": 3495792462,
-   "name": "E2M10 - Rivets 22",
+   "name": "E2M10 - Rivets 6",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40078,7 +39736,7 @@
   },
   {
    "id": 3495792463,
-   "name": "E2M10 - Rivets 23",
+   "name": "E2M10 - Rivets 7",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40095,26 +39753,8 @@
    "key": "E2M10|riveterammo (29)|2.2,-60.0,47.5"
   },
   {
-   "id": 3495792464,
-   "name": "E2M10 - Rivets 24",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (3)",
-   "path": "riveterammo (3)",
-   "pos": [
-    47.5,
-    -60.5,
-    85.78
-   ],
-   "key": "E2M10|riveterammo (3)|47.5,-60.5,85.8"
-  },
-  {
    "id": 3495792465,
-   "name": "E2M10 - Rivets 25",
+   "name": "E2M10 - Rivets 8",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40132,7 +39772,7 @@
   },
   {
    "id": 3495792466,
-   "name": "E2M10 - Rivets 26",
+   "name": "E2M10 - Rivets 9",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40150,7 +39790,7 @@
   },
   {
    "id": 3495792467,
-   "name": "E2M10 - Rivets 27",
+   "name": "E2M10 - Rivets 10",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40168,7 +39808,7 @@
   },
   {
    "id": 3495792468,
-   "name": "E2M10 - Rivets 28",
+   "name": "E2M10 - Rivets 11",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40186,7 +39826,7 @@
   },
   {
    "id": 3495792469,
-   "name": "E2M10 - Rivets 29",
+   "name": "E2M10 - Rivets 12",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40204,7 +39844,7 @@
   },
   {
    "id": 3495792470,
-   "name": "E2M10 - Rivets 30",
+   "name": "E2M10 - Rivets 13",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40222,7 +39862,7 @@
   },
   {
    "id": 3495792471,
-   "name": "E2M10 - Rivets 31",
+   "name": "E2M10 - Rivets 14",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40240,7 +39880,7 @@
   },
   {
    "id": 3495792472,
-   "name": "E2M10 - Rivets 32",
+   "name": "E2M10 - Rivets 15",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40258,7 +39898,7 @@
   },
   {
    "id": 3495792473,
-   "name": "E2M10 - Rivets 33",
+   "name": "E2M10 - Rivets 16",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40276,7 +39916,7 @@
   },
   {
    "id": 3495792474,
-   "name": "E2M10 - Rivets 34",
+   "name": "E2M10 - Rivets 17",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40293,26 +39933,8 @@
    "key": "E2M10|riveterammo (39)|-25.0,-50.2,90.2"
   },
   {
-   "id": 3495792475,
-   "name": "E2M10 - Rivets 35",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (4)",
-   "path": "riveterammo (4)",
-   "pos": [
-    47.5,
-    -60.5,
-    83.53
-   ],
-   "key": "E2M10|riveterammo (4)|47.5,-60.5,83.5"
-  },
-  {
    "id": 3495792476,
-   "name": "E2M10 - Rivets 36",
+   "name": "E2M10 - Rivets 18",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40330,7 +39952,7 @@
   },
   {
    "id": 3495792477,
-   "name": "E2M10 - Rivets 37",
+   "name": "E2M10 - Rivets 19",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40348,7 +39970,7 @@
   },
   {
    "id": 3495792478,
-   "name": "E2M10 - Rivets 38",
+   "name": "E2M10 - Rivets 20",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40366,7 +39988,7 @@
   },
   {
    "id": 3495792479,
-   "name": "E2M10 - Rivets 39",
+   "name": "E2M10 - Rivets 21",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40384,7 +40006,7 @@
   },
   {
    "id": 3495792480,
-   "name": "E2M10 - Rivets 40",
+   "name": "E2M10 - Rivets 22",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40402,7 +40024,7 @@
   },
   {
    "id": 3495792481,
-   "name": "E2M10 - Rivets 41",
+   "name": "E2M10 - Rivets 23",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40420,7 +40042,7 @@
   },
   {
    "id": 3495792482,
-   "name": "E2M10 - Rivets 42",
+   "name": "E2M10 - Rivets 24",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40438,7 +40060,7 @@
   },
   {
    "id": 3495792483,
-   "name": "E2M10 - Rivets 43",
+   "name": "E2M10 - Rivets 25",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40456,7 +40078,7 @@
   },
   {
    "id": 3495792484,
-   "name": "E2M10 - Rivets 44",
+   "name": "E2M10 - Rivets 26",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40474,7 +40096,7 @@
   },
   {
    "id": 3495792485,
-   "name": "E2M10 - Rivets 45",
+   "name": "E2M10 - Rivets 27",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40491,26 +40113,8 @@
    "key": "E2M10|riveterammo (49)|25.0,-57.2,90.2"
   },
   {
-   "id": 3495792486,
-   "name": "E2M10 - Rivets 46",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (5)",
-   "path": "riveterammo (5)",
-   "pos": [
-    47.5,
-    -60.5,
-    81.28
-   ],
-   "key": "E2M10|riveterammo (5)|47.5,-60.5,81.3"
-  },
-  {
    "id": 3495792487,
-   "name": "E2M10 - Rivets 47",
+   "name": "E2M10 - Rivets 28",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40528,7 +40132,7 @@
   },
   {
    "id": 3495792488,
-   "name": "E2M10 - Rivets 48",
+   "name": "E2M10 - Rivets 29",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40546,7 +40150,7 @@
   },
   {
    "id": 3495792489,
-   "name": "E2M10 - Rivets 49",
+   "name": "E2M10 - Rivets 30",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40564,7 +40168,7 @@
   },
   {
    "id": 3495792490,
-   "name": "E2M10 - Rivets 50",
+   "name": "E2M10 - Rivets 31",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40582,7 +40186,7 @@
   },
   {
    "id": 3495792491,
-   "name": "E2M10 - Rivets 51",
+   "name": "E2M10 - Rivets 32",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40600,7 +40204,7 @@
   },
   {
    "id": 3495792492,
-   "name": "E2M10 - Rivets 52",
+   "name": "E2M10 - Rivets 33",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40618,7 +40222,7 @@
   },
   {
    "id": 3495792493,
-   "name": "E2M10 - Rivets 53",
+   "name": "E2M10 - Rivets 34",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40636,7 +40240,7 @@
   },
   {
    "id": 3495792494,
-   "name": "E2M10 - Rivets 54",
+   "name": "E2M10 - Rivets 35",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40654,7 +40258,7 @@
   },
   {
    "id": 3495792495,
-   "name": "E2M10 - Rivets 55",
+   "name": "E2M10 - Rivets 36",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40672,7 +40276,7 @@
   },
   {
    "id": 3495792496,
-   "name": "E2M10 - Rivets 56",
+   "name": "E2M10 - Rivets 37",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40689,26 +40293,8 @@
    "key": "E2M10|riveterammo (59)|-15.0,-60.0,43.0"
   },
   {
-   "id": 3495792497,
-   "name": "E2M10 - Rivets 57",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "ammo",
-   "vanilla_item": "Rivets",
-   "tag": "Weapon Pickup",
-   "object": "riveterammo (6)",
-   "path": "riveterammo (6)",
-   "pos": [
-    47.5,
-    -60.5,
-    79.03
-   ],
-   "key": "E2M10|riveterammo (6)|47.5,-60.5,79.0"
-  },
-  {
    "id": 3495792498,
-   "name": "E2M10 - Rivets 58",
+   "name": "E2M10 - Rivets 38",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40726,7 +40312,7 @@
   },
   {
    "id": 3495792499,
-   "name": "E2M10 - Rivets 59",
+   "name": "E2M10 - Rivets 39",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40744,7 +40330,7 @@
   },
   {
    "id": 3495792500,
-   "name": "E2M10 - Rivets 60",
+   "name": "E2M10 - Rivets 40",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40762,7 +40348,7 @@
   },
   {
    "id": 3495792501,
-   "name": "E2M10 - Rivets 61",
+   "name": "E2M10 - Rivets 41",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40815,26 +40401,8 @@
    "key": "E2M10|tenarmor (1)|-14.3,-46.3,81.0"
   },
   {
-   "id": 3495792504,
-   "name": "E2M10 - Diamond 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "armor",
-   "vanilla_item": "Diamond",
-   "tag": "Health Pickup",
-   "object": "ArmorDiamond",
-   "path": "ArmorDiamond",
-   "pos": [
-    48.25,
-    -60.25,
-    44.24
-   ],
-   "key": "E2M10|ArmorDiamond|48.2,-60.2,44.2"
-  },
-  {
    "id": 3495792505,
-   "name": "E2M10 - Diamond 2",
+   "name": "E2M10 - Diamond",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40923,26 +40491,8 @@
    "key": "E2M10|weaponspeedpickup (2)|24.2,-60.0,28.8"
   },
   {
-   "id": 3495792510,
-   "name": "E2M10 - Hallowed Health 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "powerups",
-   "vanilla_item": "Hallowed Health",
-   "tag": "HolyHealthTag",
-   "object": "holyhealth",
-   "path": "holyhealth",
-   "pos": [
-    48.25,
-    -60.25,
-    46.04
-   ],
-   "key": "E2M10|holyhealth|48.2,-60.2,46.0"
-  },
-  {
    "id": 3495792511,
-   "name": "E2M10 - Hallowed Health 2",
+   "name": "E2M10 - Hallowed Health",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -40957,24 +40507,6 @@
     102.71
    ],
    "key": "E2M10|holyhealth (1)|3.3,-57.5,102.7"
-  },
-  {
-   "id": 3495792512,
-   "name": "E2M10 - Serum of Blistering Heat",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "powerups",
-   "vanilla_item": "Serum of Blistering Heat",
-   "tag": "Superhot Powerup",
-   "object": "superhotpickup",
-   "path": "superhotpickup",
-   "pos": [
-    48.26,
-    -60.32,
-    29.74
-   ],
-   "key": "E2M10|superhotpickup|48.3,-60.3,29.7"
   },
   {
    "id": 3495792513,
@@ -41049,26 +40581,8 @@
    "key": "E2M10|BuzzSawPickup|-2.2,-60.3,32.2"
   },
   {
-   "id": 3495792517,
-   "name": "E2M10 - Riveter 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "weapons",
-   "vanilla_item": "Riveter",
-   "tag": "Weapon Pickup",
-   "object": "RiveterPickup",
-   "path": "RiveterPickup",
-   "pos": [
-    49.6,
-    -60.5,
-    76.55
-   ],
-   "key": "E2M10|RiveterPickup|49.6,-60.5,76.5"
-  },
-  {
    "id": 3495792518,
-   "name": "E2M10 - Riveter 2",
+   "name": "E2M10 - Riveter",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
@@ -41085,26 +40599,8 @@
    "key": "E2M10|RiveterPickup (1)|-22.8,-50.5,90.2"
   },
   {
-   "id": 3495792519,
-   "name": "E2M10 - Super Shotgun 1",
-   "level": "E2M10",
-   "level_name": "The Gauntlet",
-   "scene": "E2M10",
-   "category": "weapons",
-   "vanilla_item": "Super Shotgun",
-   "tag": "SuperShotgunTag",
-   "object": "SuperShotgunPickup",
-   "path": "SuperShotgunPickup",
-   "pos": [
-    47.4,
-    -60.5,
-    76.52
-   ],
-   "key": "E2M10|SuperShotgunPickup|47.4,-60.5,76.5"
-  },
-  {
    "id": 3495792520,
-   "name": "E2M10 - Super Shotgun 2",
+   "name": "E2M10 - Super Shotgun",
    "level": "E2M10",
    "level_name": "The Gauntlet",
    "scene": "E2M10",
