@@ -5,6 +5,7 @@ from typing import Dict, List, NamedTuple
 from BaseClasses import Item, ItemClassification as IC
 
 from .data import ITEM_BASE_ID, LEVELS
+from .key_logic import JUNK_KEYS
 
 
 class ItemInfo(NamedTuple):
@@ -64,7 +65,8 @@ def _build_table() -> List[ItemInfo]:
         table.append(ItemInfo(f"{lvl.code} Access", IC.progression, "Level Access"))
     for lvl in LEVELS:
         for color in ("Red Key", "Blue Key", "Yellow Key"):
-            table.append(ItemInfo(f"{lvl.code} {color}", IC.progression, "Keys"))
+            name = f"{lvl.code} {color}"
+            table.append(ItemInfo(name, IC.filler if name in JUNK_KEYS else IC.progression, "Keys"))
     for w in WEAPON_ITEMS:
         table.append(ItemInfo(w, IC.progression | IC.useful, "Weapons"))
     for p in POWERUP_ITEMS:
