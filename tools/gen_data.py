@@ -77,6 +77,40 @@ CHEST_PATHIDS = {("sharedassets2.assets", 911): "tenarmor", ("sharedassets2.asse
 # (scene, object name). E2M1 has a stash of 16 blue keys in a grid plus a sword in one corner of the map; the
 # level's real blue key is the BlueCard object.
 DEV_ONLY = {("E2M1", f"BlueKey ({i})") for i in range(1, 17)} | {("E2M1", "SwordPickup")}
+# E2M10: a supply room at the far east of the map (x >= 37), behind the lever/tech-button code doors next to the
+# level's end warp. Nobody has found a way in during play, so it's treated as developer-only for now; revisit if
+# someone finds the route. Super Shotgun, Riveter, Hallowed Health, Serum of Blistering Heat, a Diamond, 3 boxes of
+# shotgun shells and 20 rivets.
+DEV_ONLY |= {("E2M10", n) for n in (
+    "ArmorDiamond",
+    "RiveterPickup",
+    "SuperShotgunPickup",
+    "holyhealth",
+    "riveterammo",
+    "riveterammo (1)",
+    "riveterammo (11)",
+    "riveterammo (12)",
+    "riveterammo (13)",
+    "riveterammo (14)",
+    "riveterammo (15)",
+    "riveterammo (16)",
+    "riveterammo (17)",
+    "riveterammo (19)",
+    "riveterammo (2)",
+    "riveterammo (20)",
+    "riveterammo (22)",
+    "riveterammo (23)",
+    "riveterammo (25)",
+    "riveterammo (27)",
+    "riveterammo (3)",
+    "riveterammo (4)",
+    "riveterammo (5)",
+    "riveterammo (6)",
+    "shotgunshells",
+    "shotgunshells (1)",
+    "shotgunshells (2)",
+    "superhotpickup",
+)}
 
 
 def classify(rec):
