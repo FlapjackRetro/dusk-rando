@@ -196,14 +196,16 @@ class DuskWorld(World):
                     if rule is None:
                         rule = rules.get(KEY_DEFAULT)
                     needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
-                needed = needed + item_rules.get(location.name, [])
+                extra = item_rules.get(location.name, [])
+                needed = needed + [i for i in extra if isinstance(i, str)]
+                any_of = [i for i in extra if not isinstance(i, str)]  # groups: any one item of each
                 weapons = (self.exorcist and lvl.code in self.EXORCIST_LEVELS
                            and not self._exorcist_free(lvl.code, location.name))
-                if weapons:
-                    location.access_rule = lambda state, k=needed: (
-                        state.has_all(k, self.player) and state.has_all_counts(EXORCIST_WEAPONS, self.player))
-                elif needed:
-                    location.access_rule = lambda state, k=needed: state.has_all(k, self.player)
+                if needed or any_of or weapons:
+                    location.access_rule = lambda state, k=needed, a=any_of, w=weapons: (
+                        state.has_all(k, self.player)
+                        and all(state.has_any(g, self.player) for g in a)
+                        and (not w or state.has_all_counts(EXORCIST_WEAPONS, self.player)))
 
         if self.options.goal == self.options.goal.option_bosses:
             targets = [f"{BOSS_LEVELS[ep]} Cleared" for ep in sorted({l.episode for l in self.included_levels})]

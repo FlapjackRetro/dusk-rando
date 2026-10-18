@@ -122,14 +122,19 @@ class TestKeyRules(DuskTestBase):
         for name, items in ITEM_RULES.items():
             self.assertIn(name, names)
             for item in items:
-                self.assertIn(item, ITEM_NAME_TO_ID)
-        # E3M1's keys are precollected (starting level), so only the Mortar matters here.
+                for i in ((item,) if isinstance(item, str) else item):
+                    self.assertIn(i, ITEM_NAME_TO_ID)
+        # E3M1's keys are precollected (starting level), so only the Mortar / Riveter matters here.
+        self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"))
+        self.collect_by_name(["Riveter"])
+        self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
+        self.remove_by_name(["Riveter"])
         self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"))
         self.collect_by_name(["Mortar"])
         self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
 
     def test_e3m1_super_shotgun(self) -> None:
-        """E3M1 - Super Shotgun needs the Blue Key, the Red Key and the Mortar."""
+        """E3M1 - Super Shotgun needs the Blue Key, the Red Key and the Mortar (or the Riveter)."""
         state = self.multiworld.state
         blue, red = self.world.create_item("E3M1 Blue Key"), self.world.create_item("E3M1 Red Key")
         state.remove(blue)
