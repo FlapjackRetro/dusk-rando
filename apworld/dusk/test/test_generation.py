@@ -128,6 +128,23 @@ class TestKeyRules(DuskTestBase):
         self.collect_by_name(["Mortar"])
         self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
 
+    def test_e3m1_super_shotgun(self) -> None:
+        """E3M1 - Super Shotgun needs the Blue Key, the Red Key and the Mortar."""
+        state = self.multiworld.state
+        blue, red = self.world.create_item("E3M1 Blue Key"), self.world.create_item("E3M1 Red Key")
+        state.remove(blue)
+        state.remove(red)
+        self.collect_by_name(["Mortar"])
+        for keys in ((), (blue,), (red,)):
+            for k in keys:
+                state.collect(k)
+            self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"), [k.name for k in keys])
+            for k in keys:
+                state.remove(k)
+        state.collect(blue)
+        state.collect(red)
+        self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
+
     def test_junk_keys(self) -> None:
         from BaseClasses import ItemClassification as IC
         self.assertEqual(self.world.create_item("E2M1 Blue Key").classification, IC.filler)
