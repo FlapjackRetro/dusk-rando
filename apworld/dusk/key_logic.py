@@ -63,7 +63,7 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E3M1 - Secret Area 3": NONE,
         "E3M1 - Secret Area 5": NONE,
         "E3M1 - Secret Area 6": NONE,
-        "E3M1 - Super Shotgun": ["Blue Key"],  # plus the Mortar (ITEM_RULES)
+        "E3M1 - Super Shotgun": ["Blue Key", "Red Key"],  # plus the Mortar (ITEM_RULES)
     },
     "E3M2": {
         "E3M2 - Sword": NONE,

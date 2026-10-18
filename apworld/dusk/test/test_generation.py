@@ -129,16 +129,20 @@ class TestKeyRules(DuskTestBase):
         self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
 
     def test_e3m1_super_shotgun(self) -> None:
-        """E3M1 - Super Shotgun needs the Blue Key and the Mortar, not the Red Key."""
+        """E3M1 - Super Shotgun needs the Blue Key, the Red Key and the Mortar."""
         state = self.multiworld.state
-        for key in ("E3M1 Red Key", "E3M1 Blue Key"):
-            state.remove(self.world.create_item(key))
+        blue, red = self.world.create_item("E3M1 Blue Key"), self.world.create_item("E3M1 Red Key")
+        state.remove(blue)
+        state.remove(red)
         self.collect_by_name(["Mortar"])
-        self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"))
-        state.collect(self.world.create_item("E3M1 Red Key"))
-        self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"))
-        state.remove(self.world.create_item("E3M1 Red Key"))
-        state.collect(self.world.create_item("E3M1 Blue Key"))
+        for keys in ((), (blue,), (red,)):
+            for k in keys:
+                state.collect(k)
+            self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"), [k.name for k in keys])
+            for k in keys:
+                state.remove(k)
+        state.collect(blue)
+        state.collect(red)
         self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
 
     def test_junk_keys(self) -> None:
