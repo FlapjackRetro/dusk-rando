@@ -108,6 +108,20 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E1M8 - Assault Rifle 1": NONE,
         "E1M8 - Blue Key": NONE,
     },
+    "E1M9": {
+        "E1M9 - Pistol 2": NONE,
+        "E1M9 - Shotgun 3": NONE,
+        "E1M9 - Super Shotgun": NONE,
+        "E1M9 - Hunting Rifle": NONE,
+        "E1M9 - Yellow Key": NONE,
+        "E1M9 - Secret Area 1": NONE,
+        "E1M9 - Secret Area 2": NONE,
+        "E1M9 - Secret Area 3": NONE,
+        "E1M9 - Secret Area 5": NONE,
+        "E1M9 - Secret Area 6": NONE,
+        "E1M9 - Secret Area 7": NONE,
+        "E1M9 - Secret Area 8": NONE,
+    },
 }
 
 ITEM_RULES: Dict[str, List[str]] = {
