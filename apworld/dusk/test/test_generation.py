@@ -69,6 +69,13 @@ class TestKeyRules(DuskTestBase):
         state.collect(self.world.create_item("E2M1 Red Key"))
         self.assertTrue(self.can_reach_location("E2M1 - Level Complete"))
 
+    def test_e2m3(self) -> None:
+        self.collect_by_name(["E2M3 Access"])
+        for name in ("E2M3 - Mortar", "E2M3 - Yellow Key", "E2M3 - Assault Rifle 1", "E2M3 - Secret Area 3"):
+            self.assertTrue(self.can_reach_location(name), name)
+        for name in ("E2M3 - Assault Rifle 2", "E2M3 - Red Key", "E2M3 - Secret Area 2", "E2M3 - Level Complete"):
+            self.assertFalse(self.can_reach_location(name), name)
+
     def test_e2m4(self) -> None:
         self.collect_by_name(["E2M4 Access"])
         for name in ("E2M4 - Shotgun 1", "E2M4 - Red Key"):
