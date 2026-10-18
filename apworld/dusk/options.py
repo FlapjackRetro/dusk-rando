@@ -85,9 +85,10 @@ class CombatLogic(Choice):
     Only matters when weapons are randomized. How many distinct firearms (weapons other than the starting sickles
     and the sword) the logic expects before a level is considered in logic. More required firearms means you arrive
     better armed. Each episode's first level never needs any; secret levels need as many as the end of their episode.
-    exorcist: for testing. Every check outside E1M1 needs all 10 weapons (both Progressive Pistols, both Progressive
-              Shotguns and the other six; not the Sword), so all 10 are placed in E1M1. If Episode 1 is off, the
-              first included episode's first level takes E1M1's place.
+    exorcist: for testing. All 10 weapons (both Progressive Pistols, both Progressive Shotguns and the other six; not
+              the Sword) are placed in the first levels: all of E1M1, all of E2M1 except Level Complete, and E3M1's
+              checks that need no keys (all of E3M1 except Level Complete when Episode 3 is the only episode). Every
+              other check needs all 10 weapons.
     easy: Episode 1 needs 1 from E1M3 and 2 from E1M6; Episode 2 needs 2 from E2M2 and 3 from E2M6; Episode 3
           needs 3 from E3M2 and 4 from E3M6.
     normal: Episode 1 needs 1 from E1M6; Episode 2 needs 1 from E2M2 and 2 from E2M6; Episode 3 needs 2 from E3M2
