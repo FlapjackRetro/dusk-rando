@@ -20,6 +20,15 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         DEFAULT: NONE,
         "E2M1 - Level Complete": ["Red Key"],
     },
+    "E3M1": {
+        "E3M1 - Sword": NONE,
+        "E3M1 - Crossbow 2": NONE,
+        "E3M1 - Mortar 2": NONE,
+        "E3M1 - Red Key": NONE,
+        "E3M1 - Secret Area 3": NONE,
+        "E3M1 - Secret Area 5": NONE,
+        "E3M1 - Secret Area 6": NONE,
+    },
     "E1M5": {
         "E1M5 - Pistol 1": NONE,
         "E1M5 - Pistol 2": NONE,
