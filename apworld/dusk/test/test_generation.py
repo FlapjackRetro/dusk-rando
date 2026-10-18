@@ -145,32 +145,41 @@ class TestKeyRules(DuskTestBase):
 
 
 class TestExorcist(DuskTestBase):
-    """exorcist: E1M1 is free; everything else needs all 10 weapons, which all land in E1M1."""
+    """exorcist: E1M1, E2M1 (not Level Complete) and E3M1's key-less checks are free; everything else needs all 10
+    weapons, which all land in those free checks."""
     options = {"combat_logic": "exorcist"}
     ALL = ["Progressive Pistol", "Progressive Pistol", "Progressive Shotgun", "Progressive Shotgun", "Super Shotgun",
            "Assault Rifle", "Hunting Rifle", "Crossbow", "Mortar", "Riveter"]
+    FREE_PREFIXES = ("E1M1 - ", "E2M1 - ", "E3M1 - ")
 
     def test_rules(self) -> None:
-        self.assertTrue(self.can_reach_location("E1M1 - Level Complete"))
+        for name in ("E1M1 - Level Complete", "E2M1 - Crossbow", "E3M1 - Sword", "E3M1 - Red Key"):
+            self.assertTrue(self.can_reach_location(name), name)
+        locked = ("E2M1 - Level Complete", "E3M1 - Blue Key", "E3M1 - Crossbow 1", "E3M1 - Level Complete")
+        for name in locked:
+            self.assertFalse(self.can_reach_location(name), name)
         self.collect_by_name(["E1M2 Access"])
         self.collect_by_name(self.ALL[:-1])
-        for name in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral"):
-            self.assertFalse(self.can_reach_region(name), name)
+        self.assertFalse(self.can_reach_region("E1M2 Down on the Farm"))
+        self.assertFalse(self.can_reach_location("E2M1 - Level Complete"))
         self.collect_by_name(self.ALL[-1:])
-        for name in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral"):
-            self.assertTrue(self.can_reach_region(name), name)
+        self.assertTrue(self.can_reach_region("E1M2 Down on the Farm"))
+        for name in locked:
+            self.assertTrue(self.can_reach_location(name), name)
 
-    def test_weapons_in_e1m1(self) -> None:
+    def test_weapons_in_free_checks(self) -> None:
         from Fill import distribute_items_restrictive
         distribute_items_restrictive(self.multiworld)
         placed = [loc for loc in self.multiworld.get_locations(self.player)
                   if loc.item and loc.item.player == self.player and loc.item.name in self.ALL]
         self.assertEqual(len(placed), 10)
-        self.assertTrue(all(loc.name.startswith("E1M1 - ") for loc in placed), [l.name for l in placed])
+        for loc in placed:
+            self.assertTrue(loc.name.startswith(self.FREE_PREFIXES), loc.name)
+            self.assertTrue(self.world._exorcist_free(loc.name.split(" - ")[0], loc.name), loc.name)
 
 
 class TestExorcistEpisode2Only(DuskTestBase):
-    """Without Episode 1, E2M1 takes E1M1's place."""
+    """Without Episodes 1 and 3, the weapons go in E2M1 (not its Level Complete)."""
     options = {"combat_logic": "exorcist", "episode1": False, "episode3": False, "secret_levels": False}
 
     def test_weapons_in_e2m1(self) -> None:
@@ -179,7 +188,8 @@ class TestExorcistEpisode2Only(DuskTestBase):
         placed = [loc for loc in self.multiworld.get_locations(self.player)
                   if loc.item and loc.item.player == self.player and loc.item.name in TestExorcist.ALL]
         self.assertEqual(len(placed), 10)
-        self.assertTrue(all(loc.name.startswith("E2M1 - ") for loc in placed), [l.name for l in placed])
+        self.assertTrue(all(loc.name.startswith("E2M1 - ") and loc.name != "E2M1 - Level Complete"
+                            for loc in placed), [l.name for l in placed])
 
 
 class TestUnhinged(DuskTestBase):

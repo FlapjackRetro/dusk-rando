@@ -78,19 +78,42 @@ class DuskWorld(World):
         return "weapons" in self.categories and \
             self.options.combat_logic == self.options.combat_logic.option_exorcist
 
+    # Levels whose checks can be free on exorcist: all of E1M1, E2M1 except Level Complete, E3M1's key-less checks.
+    EXORCIST_LEVELS = ("E1M1", "E2M1", "E3M1")
+    exorcist_e3_only = False
+
+    def _exorcist_free(self, code: str, name: str) -> bool:
+        """Is this check (or Cleared event) in logic without the 10 weapons on exorcist?"""
+        if code == "E1M1":
+            return True
+        if code == "E2M1":
+            return name not in ("E2M1 - Level Complete", "E2M1 - Cleared")
+        if code == "E3M1":
+            if self.exorcist_e3_only:
+                # Episode 3 alone: E3M1's 7 key-less checks can't hold 10 weapons, so treat it like E2M1.
+                return name not in ("E3M1 - Level Complete", "E3M1 - Cleared")
+            # Key-less as mapped in key_logic.py (E3M1's keys are precollected, so this can't use the state).
+            rules = KEY_RULES.get(code, {})
+            rule = rules.get(name, rules.get(KEY_DEFAULT))
+            return rule == [] and name not in ITEM_RULES
+        return False
+
     def _setup_exorcist(self, episodes: List[int]) -> None:
-        """Everything outside the seed's first level needs all 10 weapons, so they all go in that level."""
-        self.exorcist_level = f"E{episodes[0]}M1"
+        """Everything except the free checks (see _exorcist_free) needs all 10 weapons, so they all go there."""
         # Keep the weapons in this world; otherwise they could also land in other players' early checks.
         self.options.local_items.value |= set(EXORCIST_WEAPONS)
-        slots = sum(1 for l in LOCATIONS if l.level == self.exorcist_level and self._is_location(l))
-        # Room for the 10 weapons, plus one more level Access item when no other episode starts unlocked.
-        need = sum(EXORCIST_WEAPONS.values()) + (1 if len(episodes) == 1 else 0)
-        if slots < need:
+        self.exorcist_e3_only = episodes == [3]
+        included = {l.code for l in self.included_levels}
+        free = [l.name for l in LOCATIONS if l.level in self.EXORCIST_LEVELS and l.level in included
+                and self._is_location(l) and self._exorcist_free(l.level, l.name)]
+        # Room for the 10 weapons, plus one more level Access item when nothing opens up after them (Episode 1
+        # only: E1M1 is entirely free, so no check becomes reachable once the weapons are found).
+        need = sum(EXORCIST_WEAPONS.values()) + (1 if episodes == [1] else 0)
+        if len(free) < need:
             raise OptionError(
-                f"{self.player_name}: combat_logic exorcist puts all 10 weapons in {self.exorcist_level}, which only "
-                f"has {slots} checks with these options (needs {need}). Enable more check categories, "
-                "e.g. randomize_secrets, randomize_powerups or randomize_ammo.")
+                f"{self.player_name}: combat_logic exorcist puts all 10 weapons in E1M1, E2M1 and E3M1's key-less "
+                f"checks, but there are only {len(free)} of those with these options (needs {need}). Enable more "
+                "check categories, e.g. randomize_secrets, randomize_powerups or randomize_ammo.")
 
     def _is_location(self, loc) -> bool:
         return loc.category in self.categories and loc.vanilla_item not in VANILLA_ONLY_ITEMS
@@ -150,7 +173,8 @@ class DuskWorld(World):
         if not state.has(f"{lvl.code} Access", self.player):
             return False
         if self.exorcist:
-            return lvl.code == self.exorcist_level or state.has_all_counts(EXORCIST_WEAPONS, self.player)
+            # The free levels can be entered; their other checks get the weapon requirement in set_rules.
+            return lvl.code in self.EXORCIST_LEVELS or state.has_all_counts(EXORCIST_WEAPONS, self.player)
         need = self.firearms_needed(lvl)
         return need == 0 or state.has_from_list_unique(FIREARMS, self.player, need)
 
@@ -173,7 +197,12 @@ class DuskWorld(World):
                         rule = rules.get(KEY_DEFAULT)
                     needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
                 needed = needed + item_rules.get(location.name, [])
-                if needed:
+                weapons = (self.exorcist and lvl.code in self.EXORCIST_LEVELS
+                           and not self._exorcist_free(lvl.code, location.name))
+                if weapons:
+                    location.access_rule = lambda state, k=needed: (
+                        state.has_all(k, self.player) and state.has_all_counts(EXORCIST_WEAPONS, self.player))
+                elif needed:
                     location.access_rule = lambda state, k=needed: state.has_all(k, self.player)
 
         if self.options.goal == self.options.goal.option_bosses:
