@@ -6,14 +6,15 @@ keys falls back to strict key logic: it needs all of that level's keys. Level Co
 follow the same rules (list "<code> - Level Complete" to override them).
 
 ITEM_RULES[location name] = other items that location needs, on top of its key rule (e.g. a weapon that breaks a
-wall). Only applied when weapons are randomized; otherwise the weapon is in its vanilla spot.
+wall). Each entry is an item name (needed) or a tuple of item names (any one of them is enough). Only applied when
+weapons are randomized; otherwise the weapons are in their vanilla spots.
 
 JUNK_KEYS: keys that no check needs. They are still in the game (they may open doors), but they are classified as
 filler instead of progression.
 
 Only applies when keys are randomized; otherwise keys stay in their vanilla spots and there is no key logic.
 """
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Tuple, Union
 
 NONE: List[str] = []
 DEFAULT = "*"
@@ -63,7 +64,7 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E3M1 - Secret Area 3": NONE,
         "E3M1 - Secret Area 5": NONE,
         "E3M1 - Secret Area 6": NONE,
-        "E3M1 - Super Shotgun": ["Blue Key", "Red Key"],  # plus the Mortar (ITEM_RULES)
+        "E3M1 - Super Shotgun": ["Blue Key", "Red Key"],  # plus the Mortar or the Riveter (ITEM_RULES)
     },
     "E3M2": {
         "E3M2 - Sword": NONE,
@@ -110,8 +111,8 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
     },
 }
 
-ITEM_RULES: Dict[str, List[str]] = {
-    "E3M1 - Super Shotgun": ["Mortar"],
+ITEM_RULES: Dict[str, List[Union[str, Tuple[str, ...]]]] = {
+    "E3M1 - Super Shotgun": [("Mortar", "Riveter")],
 }
 
 JUNK_KEYS: Set[str] = {
