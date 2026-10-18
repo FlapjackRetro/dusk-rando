@@ -36,6 +36,8 @@ class TestKeyRules(DuskTestBase):
         for code, rules in KEY_RULES.items():
             self.assertIn(code, LEVELS_BY_CODE)
             for name, keys in rules.items():
+                if name == "*":
+                    continue
                 self.assertIn(name, names)
                 self.assertTrue(name.startswith(code + " - "), name)
                 self.assertTrue(set(keys) <= set(LEVELS_BY_CODE[code].keys), (name, keys))
@@ -48,6 +50,23 @@ class TestKeyRules(DuskTestBase):
             self.assertFalse(self.can_reach_location(name), name)
         self.collect_by_name(["E1M6 Red Key", "E1M6 Yellow Key"])
         self.assertTrue(self.can_reach_location("E1M6 - Level Complete"))
+
+    def test_e2m1(self) -> None:
+        """E2M1 is a starting level, so its keys are precollected; remove them to test the rule itself."""
+        state = self.multiworld.state
+        for key in ("E2M1 Red Key", "E2M1 Blue Key", "E2M1 Yellow Key"):
+            state.remove(self.world.create_item(key))
+        for name in ("E2M1 - Crossbow", "E2M1 - Blue Key", "E2M1 - Yellow Key", "E2M1 - Red Key"):
+            self.assertTrue(self.can_reach_location(name), name)
+        self.assertFalse(self.can_reach_location("E2M1 - Level Complete"))
+        state.collect(self.world.create_item("E2M1 Red Key"))
+        self.assertTrue(self.can_reach_location("E2M1 - Level Complete"))
+
+    def test_junk_keys(self) -> None:
+        from BaseClasses import ItemClassification as IC
+        self.assertEqual(self.world.create_item("E2M1 Blue Key").classification, IC.filler)
+        self.assertEqual(self.world.create_item("E2M1 Yellow Key").classification, IC.filler)
+        self.assertTrue(self.world.create_item("E2M1 Red Key").advancement)
 
     def test_e1m8(self) -> None:
         self.collect_by_name(["E1M8 Access"])

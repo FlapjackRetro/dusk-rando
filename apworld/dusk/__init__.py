@@ -8,7 +8,7 @@ from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
 
 from .data import ALWAYS_CATEGORIES, BOSS_LEVELS, LEVELS, LEVELS_BY_CODE, LOCATIONS, VANILLA_ONLY_ITEMS, LevelData
-from .key_logic import KEY_RULES
+from .key_logic import DEFAULT as KEY_DEFAULT, KEY_RULES
 from .items import (EXORCIST_WEAPONS, FILLER_WEIGHTS, FIREARMS, GAME, ITEM_GROUPS, ITEM_INFO, ITEM_NAME_TO_ID,
                     VANILLA_WEAPON_TO_ITEM, WEAPON_ITEMS, DuskItem)
 from .options import CATEGORY_OPTIONS, DuskOptions, option_groups
@@ -168,6 +168,8 @@ class DuskWorld(World):
                 rule = rules.get(location.name)
                 if rule is None and location.name == f"{lvl.code} - Cleared":
                     rule = rules.get(f"{lvl.code} - Level Complete")
+                if rule is None:
+                    rule = rules.get(KEY_DEFAULT)
                 needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
                 if needed:
                     location.access_rule = lambda state, k=needed: state.has_all(k, self.player)
