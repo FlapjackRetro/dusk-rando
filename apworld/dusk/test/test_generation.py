@@ -86,6 +86,20 @@ class TestKeyRules(DuskTestBase):
         for name in ("E3M1 - Blue Key", "E3M1 - Crossbow 1", "E3M1 - Secret Area 1", "E3M1 - Level Complete"):
             self.assertFalse(self.can_reach_location(name), name)
 
+    def test_item_rules(self) -> None:
+        from ..data import LOCATIONS
+        from ..items import ITEM_NAME_TO_ID
+        from ..key_logic import ITEM_RULES
+        names = {l.name for l in LOCATIONS}
+        for name, items in ITEM_RULES.items():
+            self.assertIn(name, names)
+            for item in items:
+                self.assertIn(item, ITEM_NAME_TO_ID)
+        # E3M1's keys are precollected (starting level), so only the Mortar matters here.
+        self.assertFalse(self.can_reach_location("E3M1 - Super Shotgun"))
+        self.collect_by_name(["Mortar"])
+        self.assertTrue(self.can_reach_location("E3M1 - Super Shotgun"))
+
     def test_junk_keys(self) -> None:
         from BaseClasses import ItemClassification as IC
         self.assertEqual(self.world.create_item("E2M1 Blue Key").classification, IC.filler)

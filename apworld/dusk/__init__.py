@@ -8,7 +8,7 @@ from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
 
 from .data import ALWAYS_CATEGORIES, BOSS_LEVELS, LEVELS, LEVELS_BY_CODE, LOCATIONS, VANILLA_ONLY_ITEMS, LevelData
-from .key_logic import DEFAULT as KEY_DEFAULT, KEY_RULES
+from .key_logic import DEFAULT as KEY_DEFAULT, ITEM_RULES, KEY_RULES
 from .items import (EXORCIST_WEAPONS, FILLER_WEIGHTS, FIREARMS, GAME, ITEM_GROUPS, ITEM_INFO, ITEM_NAME_TO_ID,
                     VANILLA_WEAPON_TO_ITEM, WEAPON_ITEMS, DuskItem)
 from .options import CATEGORY_OPTIONS, DuskOptions, option_groups
@@ -155,22 +155,24 @@ class DuskWorld(World):
         return need == 0 or state.has_from_list_unique(FIREARMS, self.player, need)
 
     def set_rules(self) -> None:
+        item_rules = ITEM_RULES if "weapons" in self.categories else {}
         for lvl in self.included_levels:
             keys = self.level_keys(lvl)
-            if not keys:
-                continue
             # Locations listed in key_logic.KEY_RULES need only the keys given there. Everything else uses strict
             # key logic: every check in a level that has keys needs all of that level's keys, until the level's
-            # door/key layout has been mapped (see key_logic.py).
+            # door/key layout has been mapped (see key_logic.py). ITEM_RULES adds other required items.
             rules = KEY_RULES.get(lvl.code, {})
             region = self.multiworld.get_region(f"{lvl.code} {lvl.name}", self.player)
             for location in region.locations:
-                rule = rules.get(location.name)
-                if rule is None and location.name == f"{lvl.code} - Cleared":
-                    rule = rules.get(f"{lvl.code} - Level Complete")
-                if rule is None:
-                    rule = rules.get(KEY_DEFAULT)
-                needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
+                needed: List[str] = []
+                if keys:
+                    rule = rules.get(location.name)
+                    if rule is None and location.name == f"{lvl.code} - Cleared":
+                        rule = rules.get(f"{lvl.code} - Level Complete")
+                    if rule is None:
+                        rule = rules.get(KEY_DEFAULT)
+                    needed = keys if rule is None else [f"{lvl.code} {k}" for k in rule]
+                needed = needed + item_rules.get(location.name, [])
                 if needed:
                     location.access_rule = lambda state, k=needed: state.has_all(k, self.player)
 

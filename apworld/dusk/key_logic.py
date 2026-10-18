@@ -5,6 +5,9 @@ is the rule for every location of that level not listed by name. Otherwise an un
 keys falls back to strict key logic: it needs all of that level's keys. Level Complete and the level's Cleared event
 follow the same rules (list "<code> - Level Complete" to override them).
 
+ITEM_RULES[location name] = other items that location needs, on top of its key rule (e.g. a weapon that breaks a
+wall). Only applied when weapons are randomized; otherwise the weapon is in its vanilla spot.
+
 JUNK_KEYS: keys that no check needs. They are still in the game (they may open doors), but they are classified as
 filler instead of progression.
 
@@ -64,6 +67,10 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E1M8 - Assault Rifle 1": NONE,
         "E1M8 - Blue Key": NONE,
     },
+}
+
+ITEM_RULES: Dict[str, List[str]] = {
+    "E3M1 - Super Shotgun": ["Mortar"],
 }
 
 JUNK_KEYS: Set[str] = {
