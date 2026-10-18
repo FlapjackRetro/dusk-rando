@@ -86,6 +86,13 @@ class TestKeyRules(DuskTestBase):
         for name in ("E3M1 - Blue Key", "E3M1 - Crossbow 1", "E3M1 - Secret Area 1", "E3M1 - Level Complete"):
             self.assertFalse(self.can_reach_location(name), name)
 
+    def test_e3m2(self) -> None:
+        self.collect_by_name(["E3M2 Access"])
+        for name in ("E3M2 - Sword", "E3M2 - Blue Key", "E3M2 - Secret Area 8", "E3M2 - Fast Fire Totem"):
+            self.assertTrue(self.can_reach_location(name), name)
+        for name in ("E3M2 - Red Key", "E3M2 - Crossbow", "E3M2 - Treasure Chest 1", "E3M2 - Level Complete"):
+            self.assertFalse(self.can_reach_location(name), name)
+
     def test_item_rules(self) -> None:
         from ..data import LOCATIONS
         from ..items import ITEM_NAME_TO_ID

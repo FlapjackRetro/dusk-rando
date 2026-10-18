@@ -36,6 +36,18 @@ KEY_RULES: Dict[str, Dict[str, List[str]]] = {
         "E3M1 - Secret Area 5": NONE,
         "E3M1 - Secret Area 6": NONE,
     },
+    "E3M2": {
+        "E3M2 - Sword": NONE,
+        "E3M2 - Pistol 1": NONE,
+        "E3M2 - Pistol 2": NONE,
+        "E3M2 - Shotgun 1": NONE,
+        "E3M2 - Shotgun 2": NONE,
+        "E3M2 - Blue Key": NONE,
+        "E3M2 - Fast Fire Totem": NONE,
+        "E3M2 - Secret Area 4": NONE,
+        "E3M2 - Secret Area 7": NONE,
+        "E3M2 - Secret Area 8": NONE,
+    },
     "E1M5": {
         "E1M5 - Pistol 1": NONE,
         "E1M5 - Pistol 2": NONE,
