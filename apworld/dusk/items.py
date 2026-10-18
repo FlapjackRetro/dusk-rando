@@ -39,6 +39,8 @@ VANILLA_WEAPON_TO_ITEM = {
     "Mortar": "Mortar", "Riveter": "Riveter", "Sword": "Sword",
 }
 FIREARMS = [w for w in WEAPON_ITEMS if w != "Sword"]
+# combat_logic exorcist: every copy of every firearm item (10 items: 2 pistols, 2 shotguns, 6 others)
+EXORCIST_WEAPONS = {w: n for w, n in WEAPON_ITEMS.items() if w != "Sword"}
 
 POWERUP_ITEMS = ["Hallowed Health", "Fast Fire Totem", "Serum of Blistering Heat", "Flashlight", "Backpack"]
 HEALTH_ITEMS = ["Medical Kit", "Small Medical Kit", "Magic Potion"]

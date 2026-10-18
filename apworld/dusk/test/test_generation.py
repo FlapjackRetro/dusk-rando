@@ -50,6 +50,44 @@ class TestKeyRules(DuskTestBase):
         self.assertTrue(self.can_reach_location("E1M8 - Level Complete"))
 
 
+class TestExorcist(DuskTestBase):
+    """exorcist: E1M1 is free; everything else needs all 10 weapons, which all land in E1M1."""
+    options = {"combat_logic": "exorcist"}
+    ALL = ["Progressive Pistol", "Progressive Pistol", "Progressive Shotgun", "Progressive Shotgun", "Super Shotgun",
+           "Assault Rifle", "Hunting Rifle", "Crossbow", "Mortar", "Riveter"]
+
+    def test_rules(self) -> None:
+        self.assertTrue(self.can_reach_location("E1M1 - Level Complete"))
+        self.collect_by_name(["E1M2 Access"])
+        self.collect_by_name(self.ALL[:-1])
+        for name in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral"):
+            self.assertFalse(self.can_reach_region(name), name)
+        self.collect_by_name(self.ALL[-1:])
+        for name in ("E1M2 Down on the Farm", "E2M1 The Grainery", "E3M1 The Iron Cathedral"):
+            self.assertTrue(self.can_reach_region(name), name)
+
+    def test_weapons_in_e1m1(self) -> None:
+        from Fill import distribute_items_restrictive
+        distribute_items_restrictive(self.multiworld)
+        placed = [loc for loc in self.multiworld.get_locations(self.player)
+                  if loc.item and loc.item.player == self.player and loc.item.name in self.ALL]
+        self.assertEqual(len(placed), 10)
+        self.assertTrue(all(loc.name.startswith("E1M1 - ") for loc in placed), [l.name for l in placed])
+
+
+class TestExorcistEpisode2Only(DuskTestBase):
+    """Without Episode 1, E2M1 takes E1M1's place."""
+    options = {"combat_logic": "exorcist", "episode1": False, "episode3": False, "secret_levels": False}
+
+    def test_weapons_in_e2m1(self) -> None:
+        from Fill import distribute_items_restrictive
+        distribute_items_restrictive(self.multiworld)
+        placed = [loc for loc in self.multiworld.get_locations(self.player)
+                  if loc.item and loc.item.player == self.player and loc.item.name in TestExorcist.ALL]
+        self.assertEqual(len(placed), 10)
+        self.assertTrue(all(loc.name.startswith("E2M1 - ") for loc in placed), [l.name for l in placed])
+
+
 class TestUnhinged(DuskTestBase):
     """No combat logic: an unlocked level is in logic with sickles only."""
     options = {"combat_logic": "unhinged"}

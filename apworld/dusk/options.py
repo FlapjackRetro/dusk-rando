@@ -85,6 +85,9 @@ class CombatLogic(Choice):
     Only matters when weapons are randomized. How many distinct firearms (weapons other than the starting sickles
     and the sword) the logic expects before a level is considered in logic. More required firearms means you arrive
     better armed. Each episode's first level never needs any; secret levels need as many as the end of their episode.
+    exorcist: for testing. Every check outside E1M1 needs all 10 weapons (both Progressive Pistols, both Progressive
+              Shotguns and the other six; not the Sword), so all 10 are placed in E1M1. If Episode 1 is off, the
+              first included episode's first level takes E1M1's place.
     easy: Episode 1 needs 1 from E1M3 and 2 from E1M6; Episode 2 needs 2 from E2M2 and 3 from E2M6; Episode 3
           needs 3 from E3M2 and 4 from E3M6.
     normal: Episode 1 needs 1 from E1M6; Episode 2 needs 1 from E2M2 and 2 from E2M6; Episode 3 needs 2 from E3M2
@@ -92,12 +95,13 @@ class CombatLogic(Choice):
     unhinged: no combat logic. Sickles are enough for everything; you may play a long time with only them.
     """
     display_name = "Combat Logic"
-    option_easy = 0
-    option_normal = 1
-    option_unhinged = 2
-    alias_lenient = 1
-    alias_none = 2
-    default = 0
+    option_exorcist = 0
+    option_easy = 1
+    option_normal = 2
+    option_unhinged = 3
+    alias_lenient = 2
+    alias_none = 3
+    default = 1
 
 
 @dataclass
