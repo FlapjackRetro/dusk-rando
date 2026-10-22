@@ -80,6 +80,14 @@ class RandomizeAmmo(Toggle):
     display_name = "Randomize Ammo"
 
 
+class RandomizeE3M4Flashlight(Toggle):
+    """
+    Make E3M4's Flashlight pickup a check (only with randomize_powerups). Off by default: E3M4 is very dark, and the
+    vanilla Flashlight there is what lets the level be completed normally.
+    """
+    display_name = "Randomize E3M4 Flashlight"
+
+
 class CombatLogic(Choice):
     """
     Only matters when weapons are randomized. How many distinct firearms (weapons other than the starting sickles
@@ -120,6 +128,7 @@ class DuskOptions(PerGameCommonOptions):
     randomize_health: RandomizeHealth
     randomize_armor: RandomizeArmor
     randomize_ammo: RandomizeAmmo
+    randomize_e3m4_flashlight: RandomizeE3M4Flashlight
     combat_logic: CombatLogic
     death_link: DeathLink
 
@@ -127,7 +136,8 @@ class DuskOptions(PerGameCommonOptions):
 option_groups = [
     OptionGroup("Levels", [Episode1, Episode2, Episode3, SecretLevels, Goal]),
     OptionGroup("Checks", [RandomizeWeapons, RandomizeKeys, RandomizePowerups, RandomizeSecrets,
-                           RandomizeTreasureChests, RandomizeHealth, RandomizeArmor, RandomizeAmmo]),
+                           RandomizeTreasureChests, RandomizeHealth, RandomizeArmor, RandomizeAmmo,
+                           RandomizeE3M4Flashlight]),
     OptionGroup("Logic", [CombatLogic]),
 ]
 
