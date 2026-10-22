@@ -157,6 +157,7 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
    | `goal` | `bosses` | `bosses` = beat E1M10/E2M10/E3M10; `all_levels` = finish every level |
    | `randomize_weapons` / `keys` / `powerups` / `secrets` / `treasure_chests` | on | Which pickups are checks |
    | `randomize_health` / `armor` / `ammo` | off | Add many more checks (ammo alone adds ~1,400) |
+   | `randomize_flashlights` | off | Make the Flashlight pickups (E2M4, E2M8, E3M4) checks. Off keeps them vanilla, so dark levels like E3M4 can be finished normally |
    | `combat_logic` | `easy` | How many guns the logic expects before later levels: `exorcist` (testing: all 10 guns are placed in E1M1, E2M1 (not Level Complete) and E3M1's key-less checks, and everything else needs them), `easy` (most guns, earliest), `normal` (one fewer) or `unhinged` (no combat logic, sickles only) |
    | `death_link` | off | Die when others die, and vice versa |
 

@@ -251,7 +251,7 @@ def write_docs():
     info = {
         "weapons": ("randomize_weapons", "on", "Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups"),
         "keys": ("randomize_keys", "on", "Red / Blue / Yellow keys (per level)"),
-        "powerups": ("randomize_powerups", "on", "Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Flashlight, Backpack"),
+        "powerups": ("randomize_powerups", "on", "Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Backpack; Flashlight only with `randomize_flashlights`"),
         "secrets": ("randomize_secrets", "on", "Secret area triggers"),
         "treasure_chests": ("randomize_treasure_chests", "on", "Treasure chests (fixed contents)"),
         "health": ("randomize_health", "off", "Medical Kit (+15), Small Medical Kit (+7), Magic Potion (+1, overcharge)"),
