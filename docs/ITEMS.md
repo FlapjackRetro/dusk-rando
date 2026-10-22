@@ -10,7 +10,7 @@ Each category is a separate YAML toggle so the number of checks can grow or shri
 |---|---|---|---:|---|
 | weapons | `randomize_weapons` | on | 269 | Pistol, Shotgun, Super Shotgun, Assault Rifle, Hunting Rifle, Crossbow, Mortar, Riveter, Sword pickups |
 | keys | `randomize_keys` | on | 72 | Red / Blue / Yellow keys (per level) |
-| powerups | `randomize_powerups` | on | 103 | Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Flashlight, Backpack |
+| powerups | `randomize_powerups` | on | 103 | Hallowed Health, Fast Fire Totem, Serum of Blistering Heat, Backpack; Flashlight only with `randomize_flashlights` |
 | secrets | `randomize_secrets` | on | 166 | Secret area triggers |
 | treasure_chests | `randomize_treasure_chests` | on | 16 | Treasure chests (fixed contents) |
 | health | `randomize_health` | off | 525 | Medical Kit (+15), Small Medical Kit (+7), Magic Potion (+1, overcharge) |

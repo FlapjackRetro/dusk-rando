@@ -115,11 +115,12 @@ class DuskWorld(World):
                 f"checks, but there are only {len(free)} of those with these options (needs {need}). Enable more "
                 "check categories, e.g. randomize_secrets, randomize_powerups or randomize_ammo.")
 
-    # Pickups that stay vanilla unless their own option is on (option attribute name).
-    OPTIONAL_LOCATIONS = {"E3M4 - Flashlight": "randomize_e3m4_flashlight"}
+    # Vanilla items whose pickups stay vanilla unless their own option is on (option attribute name).
+    OPTIONAL_VANILLA_ITEMS = {"Flashlight": "randomize_flashlights"}
 
     def _is_location(self, loc) -> bool:
-        if loc.name in self.OPTIONAL_LOCATIONS and not getattr(self.options, self.OPTIONAL_LOCATIONS[loc.name]):
+        opt = self.OPTIONAL_VANILLA_ITEMS.get(loc.vanilla_item)
+        if opt and not getattr(self.options, opt):
             return False
         return loc.category in self.categories and loc.vanilla_item not in VANILLA_ONLY_ITEMS
 

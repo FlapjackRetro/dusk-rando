@@ -80,12 +80,12 @@ class RandomizeAmmo(Toggle):
     display_name = "Randomize Ammo"
 
 
-class RandomizeE3M4Flashlight(Toggle):
+class RandomizeFlashlights(Toggle):
     """
-    Make E3M4's Flashlight pickup a check (only with randomize_powerups). Off by default: E3M4 is very dark, and the
-    vanilla Flashlight there is what lets the level be completed normally.
+    Make the Flashlight pickups (E2M4, E2M8, E3M4) checks (only with randomize_powerups). Off by default: they stay
+    vanilla Flashlights, so dark levels such as E3M4 can be completed normally.
     """
-    display_name = "Randomize E3M4 Flashlight"
+    display_name = "Randomize Flashlights"
 
 
 class CombatLogic(Choice):
@@ -128,7 +128,7 @@ class DuskOptions(PerGameCommonOptions):
     randomize_health: RandomizeHealth
     randomize_armor: RandomizeArmor
     randomize_ammo: RandomizeAmmo
-    randomize_e3m4_flashlight: RandomizeE3M4Flashlight
+    randomize_flashlights: RandomizeFlashlights
     combat_logic: CombatLogic
     death_link: DeathLink
 
@@ -137,7 +137,7 @@ option_groups = [
     OptionGroup("Levels", [Episode1, Episode2, Episode3, SecretLevels, Goal]),
     OptionGroup("Checks", [RandomizeWeapons, RandomizeKeys, RandomizePowerups, RandomizeSecrets,
                            RandomizeTreasureChests, RandomizeHealth, RandomizeArmor, RandomizeAmmo,
-                           RandomizeE3M4Flashlight]),
+                           RandomizeFlashlights]),
     OptionGroup("Logic", [CombatLogic]),
 ]
 

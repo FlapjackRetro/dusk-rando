@@ -266,21 +266,24 @@ class TestLenientAlias(DuskTestBase):
         self.assertEqual(self.world.options.combat_logic.value, self.world.options.combat_logic.option_normal)
 
 
-class TestE3M4FlashlightDefault(DuskTestBase):
-    """By default E3M4's Flashlight stays a vanilla pickup; the other Flashlights are still checks."""
+class TestFlashlightsDefault(DuskTestBase):
+    """By default the Flashlight pickups stay vanilla: none of them is a check."""
+    FLASHLIGHTS = ("E2M4 - Flashlight", "E2M8 - Flashlight", "E3M4 - Flashlight")
 
-    def test_not_a_location(self) -> None:
+    def test_not_locations(self) -> None:
         names = {loc.name for loc in self.multiworld.get_locations(self.player)}
-        self.assertNotIn("E3M4 - Flashlight", names)
-        self.assertIn("E2M4 - Flashlight", names)
+        for name in self.FLASHLIGHTS:
+            self.assertNotIn(name, names)
+        self.assertIn("E1M1 - Fast Fire Totem", names)  # other powerups still are
 
 
-class TestE3M4FlashlightOn(DuskTestBase):
-    options = {"randomize_e3m4_flashlight": True}
+class TestFlashlightsOn(DuskTestBase):
+    options = {"randomize_flashlights": True}
 
-    def test_is_a_location(self) -> None:
+    def test_are_locations(self) -> None:
         names = {loc.name for loc in self.multiworld.get_locations(self.player)}
-        self.assertIn("E3M4 - Flashlight", names)
+        for name in TestFlashlightsDefault.FLASHLIGHTS:
+            self.assertIn(name, names)
 
 
 class TestEverything(DuskTestBase):
