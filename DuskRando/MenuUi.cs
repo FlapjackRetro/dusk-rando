@@ -47,6 +47,7 @@ namespace DuskRando
                 {
                     AddEpisodeRow(panel, ep);
                     MapKeysRow.Build(panel);
+                    MapChecksRow.Build(panel);
                 }
             }
         }

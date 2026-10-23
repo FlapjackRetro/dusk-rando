@@ -143,7 +143,9 @@ namespace DuskRando
         static void Postfix(MapNodeScript __instance)
         {
             if (!Plugin.Client.Connected) return;
-            MapKeysRow.Show(LevelGate.LevelForBuildIndex(__instance.mylevel));
+            var lvl = LevelGate.LevelForBuildIndex(__instance.mylevel);
+            MapKeysRow.Show(lvl);
+            MapChecksRow.Show(lvl);
         }
     }
 }

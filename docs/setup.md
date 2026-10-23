@@ -172,7 +172,8 @@ Restart the Archipelago Launcher afterwards so it picks up the new world.
    your first episode. At the start of a seed only each episode's first level (E1M1, E2M1, E3M1) is shown; more
    appear as you receive `<level> Access` items.
 3. Hovering a level on the map shows its stats, plus a **KEYS** row: the level's keys in colour once you've
-   received them, dark until then ("NONE" if the level has no keys).
+   received them, dark until then ("NONE" if the level has no keys). A **CHECKS** row below it shows how many of
+   that level's checks you've found (e.g. "12 / 31"), in green once they're all done.
 4. On the map, the **E1 / E2 / E3** buttons above *Back to Main Menu* switch between episodes. Your current episode
    is highlighted; episodes you have no access to yet are greyed out.
 5. In a level, the pause menu has a **LEVEL SELECT** button that takes you back to the episode map.
