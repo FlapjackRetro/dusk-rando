@@ -55,18 +55,21 @@ namespace DuskRando.Patches
     /// <summary>
     /// Issue #8: "Level Complete" wasn't sent after finishing E1M1. Unity passes an empty scene as the "from"
     /// argument of SceneManager.activeSceneChanged once the old scene is unloaded, so the scene-change check
-    /// never saw which level had ended. The win screen is the reliable signal: LevelWinStuffScript.beststuff
-    /// records the finished level's stats, and PersistScript.lastlevelnumber is that level's build index.
+    /// never saw which level had ended. The win screen (LevelWinStuffScript.beststuff) is a second signal.
+    ///
+    /// Issue #52: the level it credits is the one the mod saw being played (Plugin.PlayedLevelScene), not
+    /// PersistScript.lastlevelnumber. An alternate exit (EndLevelTrigger.altlevel / EndLevelButton
+    /// altleveltoload) ends the level with lastlevelnumber = target - 1, so that the win screen's "next level"
+    /// (lastlevelnumber + 1) is the target. E3M4's secret exit to E3MS (47) therefore leaves 46 = E3M10, and the
+    /// old code completed E3M10. Same for E2M4 -> E2MS (E2M10), E1MS/E2MS/E3MS -> back (E1M2/E2M4/E3M4).
     /// </summary>
     [HarmonyPatch(typeof(LevelWinStuffScript), nameof(LevelWinStuffScript.beststuff))]
     static class LevelWinPatch
     {
         static void Postfix()
         {
-            var persist = UnityEngine.Object.FindObjectOfType<PersistScript>();
-            if (persist == null) return;
-            var lvl = LevelGate.LevelForBuildIndex(persist.lastlevelnumber);
-            if (lvl != null) Plugin.LevelCompleted(lvl.Scene, "win screen");
+            var played = Plugin.PlayedLevelScene;
+            if (played != null) Plugin.LevelCompleted(played, "win screen");
         }
     }
 }

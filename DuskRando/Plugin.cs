@@ -143,10 +143,17 @@ namespace DuskRando
 
         static string lastLevelScene; // Unity's activeSceneChanged gives an empty "from" scene (#8)
 
+        /// <summary>
+        /// The level being played or just finished: set when a level loads, kept through the win/story scenes that
+        /// follow it, cleared by any other scene (menu, map, loading screen). Used by the win screen (#52).
+        /// </summary>
+        public static string PlayedLevelScene { get; private set; }
+
         void OnActiveSceneChanged(Scene from, Scene to)
         {
             Client.ReportScene(to.name);
-            if (LocationTable.LevelByScene.ContainsKey(to.name)) { lastLevelScene = to.name; return; }
+            if (LocationTable.LevelByScene.ContainsKey(to.name)) { lastLevelScene = PlayedLevelScene = to.name; return; }
+            if (!CompletionScenes.Contains(to.name)) PlayedLevelScene = null;
             var finished = !string.IsNullOrEmpty(from.name) ? from.name : lastLevelScene;
             // Only a direct jump from a level to a win/story/credits scene counts. Anything else (menu, map,
             // loading screen) means the level was left, so forget it; an episode's intro TextScene from the
